@@ -24,7 +24,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "precommit": "pretty-quick --staged",
+    "lint": "pretty-quick --staged",
     "prepare": "npx husky-init && npm install"
   },
   "eslintConfig": {
