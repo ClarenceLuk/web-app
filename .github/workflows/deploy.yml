@@ -15,11 +15,13 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+        with:
+          ref: ${{ inputs.branch }}
 
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '22.0.0' # Use the version of Node.js you need
+          node-version: '22.0.0' # Use the exact version of Node.js you need
 
       - name: Install dependencies
         run: npm install
@@ -33,4 +35,5 @@ jobs:
         run: |
           git config --global user.email "your_email@example.com"
           git config --global user.name "Your Name"
-          npx gh-pages -d build -r https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/ClarenceLuk/clarenceluk.github.io.git
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/ClarenceLuk/clarenceluk.github.io.git
+          npx gh-pages -d build
