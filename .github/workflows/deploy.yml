@@ -16,7 +16,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '22' # Use the version of Node.js you need
+          node-version: '16' # Use the version of Node.js you need
 
       - name: Install dependencies
         run: npm install
@@ -32,4 +32,6 @@ jobs:
           echo "${{ secrets.ACTIONS_DEPLOY_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan github.com >> ~/.ssh/known_hosts
+          git config --global user.email "luk.clarence@gmail.com"
+          git config --global user.name "ClarenceLuk"
           npm run deploy
