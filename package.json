@@ -25,7 +25,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "pretty-quick --staged",
-    "prepare": "npx husky-init && npm install"
+    "prepare": "husky install .husky"
   },
   "eslintConfig": {
     "extends": [
