@@ -28,10 +28,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.ACTIONS_DEPLOY_KEY }}" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan github.com >> ~/.ssh/known_hosts
-          git config --global user.email "luk.clarence@gmail.com"
-          git config --global user.name "ClarenceLuk"
-          npm run deploy
+          git config --global user.email "your_email@example.com"
+          git config --global user.name "Your Name"
+          npx gh-pages -d build -r https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/ClarenceLuk/clarenceluk.github.io.git
