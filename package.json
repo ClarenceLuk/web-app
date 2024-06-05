@@ -19,7 +19,7 @@
   },
   "scripts": {
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build -r https://github.com/ClarenceLuk/web-app.git",
+    "deploy": "gh-pages -d build -r git@github.com:ClarenceLuk/clarenceluk.github.io.git",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
