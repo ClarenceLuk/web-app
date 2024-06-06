@@ -5,10 +5,10 @@ const App = () => {
   return (
     <div className={styles.appDiv}>
       <Menu open={true}>
-        <MenuItem>List</MenuItem>
-        <MenuItem>Others</MenuItem>
+        <MenuItem>Home</MenuItem>
+        <MenuItem>App 1</MenuItem>
       </Menu>
-      <Typography>Hello World</Typography>
+      <Typography variant="h1">Home</Typography>
     </div>
   );
 };
