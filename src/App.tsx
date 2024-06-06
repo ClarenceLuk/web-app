@@ -1,11 +1,9 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import styles from './App.module.css';
 import { Menu, MenuItem, Typography } from '@mui/material';
 
-function App() {
+const App = () => {
   return (
-    <div>
+    <div className={styles.appDiv}>
       <Menu open={true}>
         <MenuItem>List</MenuItem>
         <MenuItem>Others</MenuItem>
@@ -13,6 +11,6 @@ function App() {
       <Typography>Hello World</Typography>
     </div>
   );
-}
+};
 
 export default App;
