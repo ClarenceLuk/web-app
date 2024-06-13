@@ -5,20 +5,20 @@ export const lightTheme = createTheme({
   palette: {
     mode: 'light',
     primary: {
-      main: blue[700], // Blue
+      main: blue[700],
     },
     secondary: {
-      main: grey[500], // Grey
+      main: grey[500],
     },
     background: {
-      default: '#f5f5dc', // Beige background
-      paper: '#faf0e6',   // Light beige paper background
+      default: brown[100],
+      paper: brown.A200,
     },
     text: {
-      primary: grey[900], // Dark grey text
-      secondary: grey[700], // Medium grey text
+      primary: grey[900],
+      secondary: grey[700],
     },
-    divider: grey[300], // Light grey divider
+    divider: grey[300],
   },
   typography: {
     fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
@@ -120,26 +120,26 @@ export const lightTheme = createTheme({
     MuiButton: {
       styleOverrides: {
         root: {
-          textTransform: 'none', // Disable uppercase text
+          textTransform: 'none',
         },
         contained: {
           backgroundColor: blue[700],
           color: grey[50],
           '&:hover': {
-            backgroundColor: blue[800], // Slightly darker blue on hover
+            backgroundColor: blue[800],
           },
         },
         outlined: {
           borderColor: blue[700],
           color: blue[700],
           '&:hover': {
-            backgroundColor: '#f5f5dc', // Light beige background on hover
+            backgroundColor: brown[200],
           },
         },
         text: {
           color: blue[700],
           '&:hover': {
-            backgroundColor: '#f5f5dc', // Light beige background on hover
+            backgroundColor: brown[300],
           },
         },
       },
@@ -147,8 +147,8 @@ export const lightTheme = createTheme({
     MuiAppBar: {
       styleOverrides: {
         colorPrimary: {
-          backgroundColor: '#faf0e6', // Light beige AppBar background
-          color: grey[900], // Dark grey text
+          backgroundColor: brown[400],
+          color: grey[900],
         },
       },
     },
