@@ -1,12 +1,5 @@
 import styles from './App.module.css';
-import {
-  Box,
-  CssBaseline,
-  Menu,
-  MenuItem,
-  Switch,
-  ThemeProvider,
-} from '@mui/material';
+import { Box, CssBaseline, ThemeProvider } from '@mui/material';
 import Background from './background/background';
 import { useState } from 'react';
 
