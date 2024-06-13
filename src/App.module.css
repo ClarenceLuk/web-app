@@ -9,5 +9,6 @@
 .appBox {
   display: flex;
   height: 100%;
+  width: 800;
 }
 

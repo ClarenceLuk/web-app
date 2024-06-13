@@ -1,5 +1,6 @@
 import { Box, Typography } from '@mui/material';
 import { useEffect, useState, useRef } from 'react';
+import styles from './background.module.css'
 import {
   Rect,
   Stage,
@@ -9,33 +10,12 @@ import {
 } from 'react-konva';
 
 const Background = () => {
-  const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const handleResize = () => {
-      if (containerRef.current) {
-        setDimensions({
-          width: containerRef.current.offsetWidth,
-          height: containerRef.current.offsetHeight,
-        });
-      }
-    };
-
-    handleResize(); // Set initial dimensions
-    window.addEventListener('resize', handleResize);
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
-
-  console.log(dimensions)
 
   return (
-    <Box ref={containerRef} style={{ width: '100%', height: '100%' }}>
+    <Box className={styles.backgroundContainer}>
       <Typography variant="h1">Home</Typography>
       <Typography variant="body1">Some Text</Typography>
-      <Stage width={dimensions.width} height={dimensions.height}>
+      <Stage width={300} height={300}>
         <Layer>
           <Rect
             x={20}
