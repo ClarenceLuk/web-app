@@ -3,7 +3,7 @@ import { Box, CssBaseline, ThemeProvider } from '@mui/material';
 import Background from './background/background';
 import { ChangeEvent, useState } from 'react';
 
-import NavigationPanel from './menu/menu';
+import NavigationPanel from './navigationPanel/navigationPanel';
 import { darkTheme } from './themes/darkTheme';
 import { lightTheme } from './themes/lightTheme';
 
