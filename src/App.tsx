@@ -1,7 +1,7 @@
 import styles from './App.module.css';
 import { Box, CssBaseline, ThemeProvider } from '@mui/material';
 import Background from './background/background';
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 
 import { createTheme } from '@mui/material/styles';
 import NavigationPanel from './menu/menu';
@@ -33,9 +33,7 @@ const darkTheme = createTheme({
 const App = () => {
   const [isDarkMode, setIsDarkMode] = useState(true);
 
-  const handleThemeChange = (event: {
-    target: { checked: boolean | ((prevState: boolean) => boolean) };
-  }) => {
+  const handleThemeChange = (event: ChangeEvent<HTMLInputElement>) => {
     setIsDarkMode(event.target.checked);
   };
 
