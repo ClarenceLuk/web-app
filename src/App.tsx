@@ -3,32 +3,10 @@ import { Box, CssBaseline, ThemeProvider } from '@mui/material';
 import Background from './background/background';
 import { ChangeEvent, useState } from 'react';
 
-import { createTheme } from '@mui/material/styles';
 import NavigationPanel from './menu/menu';
+import { darkTheme } from './themes/darkTheme';
+import { lightTheme } from './themes/lightTheme';
 
-const lightTheme = createTheme({
-  palette: {
-    mode: 'light',
-    primary: {
-      main: '#1976d2',
-    },
-    secondary: {
-      main: '#dc004e',
-    },
-  },
-});
-
-const darkTheme = createTheme({
-  palette: {
-    mode: 'dark',
-    primary: {
-      main: '#90caf9',
-    },
-    secondary: {
-      main: '#f48fb1',
-    },
-  },
-});
 
 const App = () => {
   const [isDarkMode, setIsDarkMode] = useState(true);

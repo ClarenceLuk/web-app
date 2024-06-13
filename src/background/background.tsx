@@ -1,12 +1,11 @@
 import { Box, Typography } from '@mui/material';
-import React, { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import {
   Rect,
   Stage,
   Layer,
   Circle,
   Line,
-  Text as KonvaText,
 } from 'react-konva';
 
 const Background = () => {
@@ -33,9 +32,9 @@ const Background = () => {
   return (
     <Box ref={containerRef} style={{ width: '100%', height: '100%' }}>
       <Typography variant="h1">Home</Typography>
+      <Typography variant="body1">Some Text</Typography>
       <Stage width={dimensions.width} height={dimensions.height}>
         <Layer>
-          <KonvaText text="Some text on canvas" fontSize={15} />
           <Rect
             x={20}
             y={50}

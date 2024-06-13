@@ -1,4 +1,4 @@
-import { Box, Button, Drawer, Menu, MenuItem, Switch } from '@mui/material';
+import { Button, Drawer, Switch, Typography } from '@mui/material';
 import { ChangeEvent } from 'react';
 
 interface NavigationProps {
@@ -11,7 +11,8 @@ const NavigationPanel = ({
   handleThemeChange,
 }: NavigationProps) => {
   return (
-    <Drawer open={true}>
+    <Drawer open={true} variant="permanent">
+      <Button><Typography variant="button">Home</Typography></Button>
       <Switch checked={isDarkMode} onChange={handleThemeChange} />
     </Drawer>
   );
