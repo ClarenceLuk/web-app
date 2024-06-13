@@ -11,7 +11,7 @@ const NavigationPanel = ({
   handleThemeChange,
 }: NavigationProps) => {
   return (
-    <Drawer>
+    <Drawer open={true}>
       <Switch checked={isDarkMode} onChange={handleThemeChange} />
     </Drawer>
   );
