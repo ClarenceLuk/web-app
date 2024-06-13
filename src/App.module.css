@@ -1,6 +1,6 @@
 .appDiv {
   display: flex;
-  width: 800;
+  width: 800px;
   align-items: center;
   justify-content: center;
 }
