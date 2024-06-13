@@ -29,6 +29,8 @@ const Background = () => {
     };
   }, []);
 
+  console.log(dimensions)
+
   return (
     <Box ref={containerRef} style={{ width: '100%', height: '100%' }}>
       <Typography variant="h1">Home</Typography>

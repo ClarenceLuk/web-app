@@ -24,9 +24,7 @@ const App = () => {
           handleThemeChange={handleThemeChange}
         />
         <Box className={styles.appBox}>
-          <Box className={styles.contentContainer}>
-            <Background />
-          </Box>
+          <Background />
         </Box>
       </Box>
     </ThemeProvider>
