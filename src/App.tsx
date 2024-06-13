@@ -11,6 +11,7 @@ import Background from './background/background';
 import { useState } from 'react';
 
 import { createTheme } from '@mui/material/styles';
+import NavigationPanel from './menu/menu';
 
 const lightTheme = createTheme({
   palette: {
@@ -49,18 +50,10 @@ const App = () => {
     <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
       <CssBaseline />
       <Box className={styles.appWrapper}>
-        <Menu
-          open={true}
-          anchorOrigin={{
-            vertical: 'top',
-            horizontal: 'left',
-          }}>
-          <MenuItem>Home</MenuItem>
-          <MenuItem>App 1</MenuItem>
-          <MenuItem>
-            <Switch checked={isDarkMode} onChange={handleThemeChange} />
-          </MenuItem>
-        </Menu>
+        <NavigationPanel
+          isDarkMode={isDarkMode}
+          handleThemeChange={handleThemeChange}
+        />
         <Box className={styles.appBox}>
           <Box className={styles.contentContainer}>
             <Background />
