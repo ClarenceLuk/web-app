@@ -1,7 +1,7 @@
 import React from 'react';
 import { Rect, Stage, Layer, Circle, Line, Text } from 'react-konva';
 
-interface Props {}
+// interface Props {}
 
 const Background = () => {
   return (
