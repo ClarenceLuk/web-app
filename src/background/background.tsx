@@ -1,14 +1,41 @@
-import React from 'react';
-import { Rect, Stage, Layer, Circle, Line, Text } from 'react-konva';
-
-// interface Props {}
+import { Box, Typography } from '@mui/material';
+import React, { useEffect, useState, useRef } from 'react';
+import {
+  Rect,
+  Stage,
+  Layer,
+  Circle,
+  Line,
+  Text as KonvaText,
+} from 'react-konva';
 
 const Background = () => {
+  const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (containerRef.current) {
+        setDimensions({
+          width: containerRef.current.offsetWidth,
+          height: containerRef.current.offsetHeight,
+        });
+      }
+    };
+
+    handleResize(); // Set initial dimensions
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
   return (
-    <div>
-      <Stage width={window.innerWidth} height={window.innerHeight}>
+    <Box ref={containerRef} style={{ width: '100%', height: '100%' }}>
+      <Typography variant="h1">Home</Typography>
+      <Stage width={dimensions.width} height={dimensions.height}>
         <Layer>
-          <Text text="Some text on canvas" fontSize={15} />
+          <KonvaText text="Some text on canvas" fontSize={15} />
           <Rect
             x={20}
             y={50}
@@ -31,7 +58,7 @@ const Background = () => {
           />
         </Layer>
       </Stage>
-    </div>
+    </Box>
   );
 };
 

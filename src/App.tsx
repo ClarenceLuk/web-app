@@ -6,7 +6,6 @@ import {
   MenuItem,
   Switch,
   ThemeProvider,
-  Typography,
 } from '@mui/material';
 import Background from './background/background';
 import { useState } from 'react';
@@ -49,16 +48,24 @@ const App = () => {
   return (
     <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
       <CssBaseline />
-      <Box className={styles.appDiv} justifyContent="space-between" p={2}>
-        <Menu open={true}>
+      <Box className={styles.appWrapper}>
+        <Menu
+          open={true}
+          anchorOrigin={{
+            vertical: 'top',
+            horizontal: 'left',
+          }}>
           <MenuItem>Home</MenuItem>
           <MenuItem>App 1</MenuItem>
           <MenuItem>
             <Switch checked={isDarkMode} onChange={handleThemeChange} />
           </MenuItem>
         </Menu>
-        <Typography variant="h1">Home</Typography>
-        <Background />
+        <Box className={styles.appBox}>
+          <Box className={styles.contentContainer}>
+            <Background />
+          </Box>
+        </Box>
       </Box>
     </ThemeProvider>
   );
