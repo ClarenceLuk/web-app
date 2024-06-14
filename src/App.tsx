@@ -1,3 +1,4 @@
+import React from 'react';
 import styles from './App.module.css';
 import { Box, CssBaseline, ThemeProvider } from '@mui/material';
 import Background from './background/background';

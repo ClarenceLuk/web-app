@@ -1,5 +1,4 @@
 import { Box, Typography } from '@mui/material';
-import { useEffect, useState, useRef } from 'react';
 import styles from './background.module.css'
 import {
   Rect,

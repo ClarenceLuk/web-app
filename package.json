@@ -24,7 +24,7 @@
     "deploy": "gh-pages -d build -r git@github.com:ClarenceLuk/clarenceluk.github.io.git",
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "jest",
     "eject": "react-scripts eject",
     "lint": "pretty-quick",
     "prepare": "husky install .husky"
@@ -32,7 +32,7 @@
   "eslintConfig": {
     "extends": [
       "react-app",
-      "react-app/jest"
+      "react-app/test"
     ]
   },
   "browserslist": {
@@ -48,13 +48,21 @@
     ]
   },
   "devDependencies": {
+    "@babel/core": "^7.24.7",
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "@babel/plugin-transform-runtime": "^7.24.7",
+    "@babel/preset-env": "^7.24.7",
+    "@babel/preset-react": "^7.24.7",
+    "@babel/preset-typescript": "^7.24.7",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "@types/jest": "^27.5.2",
+    "babel-jest": "^29.7.0",
     "gh-pages": "^6.1.1",
     "husky": "^8.0.0",
+    "jest": "^27.5.1",
+    "jest-environment-jsdom": "^29.7.0",
     "prettier": "^3.3.0",
     "pretty-quick": "^4.0.0",
     "style-loader": "^4.0.0"

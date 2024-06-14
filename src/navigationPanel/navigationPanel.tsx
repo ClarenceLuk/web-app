@@ -1,5 +1,5 @@
 import { Button, Drawer, Switch, Typography } from '@mui/material';
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent } from 'react';
 
 interface NavigationProps {
   isDarkMode: boolean;

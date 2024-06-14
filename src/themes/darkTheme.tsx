@@ -5,20 +5,20 @@ export const darkTheme = createTheme({
   palette: {
     mode: 'dark',
     primary: {
-      main: blue[700], // Blue
+      main: blue[700],
     },
     secondary: {
-      main: blue[500], // Light blue
+      main: blue[500],
     },
     background: {
-      default: grey[900], // Dark background
-      paper: grey[800],   // Slightly lighter dark background
+      default: grey[900],
+      paper: grey[800],
     },
     text: {
-      primary: grey[50], // Light text
-      secondary: grey[200], // Slightly darker light text
+      primary: grey[50],
+      secondary: grey[200],
     },
-    divider: grey[700], // Medium grey divider
+    divider: grey[700],
   },
   typography: {
     fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
@@ -120,26 +120,26 @@ export const darkTheme = createTheme({
     MuiButton: {
       styleOverrides: {
         root: {
-          textTransform: 'none', // Disable uppercase text
+          textTransform: 'none',
         },
         contained: {
           backgroundColor: blue[700],
           color: grey[50],
           '&:hover': {
-            backgroundColor: blue[800], // Slightly darker blue on hover
+            backgroundColor: blue[800],
           },
         },
         outlined: {
           borderColor: blue[700],
           color: blue[700],
           '&:hover': {
-            backgroundColor: grey[800], // Slightly lighter dark background on hover
+            backgroundColor: grey[800],
           },
         },
         text: {
           color: blue[700],
           '&:hover': {
-            backgroundColor: grey[800], // Slightly lighter dark background on hover
+            backgroundColor: grey[800],
           },
         },
       },
@@ -147,8 +147,8 @@ export const darkTheme = createTheme({
     MuiAppBar: {
       styleOverrides: {
         colorPrimary: {
-          backgroundColor: grey[800], // Dark AppBar background
-          color: grey[50], // Light text
+          backgroundColor: grey[800],
+          color: grey[50],
         },
       },
     },

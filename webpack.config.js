@@ -7,7 +7,7 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
   },
   resolve: {
-    extensions: ['.ts', '.tsx', '.js'],
+    extensions: ['.ts', '.tsx', '.js', '.jsx'],
   },
   module: {
     rules: [
@@ -28,6 +28,16 @@ module.exports = {
           },
         ],
         exclude: /node_modules/,
+      },
+      {
+        test: path.join(__dirname, '.'),
+        exclude: /(node_modules)/,
+        loader: 'babel-loader',
+        options: {
+            presets: ['@babel/preset-env',
+                      '@babel/react',{
+                      'plugins': ['@babel/plugin-proposal-class-properties']}]
+        },
       },
     ],
   },
