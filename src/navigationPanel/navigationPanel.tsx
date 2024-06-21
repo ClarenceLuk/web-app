@@ -14,7 +14,7 @@ const NavigationPanel = ({
   handleChangePage,
 }: NavigationProps) => {
   return (
-    <Drawer open={true} variant="permanent">
+    <Drawer open={true} variant="permanent" style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
       <Button onClick={() => handleChangePage(PageEnum.Fractal)}>
         <Typography variant="button">Home</Typography>
       </Button>

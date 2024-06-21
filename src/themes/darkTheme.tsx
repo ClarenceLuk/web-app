@@ -139,7 +139,7 @@ export const darkTheme = createTheme({
         text: {
           color: blue[700],
           '&:hover': {
-            backgroundColor: grey[800],
+            backgroundColor: grey[700],
           },
         },
       },
