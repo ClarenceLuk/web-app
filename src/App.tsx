@@ -43,12 +43,14 @@ const App = () => {
           handleThemeChange={handleThemeChange}
           handleChangePage={handleChangePage}
         />
-        <Box className={styles.appBox}>{
-          <PageTemplate
-            title={currentPage}
-            children={handlePageLoad(currentPage)}
-          />
-        }</Box>
+        <Box className={styles.appBox}>
+          {
+            <PageTemplate
+              title={currentPage}
+              children={handlePageLoad(currentPage)}
+            />
+          }
+        </Box>
       </Box>
     </ThemeProvider>
   )

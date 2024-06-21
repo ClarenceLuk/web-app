@@ -5,7 +5,6 @@ import { Rect, Stage, Layer, Circle, Line } from 'react-konva'
 const Fractal = () => {
   return (
     <Box className={styles.backgroundContainer}>
-      <Typography variant="body1">Some Text</Typography>
       <Stage width={300} height={300}>
         <Layer>
           <Rect
