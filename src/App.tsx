@@ -1,7 +1,8 @@
 import React from 'react';
 import styles from './App.module.css';
 import { Box, CssBaseline, ThemeProvider } from '@mui/material';
-import Background from './background/background';
+import Fractal from './pages/background/background';
+import Earthquake from './pages/earthquake/earthquake'
 import { ChangeEvent, useState } from 'react';
 
 import NavigationPanel from './navigationPanel/navigationPanel';
@@ -11,10 +12,14 @@ import { lightTheme } from './themes/lightTheme';
 
 const App = () => {
   const [isDarkMode, setIsDarkMode] = useState(true);
+  const [currentPage, setCurrentPage] = useState("home");
 
   const handleThemeChange = (event: ChangeEvent<HTMLInputElement>) => {
     setIsDarkMode(event.target.checked);
   };
+
+  const handlePageLoad = () => {
+  }
 
   return (
     <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
@@ -25,7 +30,7 @@ const App = () => {
           handleThemeChange={handleThemeChange}
         />
         <Box className={styles.appBox}>
-          <Background />
+          <Fractal />
         </Box>
       </Box>
     </ThemeProvider>

@@ -8,7 +8,7 @@ import {
   Line,
 } from 'react-konva';
 
-const Background = () => {
+const Fractal = () => {
 
   return (
     <Box className={styles.backgroundContainer}>
@@ -42,4 +42,4 @@ const Background = () => {
   );
 };
 
-export default Background;
+export default Fractal;
