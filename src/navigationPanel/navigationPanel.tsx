@@ -21,10 +21,10 @@ const NavigationPanel = ({
         gap: 0,
       }}>
         <Button onClick={() => handleChangePage(PageEnum.Fractal)}>
-          <Typography variant="button">Home</Typography>
+          <Typography variant="button">{PageEnum.Fractal}</Typography>
         </Button>
         <Button onClick={() => handleChangePage(PageEnum.EarthQuake)}>
-          <Typography variant="button">Earth Quake</Typography>
+          <Typography variant="button">{PageEnum.EarthQuake}</Typography>
         </Button>
       </Box>
       <Box sx={{

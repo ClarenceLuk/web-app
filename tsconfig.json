@@ -16,5 +16,11 @@
     "noEmit": true,
     "jsx": "react-jsx"
   },
-  "include": ["src", "test", "babel.config.js", "jest.config.js", "webpack.config.js"]
+  "include": [
+    "src", 
+    "test", 
+    "babel.config.js", 
+    "jest.config.js", 
+    "webpack.config.js"
+  ]
 }

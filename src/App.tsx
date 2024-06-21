@@ -9,7 +9,7 @@ import NavigationPanel from './navigationPanel/navigationPanel'
 import { darkTheme } from './themes/darkTheme'
 import { lightTheme } from './themes/lightTheme'
 import { PageEnum } from './constants/mapped-enums'
-import PageTemplate from './pages/pageTemplate'
+import PageTemplate from './pages/pageTemplate/pageTemplate'
 
 const App = () => {
   const [isDarkMode, setIsDarkMode] = useState(true)

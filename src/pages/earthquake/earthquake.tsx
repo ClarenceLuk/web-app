@@ -5,9 +5,6 @@ const Earthquake = () => {
   
   return (
     <div>
-      <Typography variant="h1">
-        Earth Quake
-      </Typography>
     </div>
   )
 }
