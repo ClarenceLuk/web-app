@@ -8,7 +8,7 @@ import { ChangeEvent, useState } from 'react'
 import NavigationPanel from './navigationPanel/navigationPanel'
 import { darkTheme } from './themes/darkTheme'
 import { lightTheme } from './themes/lightTheme'
-import { PageEnum } from './constants/mapped-types'
+import { PageEnum } from './constants/mapped-enums'
 import PageTemplate from './pages/pageTemplate'
 
 const App = () => {

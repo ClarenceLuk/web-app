@@ -1,6 +1,6 @@
 import { Box, Button, Drawer, Switch, Typography } from '@mui/material'
 import { ChangeEvent } from 'react'
-import { PageEnum } from '../constants/mapped-types'
+import { PageEnum } from '../constants/mapped-enums'
 
 interface NavigationProps {
   isDarkMode: boolean
