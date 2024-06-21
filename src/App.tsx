@@ -1,24 +1,36 @@
-import React from 'react';
-import styles from './App.module.css';
-import { Box, CssBaseline, ThemeProvider } from '@mui/material';
-import Fractal from './pages/background/background';
+import React from 'react'
+import styles from './App.module.css'
+import { Box, CssBaseline, ThemeProvider } from '@mui/material'
+import Fractal from './pages/background/background'
 import Earthquake from './pages/earthquake/earthquake'
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useState } from 'react'
 
-import NavigationPanel from './navigationPanel/navigationPanel';
-import { darkTheme } from './themes/darkTheme';
-import { lightTheme } from './themes/lightTheme';
-
+import NavigationPanel from './navigationPanel/navigationPanel'
+import { darkTheme } from './themes/darkTheme'
+import { lightTheme } from './themes/lightTheme'
+import { PageEnum } from './constants/mapped-types'
 
 const App = () => {
-  const [isDarkMode, setIsDarkMode] = useState(true);
-  const [currentPage, setCurrentPage] = useState("home");
+  const [isDarkMode, setIsDarkMode] = useState(true)
+  const [currentPage, setCurrentPage] = useState('home')
 
   const handleThemeChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setIsDarkMode(event.target.checked);
-  };
+    setIsDarkMode(event.target.checked)
+  }
 
-  const handlePageLoad = () => {
+  const handleChangePage = (page: string) => {
+    setCurrentPage(page)
+  }
+
+  const handlePageLoad = (currentPage: string) => {
+    switch (currentPage) {
+      case PageEnum.EarthQuake: {
+        return <Earthquake />
+      }
+      default: {
+        return <Fractal />
+      }
+    }
   }
 
   return (
@@ -28,13 +40,12 @@ const App = () => {
         <NavigationPanel
           isDarkMode={isDarkMode}
           handleThemeChange={handleThemeChange}
+          handleChangePage={handleChangePage}
         />
-        <Box className={styles.appBox}>
-          <Fractal />
-        </Box>
+        <Box className={styles.appBox}>{handlePageLoad(currentPage)}</Box>
       </Box>
     </ThemeProvider>
-  );
-};
+  )
+}
 
-export default App;
+export default App

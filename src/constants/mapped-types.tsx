@@ -1,5 +1,4 @@
-
-export interface Pages {
-  Fractal: 'Fractal',
-  EarthQuake: 'EarthQuake'
+export enum PageEnum {
+  Fractal = 'Fractal',
+  EarthQuake = 'EarthQuake',
 }
