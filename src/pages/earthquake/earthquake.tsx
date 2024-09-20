@@ -5,6 +5,7 @@ const Earthquake = () => {
   
   return (
     <div>
+      Earthquake
     </div>
   )
 }

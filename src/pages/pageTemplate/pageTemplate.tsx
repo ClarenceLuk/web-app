@@ -22,6 +22,8 @@ const PageTemplate = ({ title, children }: PageProps) => {
           padding: 2,
           backgroundColor: 'primary.main',
           color: 'primary.contrastText',
+          display: 'flex',
+          width: '100%'
         }}>
         <Typography variant="h4">{title}</Typography>
       </Box>

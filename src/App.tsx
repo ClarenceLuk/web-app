@@ -3,6 +3,7 @@ import styles from './App.module.css'
 import { Box, CssBaseline, ThemeProvider } from '@mui/material'
 import Fractal from './pages/fractal/fractal'
 import Earthquake from './pages/earthquake/earthquake'
+import Weather from './pages/weather/weather'
 import { ChangeEvent, useState } from 'react'
 
 import NavigationPanel from './navigationPanel/navigationPanel'
@@ -27,6 +28,9 @@ const App = () => {
     switch (currentPage) {
       case PageEnum.EarthQuake: {
         return <Earthquake />
+      }
+      case PageEnum.Weather: {
+        return <Weather />
       }
       default: {
         return <Fractal />
