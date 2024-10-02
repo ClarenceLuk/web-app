@@ -29,6 +29,9 @@ const NavigationPanel = ({
         <Button onClick={() => handleChangePage(PageEnum.Weather)}>
           <Typography variant="button">{PageEnum.Weather}</Typography>
         </Button>
+        <Button onClick={() => handleChangePage(PageEnum.Othello)}>
+          <Typography variant='button'>{PageEnum.Othello}</Typography>
+        </Button>
       </Box>
       <Box sx={{
         display: 'flex',
