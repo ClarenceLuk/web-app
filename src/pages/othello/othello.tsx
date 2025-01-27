@@ -5,7 +5,7 @@ import styles from "./othello.module.css"
 import {
   handleFlipDirections,
   handleChipCount
-} from "./gamelogic/gamelogic"
+} from "./gamelogic"
 
 interface OthelloState {
   board: string[][];
