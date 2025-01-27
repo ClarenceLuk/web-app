@@ -1,4 +1,4 @@
-import { Box, Typography } from '@mui/material'
+import { Box } from '@mui/material'
 import styles from './fractal.module.css'
 import { Rect, Stage, Layer, Circle, Line } from 'react-konva'
 
