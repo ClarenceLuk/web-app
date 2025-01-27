@@ -1,30 +1,8 @@
-.game {
-  text-align: center;
+.rowStyle {
+  display: flex;
+  flex-direction: row;
 }
 
 .board {
-  display: grid;
-  grid-template-columns: repeat(8, 50px);
-  grid-template-rows: repeat(8, 50px);
-  gap: 2px;
-}
-
-.cell {
-  width: 50px;
-  height: 50px;
-  background-color: green;
-  border: 1px solid black;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.black {
-  background-color: black;
-  border-radius: 50%;
-}
-
-.white {
-  background-color: white;
-  border-radius: 50%;
+  border: 5px solid black;
 }
