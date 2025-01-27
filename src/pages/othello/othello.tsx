@@ -7,6 +7,8 @@ import {
   handleChipCount
 } from "./gamelogic"
 
+import {INITIALBOARD} from "./constants"
+
 interface OthelloState {
   board: string[][];
   player: 'B' | 'W' | 'V' | '';
@@ -15,13 +17,8 @@ interface OthelloState {
 }
 
 const Othello = () => {
-  const initialBoard = Array.from({ length: 8 }, () => Array(8).fill(''))
-  initialBoard[4][4] = 'B';
-  initialBoard[3][3] = 'B';
-  initialBoard[4][3] = 'W';
-  initialBoard[3][4] = 'W';
   const [gameState, setGameState] = useState<OthelloState>({
-    board: initialBoard,
+    board: INITIALBOARD,
     player: 'B',
     blackChipCount: 2,
     whiteChipCount: 2
@@ -51,7 +48,7 @@ const Othello = () => {
   const handleReset = () => {
     setGameState({
       ...gameState,
-      board: initialBoard,
+      board: INITIALBOARD,
       player: 'B',
       blackChipCount: 2,
       whiteChipCount: 2
