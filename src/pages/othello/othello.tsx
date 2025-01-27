@@ -38,7 +38,7 @@ const Othello = () => {
     setGameState({ ...gameState, board: initialBoard });
   }, []);
 
-  const handleFlip = (player: string, row: number, col: number): void => {
+  const handleClick = (player: string, row: number, col: number): void => {
     if (gameState.board[row][col] == '') {
       const newBoard = [...gameState.board]
       const nextPlayer = player == 'B' ? 'W' : 'B';
@@ -75,7 +75,7 @@ const Othello = () => {
         {gameState.board.map((rowArray, row: number) => (
           <div key={row} className={styles.rowStyle}> 
             {rowArray.map((value, col: number) => (
-              <Cell key={`${row}-${col}`} player={gameState.player} value={value} row={row} col={col} handleFlip={handleFlip}/> 
+              <Cell key={`${row}-${col}`} player={gameState.player} value={value} row={row} col={col} handleFlip={handleClick}/> 
             ))}
           </div>
         ))}
