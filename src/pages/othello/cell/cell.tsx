@@ -6,10 +6,10 @@ interface CellProps {
   value: string;
   row: number;
   col: number;
-  handleFlip: (player: string, row: number, col: number) => void;
+  handleClick: (player: string, row: number, col: number) => void;
 }
 
-const Cell: React.FC<CellProps> = ({ player, value, row, col, handleFlip }) => {
+const Cell: React.FC<CellProps> = ({ player, value, row, col, handleClick: handleFlip }) => {
   const pieceClass = 
   value === 'B' ? styles.black : 
   value === 'W' ? styles.white : 

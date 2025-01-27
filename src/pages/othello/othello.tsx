@@ -75,7 +75,7 @@ const Othello = () => {
         {gameState.board.map((rowArray, row: number) => (
           <div key={row} className={styles.rowStyle}> 
             {rowArray.map((value, col: number) => (
-              <Cell key={`${row}-${col}`} player={gameState.player} value={value} row={row} col={col} handleFlip={handleClick}/> 
+              <Cell key={`${row}-${col}`} player={gameState.player} value={value} row={row} col={col} handleClick={handleClick}/> 
             ))}
           </div>
         ))}
