@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import React from "react";
 import Cell from "./cell/cell";
 import styles from "./othello.module.css"
+import {handleFlipDirections} from "./gamelogic/gamelogic"
 
 interface OthelloState {
   board: string[][];
@@ -35,6 +36,9 @@ const Othello = () => {
       const newBoard = [...gameState.board]
       const nextPlayer = player == 'B' ? 'W' : 'B';
       newBoard[row][col] = player
+
+      handleFlipDirections(player, newBoard, row, col)
+      console.log(newBoard)
       
       setGameState({
         ...gameState,
@@ -64,6 +68,7 @@ const Othello = () => {
         ))}
       </div>
       <button onClick={handleReset}>Reset</button>
+      Player: {gameState.player}
     </div>
   );
 };

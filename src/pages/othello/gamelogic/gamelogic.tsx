@@ -13,16 +13,14 @@ const handleFlipDirections = (player: string, board: string[][], row: number, co
   board[row][col] = player;
   
   for (const direction of directions) {
-    if (flip(player, board, row, col, direction)) {
-      return true
+    if (row >= 0 && row < 8 && col >= 0 && col < 8 && board[row][col] !== '') {
+      flip(player, board, row + direction[0], col + direction[1], direction)
     }
   }
-  return false
-  
 }
 
 const flip = (player: string, board: string[][], row: number, col: number, direction: number[]): boolean => {
-  if (row < 0 || row > 8 || col < 0 || col > 8 || board[row][col] == '') {
+  if (row < 0 || row >= 8 || col < 0 || col >= 8 || board[row][col] == '') {
     return false
   }
   if (board[row][col] == player) {
