@@ -27,17 +27,6 @@ const Othello = () => {
     whiteChipCount: 2
   })
 
-  useEffect(() => {
-    const initialBoard: string[][] = [
-      ...gameState.board,
-    ];
-    initialBoard[4][4] = 'B';
-    initialBoard[3][3] = 'B';
-    initialBoard[4][3] = 'W';
-    initialBoard[3][4] = 'W';
-    setGameState({ ...gameState, board: initialBoard });
-  }, []);
-
   const handleClick = (player: string, row: number, col: number): void => {
     if (gameState.board[row][col] === '') {
       const newBoard = [...gameState.board]
