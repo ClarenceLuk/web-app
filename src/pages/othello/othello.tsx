@@ -1,6 +1,6 @@
 import { useState } from "react";
 import React from "react";
-import Cell from "./cell/cell";
+import Cell from "./cell";
 import styles from "./othello.module.css"
 import {
   handleFlipDirections,
