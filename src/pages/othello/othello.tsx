@@ -39,9 +39,9 @@ const Othello = () => {
   }, []);
 
   const handleClick = (player: string, row: number, col: number): void => {
-    if (gameState.board[row][col] == '') {
+    if (gameState.board[row][col] === '') {
       const newBoard = [...gameState.board]
-      const nextPlayer = player == 'B' ? 'W' : 'B';
+      const nextPlayer = player === 'B' ? 'W' : 'B';
       newBoard[row][col] = player
 
       handleFlipDirections(player, newBoard, row, col)

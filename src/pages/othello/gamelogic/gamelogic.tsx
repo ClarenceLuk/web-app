@@ -20,10 +20,10 @@ const handleFlipDirections = (player: string, board: string[][], row: number, co
 }
 
 const flip = (player: string, board: string[][], row: number, col: number, direction: number[]): boolean => {
-  if (row < 0 || row >= 8 || col < 0 || col >= 8 || board[row][col] == '') {
+  if (row < 0 || row >= 8 || col < 0 || col >= 8 || board[row][col] === '') {
     return false
   }
-  if (board[row][col] == player) {
+  if (board[row][col] === player) {
     return true
   }
 
@@ -43,9 +43,9 @@ const handleChipCount = (board: string[][]) => {
 
   for (const row of board) {
     for (const cell of row) {
-      if (cell == 'B') {
+      if (cell === 'B') {
         counts[0] += 1
-      } else if (cell == 'W') {
+      } else if (cell === 'W') {
         counts[1] += 1
       }
     }
