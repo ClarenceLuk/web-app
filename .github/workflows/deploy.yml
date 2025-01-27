@@ -1,6 +1,8 @@
 name: Deploy to GitHub Pages
 
 on:
+  push:
+    branches: [ main ]
   workflow_dispatch:
     inputs:
       branch:
@@ -16,7 +18,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
         with:
-          ref: ${{ inputs.branch }}
+          ref: ${{ github.ref }}
 
       - name: Set up Node.js
         uses: actions/setup-node@v3
