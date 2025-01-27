@@ -38,4 +38,21 @@ const flip = (player: string, board: string[][], row: number, col: number, direc
 
 }
 
-export {flip, handleFlipDirections}
+const handleChipCount = (board: string[][]) => {
+  const counts = [0, 0]
+
+  for (const row of board) {
+    for (const cell of row) {
+      if (cell == 'B') {
+        counts[0] += 1
+      } else if (cell == 'W') {
+        counts[1] += 1
+      }
+    }
+  }
+  return counts
+}
+
+
+
+export {handleFlipDirections, handleChipCount}

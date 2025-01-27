@@ -2,11 +2,16 @@ import { useEffect, useState } from "react";
 import React from "react";
 import Cell from "./cell/cell";
 import styles from "./othello.module.css"
-import {handleFlipDirections} from "./gamelogic/gamelogic"
+import {
+  handleFlipDirections,
+  handleChipCount
+} from "./gamelogic/gamelogic"
 
 interface OthelloState {
   board: string[][];
   player: 'B' | 'W' | 'V' | '';
+  blackChipCount: number;
+  whiteChipCount: number;
 }
 
 const Othello = () => {
@@ -17,7 +22,9 @@ const Othello = () => {
   initialBoard[3][4] = 'W';
   const [gameState, setGameState] = useState<OthelloState>({
     board: initialBoard,
-    player: 'B'
+    player: 'B',
+    blackChipCount: 2,
+    whiteChipCount: 2
   })
 
   useEffect(() => {
@@ -38,20 +45,26 @@ const Othello = () => {
       newBoard[row][col] = player
 
       handleFlipDirections(player, newBoard, row, col)
-      console.log(newBoard)
+
+      const [newBlackCount, newWhiteCount] = handleChipCount(newBoard)
       
       setGameState({
         ...gameState,
         board: newBoard,
-        player: nextPlayer
+        player: nextPlayer,
+        blackChipCount: newBlackCount,
+        whiteChipCount: newWhiteCount
       })
     }
   }
 
   const handleReset = () => {
     setGameState({
+      ...gameState,
       board: initialBoard,
-      player: 'B'
+      player: 'B',
+      blackChipCount: 2,
+      whiteChipCount: 2
     })
   }
 
@@ -69,6 +82,8 @@ const Othello = () => {
       </div>
       <button onClick={handleReset}>Reset</button>
       Player: {gameState.player}
+      Black: {gameState.blackChipCount}
+      White: {gameState.whiteChipCount}
     </div>
   );
 };
