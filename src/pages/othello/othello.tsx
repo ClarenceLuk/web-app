@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import React from "react";
 import Cell from "./cell/cell";
 import styles from "./othello.module.css"
