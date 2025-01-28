@@ -1,3 +1,5 @@
+import { OthelloState } from './types'
+
 const INITIALBOARD: string[][] = [
   ['', '', '', '', '', '', '', ''],
   ['', '', '', '', '', '', '', ''],
@@ -7,7 +9,7 @@ const INITIALBOARD: string[][] = [
   ['', '', '', '', '', '', '', ''],
   ['', '', '', '', '', '', '', ''],
   ['', '', '', '', '', '', '', ''],
-];
+]
 
 const DIRECTIONS = [
   [1, 0], // Right
@@ -17,7 +19,13 @@ const DIRECTIONS = [
   [1, 1], // Diagonal Down-Right
   [-1, -1], // Diagonal Up-Left
   [1, -1], // Diagonal Up-Right
-  [-1, 1] // Diagonal Down-Left
-];
+  [-1, 1], // Diagonal Down-Left
+]
 
-export {INITIALBOARD, DIRECTIONS}
+const DEFAULTGAMESTATE: OthelloState = {
+  board: INITIALBOARD,
+  player: 'B',
+  chipCounts: { black: 2, white: 2 },
+}
+
+export { DIRECTIONS, DEFAULTGAMESTATE }
