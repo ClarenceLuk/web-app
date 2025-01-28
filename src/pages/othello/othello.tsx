@@ -11,17 +11,15 @@ import {INITIALBOARD} from "./constants"
 
 interface OthelloState {
   board: string[][];
-  player: 'B' | 'W' | 'V' | '';
-  blackChipCount: number;
-  whiteChipCount: number;
+  player: 'B' | 'W';
+  chipCounts: { black: number; white: number }
 }
 
 const Othello = () => {
   const [gameState, setGameState] = useState<OthelloState>({
     board: INITIALBOARD,
     player: 'B',
-    blackChipCount: 2,
-    whiteChipCount: 2
+    chipCounts: { black: 2, white: 2 }
   })
 
   const handleClick = (player: string, row: number, col: number): void => {
@@ -39,8 +37,7 @@ const Othello = () => {
         ...gameState,
         board: newBoard,
         player: nextPlayer,
-        blackChipCount: newBlackCount,
-        whiteChipCount: newWhiteCount
+        chipCounts: { black: newBlackCount, white: newWhiteCount }
       })
     }
   }
@@ -50,8 +47,7 @@ const Othello = () => {
       ...gameState,
       board: INITIALBOARD,
       player: 'B',
-      blackChipCount: 2,
-      whiteChipCount: 2
+      chipCounts: { black: 2, white: 2 }
     })
   }
 
@@ -69,8 +65,8 @@ const Othello = () => {
       </div>
       <button onClick={handleReset}>Reset</button>
       Player: {gameState.player}
-      Black: {gameState.blackChipCount}
-      White: {gameState.whiteChipCount}
+      Black: {gameState.chipCounts.black}
+      White: {gameState.chipCounts.white}
     </div>
   );
 };

@@ -1,18 +1,11 @@
+import { DIRECTIONS } from "./constants"
+
 const handleFlipDirections = (player: string, board: string[][], row: number, col: number) => {
-  const directions = [
-    [1, 0], // Right
-    [0, 1], // Down
-    [-1, 0], // Left
-    [0, -1], // Up
-    [1, 1], // Diagonal Down-Right
-    [-1, -1], // Diagonal Up-Left
-    [1, -1], // Diagonal Up-Right
-    [-1, 1] // Diagonal Down-Left
-  ];
+  
 
   board[row][col] = player;
   
-  for (const direction of directions) {
+  for (const direction of DIRECTIONS) {
     if (row >= 0 && row < 8 && col >= 0 && col < 8 && board[row][col] !== '') {
       flip(player, board, row + direction[0], col + direction[1], direction)
     }
@@ -35,7 +28,6 @@ const flip = (player: string, board: string[][], row: number, col: number, direc
   }
   
   return false
-
 }
 
 const handleChipCount = (board: string[][]) => {
