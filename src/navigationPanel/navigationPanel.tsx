@@ -20,18 +20,11 @@ const NavigationPanel = ({
         flexDirection: 'column',
         gap: 0,
       }}>
-        <Button onClick={() => handleChangePage(PageEnum.Fractal)}>
-          <Typography variant="button">{PageEnum.Fractal}</Typography>
-        </Button>
-        <Button onClick={() => handleChangePage(PageEnum.EarthQuake)}>
-          <Typography variant="button">{PageEnum.EarthQuake}</Typography>
-        </Button>
-        <Button onClick={() => handleChangePage(PageEnum.Weather)}>
-          <Typography variant="button">{PageEnum.Weather}</Typography>
-        </Button>
-        <Button onClick={() => handleChangePage(PageEnum.Othello)}>
-          <Typography variant='button'>{PageEnum.Othello}</Typography>
-        </Button>
+        {Object.keys(PageEnum).map((key) => (
+          <Button key={key} onClick={() => handleChangePage(key)}> 
+            <Typography variant="button">{key}</Typography>
+          </Button>
+        ))}
       </Box>
       <Box sx={{
         display: 'flex',

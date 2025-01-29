@@ -1,4 +1,6 @@
-import { OthelloState } from './types'
+import { Coordinate, OthelloState } from './types'
+
+const BOARDSIZE = 8
 
 const INITIALBOARD: string[][] = [
   ['', '', '', '', '', '', '', ''],
@@ -24,8 +26,22 @@ const DIRECTIONS = [
 
 const DEFAULTGAMESTATE: OthelloState = {
   board: INITIALBOARD,
-  player: 'B',
+  player: 'black',
   chipCounts: { black: 2, white: 2 },
+  validMoves: {
+    black: new Set<Coordinate>([
+      [2, 3],
+      [3, 2],
+      [4, 5],
+      [5, 4],
+    ]),
+    white: new Set<Coordinate>([
+      [2, 4],
+      [3, 5],
+      [4, 2],
+      [5, 3],
+    ]),
+  },
 }
 
-export { DIRECTIONS, DEFAULTGAMESTATE }
+export { DIRECTIONS, DEFAULTGAMESTATE, BOARDSIZE }

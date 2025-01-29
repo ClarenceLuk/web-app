@@ -15,7 +15,7 @@ const Othello = () => {
       const newBoard = [...gameState.board]
 
       // implement player turn validation and valid placement
-      const nextPlayer = player === 'B' ? 'W' : 'B'
+      const nextPlayer = player === 'black' ? 'white' : 'black'
 
       handleFlipDirections(player, newBoard, row, col)
 

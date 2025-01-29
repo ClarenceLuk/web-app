@@ -1,4 +1,5 @@
-import { DIRECTIONS } from './constants'
+import { BOARDSIZE, DIRECTIONS } from './constants'
+import { OthelloState, Player } from './types'
 
 const handleFlipDirections = (
   player: string,
@@ -46,6 +47,10 @@ const flip = (
   return false
 }
 
+const hasValidMoves = (row: number, col: number, player: Player) => {
+  
+}
+
 const handleChipCount = (board: string[][]) => {
   const counts = [0, 0]
 
@@ -61,4 +66,36 @@ const handleChipCount = (board: string[][]) => {
   return counts
 }
 
-export { handleFlipDirections, handleChipCount }
+const getValidMoves = (
+  gameState: OthelloState,
+  currentPlayer: Player,
+  setGameState: (gameState: OthelloState) => void
+): void => {
+  const newGameState = {
+    ...gameState,
+    validMoves: {
+      ...gameState.validMoves,
+      [currentPlayer]: new Set(),
+    },
+  }
+  if (gameState.chipCounts[currentPlayer] === 0) {
+    setGameState(newGameState)
+    return
+  }
+
+  for (let row = 0; row < BOARDSIZE; row++) {
+    for (let col = 0; col < BOARDSIZE; col++) {
+      if (gameState.board[row][col] !== currentPlayer) {
+        for (const direction of DIRECTIONS) {
+          let rowCheck = row + direction[0]
+          let colCheck = col + direction[1]
+          if (rowCheck >= 0 && rowCheck < 8 && colCheck >= 0 && colCheck < 8 && gameState.board[rowCheck][colCheck] === '') {
+            
+          }
+        }
+      }
+    }
+  }
+}
+
+export { handleFlipDirections, handleChipCount, getValidMoves }
