@@ -6,10 +6,10 @@ import { handleFlipDirections, handleChipCount } from './gamelogic'
 
 import { DEFAULTGAMESTATE } from './constants'
 import { OthelloState } from './types'
-import _ from 'lodash';
+import { cloneDeep } from 'lodash';
 
 const Othello = () => {
-  const [gameState, setGameState] = useState<OthelloState>(_.cloneDeep(DEFAULTGAMESTATE))
+  const [gameState, setGameState] = useState<OthelloState>(cloneDeep(DEFAULTGAMESTATE))
 
   const handleClick = (player: string, row: number, col: number): void => {
     if (gameState.board[row][col] === '') {
@@ -32,7 +32,7 @@ const Othello = () => {
   }
 
   const handleReset = () => {
-    setGameState(_.cloneDeep(DEFAULTGAMESTATE))
+    setGameState(cloneDeep(DEFAULTGAMESTATE))
   }
 
   return (
