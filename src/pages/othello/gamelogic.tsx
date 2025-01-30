@@ -1,17 +1,26 @@
 import { BOARDSIZE, DIRECTIONS } from './constants'
 import { OthelloState, Player } from './types'
 
-const handleFlipDirections = (
+const handleFlip = (
+  gameState: OthelloState,
+  setGameState: (gameState: OthelloState) => void,
   player: string,
-  board: string[][],
   row: number,
   col: number
 ) => {
-  board[row][col] = player
+
+  const newGameState = {
+    ...gameState,
+    board: {...gameState.board}
+  }
+  newGameState.board[row][col] = player
+  // also update valid moves and possible moves here
+  setGameState(newGameState)
+
 
   for (const direction of DIRECTIONS) {
-    if (row >= 0 && row < 8 && col >= 0 && col < 8 && board[row][col] !== '') {
-      flip(player, board, row + direction[0], col + direction[1], direction)
+    if (row >= 0 && row < 8 && col >= 0 && col < 8 && gameState.board[row][col] !== '') {
+      flip(player, gameState.board, row + direction[0], col + direction[1], direction)
     }
   }
 }
@@ -85,19 +94,7 @@ const handleValidMoves = (
   }
 
   // get a set of the surface area
-  for (let row = 0; row < BOARDSIZE; row++) {
-    for (let col = 0; col < BOARDSIZE; col++) {
-      if (gameState.board[row][col] == 'black' || gameState.board[row][col] == 'white') {
-        for (const direction of DIRECTIONS) {
-          let rowCheck = row + direction[0]
-          let colCheck = col + direction[1]
-          if (rowCheck >= 0 && rowCheck < 8 && colCheck >= 0 && colCheck < 8 && gameState.board[rowCheck][colCheck] === '') {
-            
-          }
-        }
-      }
-    }
-  }
+  
 }
 
-export { handleFlipDirections, handleChipCount, handleValidMoves }
+export { handleFlip, handleChipCount, handleValidMoves }

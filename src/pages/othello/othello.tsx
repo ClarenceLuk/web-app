@@ -2,7 +2,7 @@ import { useState } from 'react'
 import React from 'react'
 import Cell from './cell'
 import styles from './othello.module.css'
-import { handleFlipDirections, handleChipCount } from './gamelogic'
+import { handleFlip, handleChipCount } from './gamelogic'
 
 import { DEFAULTGAMESTATE } from './constants'
 import { OthelloState } from './types'
@@ -18,7 +18,7 @@ const Othello = () => {
       // implement player turn validation and valid placement
       const nextPlayer = player === 'black' ? 'white' : 'black'
 
-      handleFlipDirections(player, newBoard, row, col)
+      handleFlip(gameState, setGameState, player, row, col)
 
       const [newBlackCount, newWhiteCount] = handleChipCount(newBoard)
 
