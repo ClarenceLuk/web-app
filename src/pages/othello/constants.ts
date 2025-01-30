@@ -6,8 +6,8 @@ const INITIALBOARD: string[][] = [
   ['', '', '', '', '', '', '', ''],
   ['', '', '', '', '', '', '', ''],
   ['', '', '', '', '', '', '', ''],
-  ['', '', '', 'W', 'B', '', '', ''],
-  ['', '', '', 'B', 'W', '', '', ''],
+  ['', '', '', 'white', 'black', '', '', ''],
+  ['', '', '', 'black', 'white', '', '', ''],
   ['', '', '', '', '', '', '', ''],
   ['', '', '', '', '', '', '', ''],
   ['', '', '', '', '', '', '', ''],
@@ -29,19 +29,23 @@ const DEFAULTGAMESTATE: OthelloState = {
   player: 'black',
   chipCounts: { black: 2, white: 2 },
   validMoves: {
-    black: new Set<Coordinate>([
-      [2, 3],
-      [3, 2],
-      [4, 5],
-      [5, 4],
-    ]),
-    white: new Set<Coordinate>([
-      [2, 4],
-      [3, 5],
-      [4, 2],
-      [5, 3],
-    ]),
+    black: new Set<Coordinate>(),
+    white: new Set<Coordinate>(),
   },
+  possibleMoves: new Set<Coordinate>([
+    [2, 2],
+    [3, 2],
+    [4, 2],
+    [5, 2],
+    [2, 3],
+    [2, 4],
+    [2, 5],
+    [3, 5],
+    [4, 5],
+    [5, 5],
+    [5, 3],
+    [5, 4],
+  ]),
 }
 
 export { DIRECTIONS, DEFAULTGAMESTATE, BOARDSIZE }

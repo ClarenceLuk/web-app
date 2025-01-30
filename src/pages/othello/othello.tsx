@@ -53,6 +53,7 @@ const Othello = () => {
         ))}
       </div>
       {/* implement ui for game statistics */}
+      {/* implement undo funtion */}
       <div>
         <button onClick={handleReset}>Reset</button>
         Player: {gameState.player}

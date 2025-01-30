@@ -48,7 +48,9 @@ const flip = (
 }
 
 const hasValidMoves = (row: number, col: number, player: Player) => {
-  
+   for (const direction of DIRECTIONS) {
+    if 
+   }
 }
 
 const handleChipCount = (board: string[][]) => {
@@ -66,7 +68,7 @@ const handleChipCount = (board: string[][]) => {
   return counts
 }
 
-const getValidMoves = (
+const handleValidMoves = (
   gameState: OthelloState,
   currentPlayer: Player,
   setGameState: (gameState: OthelloState) => void
@@ -83,9 +85,10 @@ const getValidMoves = (
     return
   }
 
+  // get a set of the surface area
   for (let row = 0; row < BOARDSIZE; row++) {
     for (let col = 0; col < BOARDSIZE; col++) {
-      if (gameState.board[row][col] !== currentPlayer) {
+      if (gameState.board[row][col] == 'black' || gameState.board[row][col] == 'white') {
         for (const direction of DIRECTIONS) {
           let rowCheck = row + direction[0]
           let colCheck = col + direction[1]
@@ -98,4 +101,4 @@ const getValidMoves = (
   }
 }
 
-export { handleFlipDirections, handleChipCount, getValidMoves }
+export { handleFlipDirections, handleChipCount, handleValidMoves }

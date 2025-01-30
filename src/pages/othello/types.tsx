@@ -6,6 +6,7 @@ export interface OthelloState {
     black: Set<Coordinate>
     white: Set<Coordinate>
   }
+  possibleMoves: Set<Coordinate>
 }
 
 export type Coordinate = [number, number]

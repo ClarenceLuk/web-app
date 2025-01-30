@@ -17,7 +17,7 @@ const Cell: React.FC<CellProps> = ({
   onClick: handleFlip,
 }) => {
   const pieceClass =
-    value === 'B' ? styles.black : value === 'W' ? styles.white : ''
+    value === 'black' ? styles.black : value === 'white' ? styles.white : ''
 
   return (
     <div
