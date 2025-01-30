@@ -20,9 +20,9 @@ const NavigationPanel = ({
         flexDirection: 'column',
         gap: 0,
       }}>
-        {Object.keys(PageEnum).map((key) => (
+        {Object.entries(PageEnum).map(([key, value]) => (
           <Button key={key} onClick={() => handleChangePage(key)}> 
-            <Typography variant="button">{key}</Typography>
+            <Typography variant="button">{value}</Typography>
           </Button>
         ))}
       </Box>

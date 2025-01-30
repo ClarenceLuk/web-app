@@ -1,6 +1,6 @@
 export enum PageEnum {
   Fractal = 'Fractal',
-  EarthQuake = 'Earth Quake',
+  EarthQuake = 'Earthquake',
   Weather = 'Weather',
   Othello = 'Othello'
 }
