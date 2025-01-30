@@ -1,5 +1,5 @@
 import { DIRECTIONS } from './constants'
-import { OthelloState, Player } from './types'
+import { Coordinate, OthelloState, Player } from './types'
 
 const handleFlip = (
   gameState: OthelloState,
@@ -70,8 +70,10 @@ const flip = (
   return false
 }
 
-const hasValidMoves = (gameState: OthelloState, row: number, col: number, player: Player) => {
+const hasValidMoves = (gameState: OthelloState, row: number, col: number, player: Player): Set<Coordinate> => {
   // board[row][col] should be '' and checking for opposite player's token and then players token
+
+  return new Set<Coordinate>([]) // placeholder
 }
 
 const handleChipCount = (board: string[][]) => {
@@ -130,8 +132,10 @@ const handleValidMoves = (
   newGameState.possibleMoves = newPossibleMoves
 
   // now get valid moves for the current player
+  const newCurrentPlayerValidMoves = hasValidMoves(gameState, row, col, currentPlayer)
+  newGameState.validMoves[currentPlayer] = newCurrentPlayerValidMoves
 
-  
+  setGameState(newGameState)
 }
 
 export { handleFlip, handleChipCount, handleValidMoves }
