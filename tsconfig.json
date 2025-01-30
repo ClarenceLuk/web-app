@@ -4,6 +4,9 @@
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
+    "typeRoots": [
+      "node_modules/@types" // This is important!
+    ],
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "strict": true,
@@ -21,6 +24,7 @@
     "test", 
     "babel.config.js", 
     "jest.config.js", 
-    "webpack.config.js"
+    "webpack.config.js",
+    "lodash.d.ts"
   ]
 }
