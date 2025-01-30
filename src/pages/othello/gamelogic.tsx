@@ -49,7 +49,6 @@ const flip = (
 
 const hasValidMoves = (row: number, col: number, player: Player) => {
    for (const direction of DIRECTIONS) {
-    if 
    }
 }
 
