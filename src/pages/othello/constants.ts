@@ -32,19 +32,8 @@ const DEFAULTGAMESTATE: OthelloState = {
     black: new Set<Coordinate>(),
     white: new Set<Coordinate>(),
   },
-  possibleMoves: new Set<Coordinate>([
-    [2, 2],
-    [3, 2],
-    [4, 2],
-    [5, 2],
-    [2, 3],
-    [2, 4],
-    [2, 5],
-    [3, 5],
-    [4, 5],
-    [5, 5],
-    [5, 3],
-    [5, 4],
+  possibleMoves: new Set<string>([
+    '2,2', '3,2', '4,2', '5,2', '2,3', '2,4', '2,5', '3,5', '4,5', '5,5', '5,3', '5,4'
   ]),
 }
 

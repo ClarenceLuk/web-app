@@ -1,4 +1,4 @@
-import { BOARDSIZE, DIRECTIONS } from './constants'
+import { DIRECTIONS } from './constants'
 import { OthelloState, Player } from './types'
 
 const handleFlip = (
@@ -8,19 +8,33 @@ const handleFlip = (
   row: number,
   col: number
 ) => {
-
   const newGameState = {
     ...gameState,
-    board: {...gameState.board}
+    board: { ...gameState.board },
   }
   newGameState.board[row][col] = player
+
+  if (newGameState.possibleMoves.has(`${row},${col}`)) {
+    newGameState.possibleMoves.delete(`${row},${col}`)
+  }
   // also update valid moves and possible moves here
   setGameState(newGameState)
 
-
   for (const direction of DIRECTIONS) {
-    if (row >= 0 && row < 8 && col >= 0 && col < 8 && gameState.board[row][col] !== '') {
-      flip(player, gameState.board, row + direction[0], col + direction[1], direction)
+    if (
+      row >= 0 &&
+      row < 8 &&
+      col >= 0 &&
+      col < 8 &&
+      gameState.board[row][col] !== ''
+    ) {
+      flip(
+        player,
+        gameState.board,
+        row + direction[0],
+        col + direction[1],
+        direction
+      )
     }
   }
 }
@@ -56,9 +70,8 @@ const flip = (
   return false
 }
 
-const hasValidMoves = (row: number, col: number, player: Player) => {
-   for (const direction of DIRECTIONS) {
-   }
+const hasValidMoves = (gameState: OthelloState, row: number, col: number, player: Player) => {
+  // board[row][col] should be '' and checking for opposite player's token and then players token
 }
 
 const handleChipCount = (board: string[][]) => {
@@ -76,10 +89,30 @@ const handleChipCount = (board: string[][]) => {
   return counts
 }
 
+const handlePossibleMoves = (
+  gameState: OthelloState,
+  row: number,
+  col: number
+) => {
+  const newPossibleMoves = new Set(gameState.possibleMoves)
+  newPossibleMoves.delete(`${row},${col}`)
+  for (const direction of DIRECTIONS) {
+    const newRow = row+direction[0]
+    const newCol = col+direction[1]
+    if (gameState.board[newRow][newCol] === '') {
+      newPossibleMoves.add(`${newRow},${newCol}`)
+    }
+  }
+
+  return newPossibleMoves
+}
+
 const handleValidMoves = (
   gameState: OthelloState,
   currentPlayer: Player,
-  setGameState: (gameState: OthelloState) => void
+  setGameState: (gameState: OthelloState) => void,
+  row: number,
+  col: number
 ): void => {
   const newGameState = {
     ...gameState,
@@ -93,7 +126,11 @@ const handleValidMoves = (
     return
   }
 
-  // get a set of the surface area
+  const newPossibleMoves = handlePossibleMoves(gameState, row, col)
+  newGameState.possibleMoves = newPossibleMoves
+
+  // now get valid moves for the current player
+
   
 }
 
