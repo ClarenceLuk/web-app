@@ -2,23 +2,32 @@ import { useState } from 'react'
 import React from 'react'
 import Cell from './cell'
 import styles from './othello.module.css'
-import { handleFlip, handleChipCount, handleValidMoves, handlePossibleMoves } from './gamelogic'
+import { handleFlip, handleChipCount, handlePossibleMoves } from './gamelogic'
 
 import { DEFAULTGAMESTATE } from './constants'
 import { OthelloState, Player } from './types'
-import { cloneDeep } from 'lodash';
+import { cloneDeep } from 'lodash'
 
 const Othello = () => {
-  const [gameState, setGameState] = useState<OthelloState>(cloneDeep(DEFAULTGAMESTATE))
+  const [gameState, setGameState] = useState<OthelloState>(
+    cloneDeep(DEFAULTGAMESTATE)
+  )
 
   const handleClick = (player: Player, row: number, col: number): void => {
     if (gameState.board[row][col] === '') {
-
       const newBoard = handleFlip(gameState.board, player, row, col)
 
       const [newBlackCount, newWhiteCount] = handleChipCount(newBoard)
 
-      const newPossibleMoves = handlePossibleMoves(gameState.board, gameState.possibleMoves, row, col)
+      const newPossibleMoves = handlePossibleMoves(
+        gameState.board,
+        gameState.possibleMoves,
+        row,
+        col
+      )
+      console.log(newPossibleMoves)
+
+      // handle valid moves here
 
       const nextPlayer = player === 'black' ? 'white' : 'black'
 
@@ -27,10 +36,9 @@ const Othello = () => {
         board: newBoard,
         player: nextPlayer,
         chipCounts: { black: newBlackCount, white: newWhiteCount },
-        possibleMoves: newPossibleMoves
+        possibleMoves: newPossibleMoves,
       })
     }
-
   }
 
   const handleReset = () => {

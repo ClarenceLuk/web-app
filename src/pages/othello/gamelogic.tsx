@@ -1,6 +1,6 @@
 import { cloneDeep } from 'lodash'
 import { DIRECTIONS } from './constants'
-import { Coordinate, OthelloState, Player } from './types'
+import { Coordinate, OthelloState, Player, PossibleMoves } from './types'
 
 const handleFlip = (
   board: string[][],
@@ -87,12 +87,12 @@ const handleChipCount = (board: string[][]) => {
 
 const handlePossibleMoves = (
   board: string[][],
-  possibleMoves: Set<string>,
+  possibleMoves: PossibleMoves,
   row: number,
   col: number
-): Set<string> => {
-  const newPossibleMoves = new Set<string>(possibleMoves)
-  newPossibleMoves.delete(`${row},${col}`)
+): PossibleMoves => {
+  const newPossibleMoves = {...possibleMoves}
+  delete newPossibleMoves[`${row},${col}`]
   for (const direction of DIRECTIONS) {
     const newRow = row+direction[0]
     const newCol = col+direction[1]
@@ -101,7 +101,7 @@ const handlePossibleMoves = (
       newCol >= 0 &&
       newCol < 8 &&
       board[newRow][newCol] === '') {
-      newPossibleMoves.add(`${newRow},${newCol}`)
+      newPossibleMoves[`${newRow},${newCol}`] = [newRow, newCol]
     }
   }
 

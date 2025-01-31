@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from './cell.module.css'
-import { Player } from './types'
+import { Player, PossibleMoves } from './types'
 
 interface CellProps {
   player: Player // 'B' for black, 'W' for white, or empty string
@@ -8,7 +8,7 @@ interface CellProps {
   row: number
   col: number
   onClick: (player: Player, row: number, col: number) => void
-  possibleMoves: Set<string>
+  possibleMoves: PossibleMoves
 }
 
 const Cell: React.FC<CellProps> = ({
@@ -21,7 +21,7 @@ const Cell: React.FC<CellProps> = ({
 }) => {
   const pieceClass =
     value === 'black' ? styles.black : value === 'white' ? styles.white : ''
-  if (possibleMoves.has(`${row},${col}`)) {
+  if (`${row},${col}` in possibleMoves) {
     return (
       <div
         className={styles.possibleCell}
