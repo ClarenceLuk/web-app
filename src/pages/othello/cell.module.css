@@ -5,6 +5,14 @@
   margin: 1px;
 }
 
+.possibleCell {
+  height: 50px;
+  width: 50px;
+  background-color: green;
+  margin: 1px;
+  border: 2px solid white;
+}
+
 .black {
   height: 46px;
   width: 46px;
@@ -31,6 +39,3 @@
   margin: 20px;
 }
 
-.hovered {
-  background-color: lightgreen; /* Highlight valid moves */
-}

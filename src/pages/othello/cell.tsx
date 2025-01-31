@@ -1,12 +1,14 @@
 import React from 'react'
 import styles from './cell.module.css'
+import { Player } from './types'
 
 interface CellProps {
-  player: string // 'B' for black, 'W' for white, or empty string
+  player: Player // 'B' for black, 'W' for white, or empty string
   value: string
   row: number
   col: number
-  onClick: (player: string, row: number, col: number) => void
+  onClick: (player: Player, row: number, col: number) => void
+  possibleMoves: Set<string>
 }
 
 const Cell: React.FC<CellProps> = ({
@@ -15,10 +17,20 @@ const Cell: React.FC<CellProps> = ({
   row,
   col,
   onClick: handleFlip,
+  possibleMoves
 }) => {
   const pieceClass =
     value === 'black' ? styles.black : value === 'white' ? styles.white : ''
-
+  if (possibleMoves.has(`${row},${col}`)) {
+    return (
+      <div
+        className={styles.possibleCell}
+        key={`${player}-${row}-${col}`}
+        onClick={() => handleFlip(player, row, col)}>
+        <div className={pieceClass} />
+    </div>
+    )
+  }
   return (
     <div
       className={styles.cell}

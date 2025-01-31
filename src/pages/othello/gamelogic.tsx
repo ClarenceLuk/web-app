@@ -1,24 +1,16 @@
+import { cloneDeep } from 'lodash'
 import { DIRECTIONS } from './constants'
 import { Coordinate, OthelloState, Player } from './types'
 
 const handleFlip = (
-  gameState: OthelloState,
-  setGameState: (gameState: OthelloState) => void,
-  player: string,
+  board: string[][],
+  player: Player,
   row: number,
   col: number
 ) => {
-  const newGameState = {
-    ...gameState,
-    board: { ...gameState.board },
-  }
-  newGameState.board[row][col] = player
-
-  if (newGameState.possibleMoves.has(`${row},${col}`)) {
-    newGameState.possibleMoves.delete(`${row},${col}`)
-  }
+  const newBoard: string[][] = cloneDeep(board)
+  newBoard[row][col] = player
   // also update valid moves and possible moves here
-  setGameState(newGameState)
 
   for (const direction of DIRECTIONS) {
     if (
@@ -26,21 +18,23 @@ const handleFlip = (
       row < 8 &&
       col >= 0 &&
       col < 8 &&
-      gameState.board[row][col] !== ''
+      newBoard[row][col] !== ''
     ) {
       flip(
         player,
-        gameState.board,
+        newBoard,
         row + direction[0],
         col + direction[1],
         direction
       )
     }
   }
+
+  return newBoard
 }
 
 const flip = (
-  player: string,
+  player: Player,
   board: string[][],
   row: number,
   col: number,
@@ -81,9 +75,9 @@ const handleChipCount = (board: string[][]) => {
 
   for (const row of board) {
     for (const cell of row) {
-      if (cell === 'B') {
+      if (cell === 'black') {
         counts[0] += 1
-      } else if (cell === 'W') {
+      } else if (cell === 'white') {
         counts[1] += 1
       }
     }
@@ -92,16 +86,21 @@ const handleChipCount = (board: string[][]) => {
 }
 
 const handlePossibleMoves = (
-  gameState: OthelloState,
+  board: string[][],
+  possibleMoves: Set<string>,
   row: number,
   col: number
-) => {
-  const newPossibleMoves = new Set(gameState.possibleMoves)
+): Set<string> => {
+  const newPossibleMoves = new Set<string>(possibleMoves)
   newPossibleMoves.delete(`${row},${col}`)
   for (const direction of DIRECTIONS) {
     const newRow = row+direction[0]
     const newCol = col+direction[1]
-    if (gameState.board[newRow][newCol] === '') {
+    if (newRow >= 0 &&
+      newRow < 8 &&
+      newCol >= 0 &&
+      newCol < 8 &&
+      board[newRow][newCol] === '') {
       newPossibleMoves.add(`${newRow},${newCol}`)
     }
   }
@@ -128,9 +127,6 @@ const handleValidMoves = (
     return
   }
 
-  const newPossibleMoves = handlePossibleMoves(gameState, row, col)
-  newGameState.possibleMoves = newPossibleMoves
-
   // now get valid moves for the current player
   const newCurrentPlayerValidMoves = hasValidMoves(gameState, row, col, currentPlayer)
   newGameState.validMoves[currentPlayer] = newCurrentPlayerValidMoves
@@ -138,4 +134,4 @@ const handleValidMoves = (
   setGameState(newGameState)
 }
 
-export { handleFlip, handleChipCount, handleValidMoves }
+export { handleFlip, handleChipCount, handleValidMoves, handlePossibleMoves }

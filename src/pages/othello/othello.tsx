@@ -2,33 +2,35 @@ import { useState } from 'react'
 import React from 'react'
 import Cell from './cell'
 import styles from './othello.module.css'
-import { handleFlip, handleChipCount } from './gamelogic'
+import { handleFlip, handleChipCount, handleValidMoves, handlePossibleMoves } from './gamelogic'
 
 import { DEFAULTGAMESTATE } from './constants'
-import { OthelloState } from './types'
+import { OthelloState, Player } from './types'
 import { cloneDeep } from 'lodash';
 
 const Othello = () => {
   const [gameState, setGameState] = useState<OthelloState>(cloneDeep(DEFAULTGAMESTATE))
 
-  const handleClick = (player: string, row: number, col: number): void => {
+  const handleClick = (player: Player, row: number, col: number): void => {
     if (gameState.board[row][col] === '') {
-      const newBoard = [...gameState.board]
 
-      // implement player turn validation and valid placement
-      const nextPlayer = player === 'black' ? 'white' : 'black'
-
-      handleFlip(gameState, setGameState, player, row, col)
+      const newBoard = handleFlip(gameState.board, player, row, col)
 
       const [newBlackCount, newWhiteCount] = handleChipCount(newBoard)
+
+      const newPossibleMoves = handlePossibleMoves(gameState.board, gameState.possibleMoves, row, col)
+
+      const nextPlayer = player === 'black' ? 'white' : 'black'
 
       setGameState({
         ...gameState,
         board: newBoard,
         player: nextPlayer,
         chipCounts: { black: newBlackCount, white: newWhiteCount },
+        possibleMoves: newPossibleMoves
       })
     }
+
   }
 
   const handleReset = () => {
@@ -48,6 +50,7 @@ const Othello = () => {
                 row={row}
                 col={col}
                 onClick={handleClick}
+                possibleMoves={gameState.possibleMoves}
               />
             ))}
           </div>
