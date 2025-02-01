@@ -7,6 +7,7 @@ import {
   handleChipCount,
   handlePossibleMoves,
   handleValidMoves,
+  handlePlayerTurn,
 } from './gamelogic'
 
 import { DEFAULTGAMESTATE, PLAYER } from './constants'
@@ -32,7 +33,7 @@ const Othello = () => {
       )
       const newValidMoves = handleValidMoves(newBoard, newPossibleMoves)
 
-      const nextPlayer = player === PLAYER.black ? PLAYER.white : PLAYER.black
+      const nextPlayer = handlePlayerTurn(newValidMoves, player, player === PLAYER.black ? PLAYER.white : PLAYER.black)
 
       setGameState({
         ...gameState,

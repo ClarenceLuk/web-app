@@ -6,12 +6,7 @@ const validCoordinates = (row: number, col: number) => {
   return row >= 0 && row < 8 && col >= 0 && col < 8
 }
 
-const handleFlip = (
-  board: Board,
-  player: Player,
-  row: number,
-  col: number
-) => {
+const handleFlip = (board: Board, player: Player, row: number, col: number) => {
   const newBoard: Board = cloneDeep(board)
   newBoard[row][col] = player
   // also update valid moves and possible moves here
@@ -150,4 +145,21 @@ const handleValidMoves = (
   return newValidMoves
 }
 
-export { handleFlip, handleChipCount, handleValidMoves, handlePossibleMoves }
+const handlePlayerTurn = (
+  validMoves: ValidMoves,
+  currentPlayer: Player,
+  nextPlayer: Player
+) => {
+  if (Object.keys(validMoves[nextPlayer]).length === 0) {
+    return currentPlayer
+  }
+  return nextPlayer
+}
+
+export {
+  handleFlip,
+  handleChipCount,
+  handleValidMoves,
+  handlePossibleMoves,
+  handlePlayerTurn,
+}
