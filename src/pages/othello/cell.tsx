@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from './cell.module.css'
-import { Player, PossibleMoves, ValidMoves } from './types'
+import { Player, ValidMoves } from './types'
 
 interface CellProps {
   player: Player // 'B' for black, 'W' for white, or empty string
@@ -8,7 +8,6 @@ interface CellProps {
   row: number
   col: number
   onClick: (player: Player, row: number, col: number) => void
-  possibleMoves: PossibleMoves
   validMoves: ValidMoves
 }
 
@@ -18,7 +17,6 @@ const Cell: React.FC<CellProps> = ({
   row,
   col,
   onClick: handleFlip,
-  possibleMoves,
   validMoves,
 }) => {
   if (`${row},${col}` in validMoves[player]) {

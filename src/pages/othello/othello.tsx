@@ -62,7 +62,6 @@ const Othello = () => {
                 row={row}
                 col={col}
                 onClick={handleClick}
-                possibleMoves={gameState.possibleMoves}
                 validMoves={gameState.validMoves}
               />
             ))}
