@@ -20,7 +20,10 @@ const Othello = () => {
   )
 
   const handleClick = (player: Player, row: number, col: number): void => {
-    if (gameState.board[row][col] === '' && `${row},${col}` in gameState.validMoves[player]) {
+    if (
+      gameState.board[row][col] === '' &&
+      `${row},${col}` in gameState.validMoves[player]
+    ) {
       const newBoard = handleFlip(gameState.board, player, row, col)
 
       const [newBlackCount, newWhiteCount] = handleChipCount(newBoard)
@@ -33,7 +36,11 @@ const Othello = () => {
       )
       const newValidMoves = handleValidMoves(newBoard, newPossibleMoves)
 
-      const nextPlayer = handlePlayerTurn(newValidMoves, player, player === PLAYER.black ? PLAYER.white : PLAYER.black)
+      const nextPlayer = handlePlayerTurn(
+        newValidMoves,
+        player,
+        player === PLAYER.black ? PLAYER.white : PLAYER.black
+      )
 
       setGameState({
         ...gameState,
@@ -44,6 +51,7 @@ const Othello = () => {
         validMoves: newValidMoves,
       })
     }
+    //TODO: handle win condition and add ui component for win
   }
 
   const handleReset = () => {
@@ -69,8 +77,8 @@ const Othello = () => {
           </div>
         ))}
       </div>
-      {/* implement ui for game statistics */}
-      {/* implement undo funtion */}
+      {/* TODO: implement ui for game statistics */}
+      {/* TODO: implement undo funtion */}
       <div>
         <button onClick={handleReset}>Reset</button>
         Player: {gameState.player}
