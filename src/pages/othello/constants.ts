@@ -1,4 +1,4 @@
-import { Coordinate, OthelloState } from './types'
+import { Coordinate, OthelloState, PossibleMoves } from './types'
 
 const BOARDSIZE = 8
 
@@ -24,6 +24,21 @@ const DIRECTIONS = [
   [-1, 1], // Diagonal Down-Left
 ]
 
+const INITIALPOSSIBLEMOVES: PossibleMoves = {
+  '2,2': [2, 2],
+  '3,2': [3, 2],
+  '4,2': [4, 2],
+  '5,2': [5, 2],
+  '2,3': [2, 3],
+  '2,4': [2, 4],
+  '2,5': [2, 5],
+  '3,5': [3, 5],
+  '4,5': [4, 5],
+  '5,5': [5, 5],
+  '5,3': [5, 3],
+  '5,4': [5, 4]
+}
+
 const DEFAULTGAMESTATE: OthelloState = {
   board: INITIALBOARD,
   player: 'black',
@@ -32,20 +47,7 @@ const DEFAULTGAMESTATE: OthelloState = {
     black: new Set<Coordinate>(),
     white: new Set<Coordinate>(),
   },
-  possibleMoves: {
-    '2,2': [2, 2],
-    '3,2': [3, 2],
-    '4,2': [4, 2],
-    '5,2': [5, 2],
-    '2,3': [2, 3],
-    '2,4': [2, 4],
-    '2,5': [2, 5],
-    '3,5': [3, 5],
-    '4,5': [4, 5],
-    '5,5': [5, 5],
-    '5,3': [5, 3],
-    '5,4': [5, 4],
-  },
+  possibleMoves: INITIALPOSSIBLEMOVES,
 }
 
 export { DIRECTIONS, DEFAULTGAMESTATE, BOARDSIZE }
