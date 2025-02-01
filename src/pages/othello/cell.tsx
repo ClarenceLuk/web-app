@@ -31,16 +31,6 @@ const Cell: React.FC<CellProps> = ({
       </div>
     )
   }
-  if (`${row},${col}` in possibleMoves) {
-    return (
-      <div
-        className={styles.possibleCell}
-        key={`${player}-${row}-${col}`}
-        onClick={() => handleFlip(player, row, col)}>
-        <div className={styles[value]} />
-      </div>
-    )
-  }
   return (
     <div
       className={styles.cell}
