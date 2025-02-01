@@ -1,5 +1,4 @@
-import { handleValidMoves } from './gamelogic'
-import { OthelloState, Player, PossibleMoves, ValidMoves } from './types'
+import { OthelloState, Player, PossibleMoves } from './types'
 
 const BOARDSIZE = 8
 

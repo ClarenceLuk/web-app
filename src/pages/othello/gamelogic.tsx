@@ -1,6 +1,6 @@
 import { cloneDeep } from 'lodash'
 import { DIRECTIONS, PLAYER } from './constants'
-import { OthelloState, Player, PossibleMoves, ValidMoves } from './types'
+import { Player, PossibleMoves, ValidMoves } from './types'
 
 const validCoordinates = (row: number, col: number) => {
   return row >= 0 && row < 8 && col >= 0 && col < 8
