@@ -1,7 +1,6 @@
 import React from 'react'
 import styles from './cell.module.css'
 import { Player, PossibleMoves, ValidMoves } from './types'
-import { PLAYER } from './constants'
 
 interface CellProps {
   player: Player // 'B' for black, 'W' for white, or empty string
@@ -20,16 +19,16 @@ const Cell: React.FC<CellProps> = ({
   col,
   onClick: handleFlip,
   possibleMoves,
-  validMoves
+  validMoves,
 }) => {
   if (`${row},${col}` in validMoves[player]) {
     return (
       <div
-      className={styles.cell}
-      key={`${player}-${row}-${col}`}
-      onClick={() => handleFlip(player, row, col)}>
-      <div className={styles.valid} />
-    </div>
+        className={styles.cell}
+        key={`${player}-${row}-${col}`}
+        onClick={() => handleFlip(player, row, col)}>
+        <div className={styles.valid} />
+      </div>
     )
   }
   if (`${row},${col}` in possibleMoves) {
@@ -39,7 +38,7 @@ const Cell: React.FC<CellProps> = ({
         key={`${player}-${row}-${col}`}
         onClick={() => handleFlip(player, row, col)}>
         <div className={styles[value]} />
-    </div>
+      </div>
     )
   }
   return (
