@@ -1,5 +1,5 @@
 export interface OthelloState {
-  board: string[][]
+  board: Board
   player: Player
   chipCounts: ChipCounts
   validMoves: ValidMoves
@@ -18,3 +18,5 @@ export type PossibleMoves = { [key: string]: Coordinate }
 export type Coordinate = [number, number]
 
 export type Player = 'black' | 'white'
+
+export type Board = string[][]

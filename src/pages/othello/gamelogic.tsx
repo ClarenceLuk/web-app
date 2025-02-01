@@ -1,18 +1,18 @@
 import { cloneDeep } from 'lodash'
 import { DIRECTIONS, PLAYER } from './constants'
-import { Player, PossibleMoves, ValidMoves } from './types'
+import { Board, Player, PossibleMoves, ValidMoves } from './types'
 
 const validCoordinates = (row: number, col: number) => {
   return row >= 0 && row < 8 && col >= 0 && col < 8
 }
 
 const handleFlip = (
-  board: string[][],
+  board: Board,
   player: Player,
   row: number,
   col: number
 ) => {
-  const newBoard: string[][] = cloneDeep(board)
+  const newBoard: Board = cloneDeep(board)
   newBoard[row][col] = player
   // also update valid moves and possible moves here
 
@@ -27,7 +27,7 @@ const handleFlip = (
 
 const flip = (
   player: Player,
-  board: string[][],
+  board: Board,
   row: number,
   col: number,
   direction: number[]
@@ -56,7 +56,7 @@ const flip = (
   return false
 }
 
-const handleChipCount = (board: string[][]) => {
+const handleChipCount = (board: Board) => {
   const counts = [0, 0]
 
   for (const row of board) {
@@ -72,7 +72,7 @@ const handleChipCount = (board: string[][]) => {
 }
 
 const handlePossibleMoves = (
-  board: string[][],
+  board: Board,
   possibleMoves: PossibleMoves,
   row: number,
   col: number
@@ -91,7 +91,7 @@ const handlePossibleMoves = (
 }
 
 const hasValidMoves = (
-  board: string[][],
+  board: Board,
   row: number,
   col: number,
   direction: number[],
@@ -117,7 +117,7 @@ const hasValidMoves = (
 }
 
 const handleValidMoves = (
-  board: string[][],
+  board: Board,
   possibleMoves: PossibleMoves
 ): ValidMoves => {
   const newValidMoves: ValidMoves = {
