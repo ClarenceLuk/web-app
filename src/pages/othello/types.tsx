@@ -1,13 +1,17 @@
 export interface OthelloState {
   board: string[][]
   player: Player
-  chipCounts: { black: number; white: number }
-  validMoves: {
-    black: Set<Coordinate>
-    white: Set<Coordinate>
-  }
+  chipCounts: ChipCounts
+  validMoves: ValidMoves
   possibleMoves: PossibleMoves
 }
+
+export type ValidMoves = {
+  black: { [key:string]: Coordinate }
+  white: { [key:string]: Coordinate }
+}
+
+export type ChipCounts = { black: number; white: number }
 
 export type PossibleMoves = { [key: string]: Coordinate }
 

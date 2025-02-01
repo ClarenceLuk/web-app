@@ -2,9 +2,9 @@ import { useState } from 'react'
 import React from 'react'
 import Cell from './cell'
 import styles from './othello.module.css'
-import { handleFlip, handleChipCount, handlePossibleMoves } from './gamelogic'
+import { handleFlip, handleChipCount, handlePossibleMoves, handleValidMoves } from './gamelogic'
 
-import { DEFAULTGAMESTATE } from './constants'
+import { DEFAULTGAMESTATE, PLAYER } from './constants'
 import { OthelloState, Player } from './types'
 import { cloneDeep } from 'lodash'
 
@@ -25,11 +25,11 @@ const Othello = () => {
         row,
         col
       )
-      console.log(newPossibleMoves)
+      console.log(newPossibleMoves, player)
+      const newValidMoves = handleValidMoves(gameState, newPossibleMoves)
+      console.log(newValidMoves)
 
-      // handle valid moves here
-
-      const nextPlayer = player === 'black' ? 'white' : 'black'
+      const nextPlayer = player === PLAYER.black ? PLAYER.white : PLAYER.black
 
       setGameState({
         ...gameState,
@@ -37,6 +37,7 @@ const Othello = () => {
         player: nextPlayer,
         chipCounts: { black: newBlackCount, white: newWhiteCount },
         possibleMoves: newPossibleMoves,
+        validMoves: newValidMoves
       })
     }
   }
@@ -59,6 +60,7 @@ const Othello = () => {
                 col={col}
                 onClick={handleClick}
                 possibleMoves={gameState.possibleMoves}
+                validMoves={gameState.validMoves}
               />
             ))}
           </div>

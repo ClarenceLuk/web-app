@@ -1,6 +1,15 @@
 import { cloneDeep } from 'lodash'
-import { DIRECTIONS } from './constants'
-import { Coordinate, OthelloState, Player, PossibleMoves } from './types'
+import { DIRECTIONS, PLAYER } from './constants'
+import {
+  OthelloState,
+  Player,
+  PossibleMoves,
+  ValidMoves,
+} from './types'
+
+const validCoordinates = (row: number, col: number) => {
+  return (row >= 0 && row < 8 && col >= 0 && col < 8)
+}
 
 const handleFlip = (
   board: string[][],
@@ -14,19 +23,10 @@ const handleFlip = (
 
   for (const direction of DIRECTIONS) {
     if (
-      row >= 0 &&
-      row < 8 &&
-      col >= 0 &&
-      col < 8 &&
+      validCoordinates(row, col) &&
       newBoard[row][col] !== ''
     ) {
-      flip(
-        player,
-        newBoard,
-        row + direction[0],
-        col + direction[1],
-        direction
-      )
+      flip(player, newBoard, row + direction[0], col + direction[1], direction)
     }
   }
 
@@ -40,7 +40,7 @@ const flip = (
   col: number,
   direction: number[]
 ): boolean => {
-  if (row < 0 || row >= 8 || col < 0 || col >= 8 || board[row][col] === '') {
+  if (!validCoordinates(row, col) || board[row][col] === '') {
     return false
   }
 
@@ -64,12 +64,6 @@ const flip = (
   return false
 }
 
-const hasValidMoves = (gameState: OthelloState, row: number, col: number, player: Player): Set<Coordinate> => {
-  // board[row][col] should be '' and checking for opposite player's token and then players token
-
-  return new Set<Coordinate>([]) // placeholder
-}
-
 const handleChipCount = (board: string[][]) => {
   const counts = [0, 0]
 
@@ -91,16 +85,15 @@ const handlePossibleMoves = (
   row: number,
   col: number
 ): PossibleMoves => {
-  const newPossibleMoves = {...possibleMoves}
+  const newPossibleMoves = { ...possibleMoves }
   delete newPossibleMoves[`${row},${col}`]
   for (const direction of DIRECTIONS) {
-    const newRow = row+direction[0]
-    const newCol = col+direction[1]
-    if (newRow >= 0 &&
-      newRow < 8 &&
-      newCol >= 0 &&
-      newCol < 8 &&
-      board[newRow][newCol] === '') {
+    const newRow = row + direction[0]
+    const newCol = col + direction[1]
+    if (
+      validCoordinates(newRow, newCol) &&
+      board[newRow][newCol] === ''
+    ) {
       newPossibleMoves[`${newRow},${newCol}`] = [newRow, newCol]
     }
   }
@@ -108,30 +101,49 @@ const handlePossibleMoves = (
   return newPossibleMoves
 }
 
+const hasValidMoves = (
+  gameState: OthelloState,
+  row: number,
+  col: number,
+  direction: number[],
+  player: Player
+): boolean => {
+  console.log('ran')
+  if (gameState.board[row][col] === player) {
+    return true
+  }
+  if (gameState.board[row][col] === '') {
+    return false
+  }
+
+  return hasValidMoves(gameState, row + direction[0], col + direction[1], direction, player)
+}
+
 const handleValidMoves = (
   gameState: OthelloState,
-  currentPlayer: Player,
-  setGameState: (gameState: OthelloState) => void,
-  row: number,
-  col: number
-): void => {
-  const newGameState = {
-    ...gameState,
-    validMoves: {
-      ...gameState.validMoves,
-      [currentPlayer]: new Set(),
-    },
+  possibleMoves: PossibleMoves
+): ValidMoves => {
+  const newValidMoves: ValidMoves = {
+    black: {},
+    white: {}
   }
-  if (gameState.chipCounts[currentPlayer] === 0) {
-    setGameState(newGameState)
-    return
+  for (const coords of Object.values(possibleMoves)) {
+    for (const direction of DIRECTIONS) {
+      const row = coords[0] + direction[0]
+      const col = coords[1] + direction[1]
+      if (validCoordinates(row, col)) {
+        if (gameState.board[row][col] === PLAYER.white && hasValidMoves(gameState, row, col, direction, PLAYER.black)) {
+          newValidMoves.black[`${row},${col}`] = [row, col]
+        }
+        if (gameState.board[row][col] === PLAYER.black && hasValidMoves(gameState, row, col, direction, PLAYER.white)) {
+          newValidMoves.white[`${row},${col}`] = [row, col]
+        }
+      }
+    }
   }
+  
 
-  // now get valid moves for the current player
-  const newCurrentPlayerValidMoves = hasValidMoves(gameState, row, col, currentPlayer)
-  newGameState.validMoves[currentPlayer] = newCurrentPlayerValidMoves
-
-  setGameState(newGameState)
+  return newValidMoves
 }
 
 export { handleFlip, handleChipCount, handleValidMoves, handlePossibleMoves }

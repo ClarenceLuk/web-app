@@ -1,6 +1,7 @@
 import React from 'react'
 import styles from './cell.module.css'
-import { Player, PossibleMoves } from './types'
+import { Player, PossibleMoves, ValidMoves } from './types'
+import { PLAYER } from './constants'
 
 interface CellProps {
   player: Player // 'B' for black, 'W' for white, or empty string
@@ -9,6 +10,7 @@ interface CellProps {
   col: number
   onClick: (player: Player, row: number, col: number) => void
   possibleMoves: PossibleMoves
+  validMoves: ValidMoves
 }
 
 const Cell: React.FC<CellProps> = ({
@@ -17,17 +19,26 @@ const Cell: React.FC<CellProps> = ({
   row,
   col,
   onClick: handleFlip,
-  possibleMoves
+  possibleMoves,
+  validMoves
 }) => {
-  const pieceClass =
-    value === 'black' ? styles.black : value === 'white' ? styles.white : ''
+  if (`${row},${col}` in validMoves[player]) {
+    return (
+      <div
+      className={styles.cell}
+      key={`${player}-${row}-${col}`}
+      onClick={() => handleFlip(player, row, col)}>
+      <div className={styles.valid} />
+    </div>
+    )
+  }
   if (`${row},${col}` in possibleMoves) {
     return (
       <div
         className={styles.possibleCell}
         key={`${player}-${row}-${col}`}
         onClick={() => handleFlip(player, row, col)}>
-        <div className={pieceClass} />
+        <div className={styles[value]} />
     </div>
     )
   }
@@ -36,7 +47,7 @@ const Cell: React.FC<CellProps> = ({
       className={styles.cell}
       key={`${player}-${row}-${col}`}
       onClick={() => handleFlip(player, row, col)}>
-      <div className={pieceClass} />
+      <div className={styles[value]} />
     </div>
   )
 }
