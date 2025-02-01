@@ -108,7 +108,6 @@ const hasValidMoves = (
   direction: number[],
   player: Player
 ): boolean => {
-  console.log('ran')
   if (gameState.board[row][col] === player) {
     return true
   }

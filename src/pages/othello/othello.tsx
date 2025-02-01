@@ -25,9 +25,7 @@ const Othello = () => {
         row,
         col
       )
-      console.log(newPossibleMoves, player)
       const newValidMoves = handleValidMoves(gameState, newPossibleMoves)
-      console.log(newValidMoves)
 
       const nextPlayer = player === PLAYER.black ? PLAYER.white : PLAYER.black
 
