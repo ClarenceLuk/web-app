@@ -1,4 +1,5 @@
-import { OthelloState, Player, PossibleMoves } from './types'
+import { handleValidMoves } from './gamelogic'
+import { OthelloState, Player, PossibleMoves, ValidMoves } from './types'
 
 const BOARDSIZE = 8
 
@@ -15,7 +16,7 @@ const INITIALBOARD: string[][] = [
 
 const PLAYER: { [key: string]: Player } = {
   black: 'black',
-  white: 'white'
+  white: 'white',
 }
 
 const DIRECTIONS = [
@@ -41,7 +42,7 @@ const INITIALPOSSIBLEMOVES: PossibleMoves = {
   '4,5': [4, 5],
   '5,5': [5, 5],
   '5,3': [5, 3],
-  '5,4': [5, 4]
+  '5,4': [5, 4],
 }
 
 const DEFAULTGAMESTATE: OthelloState = {
@@ -49,8 +50,8 @@ const DEFAULTGAMESTATE: OthelloState = {
   player: PLAYER.black,
   chipCounts: { black: 2, white: 2 },
   validMoves: {
-    black: {'2,3': [2,3], '3,2': [3,2], '5,4': [5,4], '4,5': [4,5]},
-    white: {'2,4': [2,4], '4,2': [4,2], '5,4': [3,5], '5,3': [5,3]},
+    black: { '2,3': [2, 3], '3,2': [3, 2], '5,4': [5, 4], '4,5': [4, 5] },
+    white: { '2,4': [2, 4], '4,2': [4, 2], '5,4': [3, 5], '5,3': [5, 3] },
   },
   possibleMoves: INITIALPOSSIBLEMOVES,
 }

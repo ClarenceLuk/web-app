@@ -2,7 +2,12 @@ import { useState } from 'react'
 import React from 'react'
 import Cell from './cell'
 import styles from './othello.module.css'
-import { handleFlip, handleChipCount, handlePossibleMoves, handleValidMoves } from './gamelogic'
+import {
+  handleFlip,
+  handleChipCount,
+  handlePossibleMoves,
+  handleValidMoves,
+} from './gamelogic'
 
 import { DEFAULTGAMESTATE, PLAYER } from './constants'
 import { OthelloState, Player } from './types'
@@ -14,7 +19,7 @@ const Othello = () => {
   )
 
   const handleClick = (player: Player, row: number, col: number): void => {
-    if (gameState.board[row][col] === '') {
+    if (gameState.board[row][col] === '' && `${row},${col}` in gameState.validMoves[player]) {
       const newBoard = handleFlip(gameState.board, player, row, col)
 
       const [newBlackCount, newWhiteCount] = handleChipCount(newBoard)
@@ -25,7 +30,7 @@ const Othello = () => {
         row,
         col
       )
-      const newValidMoves = handleValidMoves(gameState, newPossibleMoves)
+      const newValidMoves = handleValidMoves(newBoard, newPossibleMoves)
 
       const nextPlayer = player === PLAYER.black ? PLAYER.white : PLAYER.black
 
@@ -35,7 +40,7 @@ const Othello = () => {
         player: nextPlayer,
         chipCounts: { black: newBlackCount, white: newWhiteCount },
         possibleMoves: newPossibleMoves,
-        validMoves: newValidMoves
+        validMoves: newValidMoves,
       })
     }
   }
