@@ -34,6 +34,8 @@ const Weather: React.FC = () => {
   const [weatherData, setWeatherData] = useState<WeatherForecast | null>(null)
   const [loading, setLoading] = useState(true)
 
+  setZipCode('90210')
+
   useEffect(() => {
     const fetchWeatherData = async () => {
       setLoading(true)
