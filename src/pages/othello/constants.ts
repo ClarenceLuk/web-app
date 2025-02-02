@@ -1,8 +1,8 @@
-import { OthelloState, Player, PossibleMoves } from './types'
+import { Board, OthelloState, Player, PossibleMoves } from './types'
 
 const BOARDSIZE = 8
 
-const INITIALBOARD: string[][] = [
+const INITIALBOARD: Board = [
   ['', '', '', '', '', '', '', ''],
   ['', '', '', '', '', '', '', ''],
   ['', '', '', '', '', '', '', ''],
@@ -53,6 +53,7 @@ const DEFAULTGAMESTATE: OthelloState = {
     white: { '2,4': [2, 4], '4,2': [4, 2], '5,4': [3, 5], '5,3': [5, 3] },
   },
   possibleMoves: INITIALPOSSIBLEMOVES,
+  winner: false
 }
 
 export { DIRECTIONS, DEFAULTGAMESTATE, BOARDSIZE, PLAYER }
