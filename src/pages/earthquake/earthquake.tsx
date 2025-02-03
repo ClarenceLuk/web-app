@@ -6,6 +6,7 @@ const Earthquake = () => {
   return (
     <div>
       Earthquake
+      Work In Progress
     </div>
   )
 }

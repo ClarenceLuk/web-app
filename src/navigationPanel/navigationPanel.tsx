@@ -23,10 +23,13 @@ const NavigationPanel = ({
     const newDrawerState = !drawerState
     setDrawerState(newDrawerState)
   }
-  console.log(drawerState)
+
   return (
-    <Box>
-      <Button onClick={toggleDrawer}>
+    <Box className={styles.drawerBox}>
+      <Button 
+        onClick={toggleDrawer}
+        className={styles.drawerToggleButton}
+      >
         <FontAwesomeIcon
           icon={(drawerState ? faAnglesLeft : faAnglesRight as IconProp)}
         />
