@@ -1,0 +1,10 @@
+.navigation {
+  display: flex;
+  justify-content: left;
+  border: 1px solid white;
+}
+
+.drawer {
+  display: flex;
+  justify-content: space-between;
+}
