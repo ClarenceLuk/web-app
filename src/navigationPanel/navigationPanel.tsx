@@ -14,25 +14,27 @@ const NavigationPanel = ({
   handleChangePage,
 }: NavigationProps) => {
   return (
-    <Drawer open={true} variant="permanent" style={{display: 'flex', justifyContent: 'space-between'}}>
-      <Box sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        gap: 0,
-      }}>
-        {Object.entries(PageEnum).map(([key, value]) => (
-          <Button key={key} onClick={() => handleChangePage(key)}> 
-            <Typography variant="button">{value}</Typography>
-          </Button>
-        ))}
-      </Box>
-      <Box sx={{
-        display: 'flex',
-        justifyContent: 'center'
-      }}>
-        <Switch checked={isDarkMode} onChange={handleThemeChange} />
-      </Box>
-    </Drawer>
+    <Box>
+      <Drawer open={true} variant="permanent" style={{display: 'flex', justifyContent: 'space-between'}}>
+        <Box sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 0,
+        }}>
+          {Object.entries(PageEnum).map(([key, value]) => (
+            <Button key={key} onClick={() => handleChangePage(key)}> 
+              <Typography variant="button">{value}</Typography>
+            </Button>
+          ))}
+        </Box>
+        <Box sx={{
+          display: 'flex',
+          justifyContent: 'center'
+        }}>
+          <Switch checked={isDarkMode} onChange={handleThemeChange} />
+        </Box>
+      </Drawer>
+    </Box>
   )
 }
 

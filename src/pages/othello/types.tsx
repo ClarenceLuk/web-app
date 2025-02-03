@@ -4,7 +4,7 @@ export interface OthelloState {
   chipCounts: ChipCounts
   validMoves: ValidMoves
   possibleMoves: PossibleMoves
-  winner: boolean
+  winningCondition: boolean
 }
 
 export type ValidMoves = {

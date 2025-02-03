@@ -1,6 +1,6 @@
 import { cloneDeep } from 'lodash'
 import { DIRECTIONS, PLAYER } from './constants'
-import { Board, Player, PossibleMoves, ValidMoves } from './types'
+import { Board, ChipCounts, Player, PossibleMoves, ValidMoves } from './types'
 
 const validCoordinates = (row: number, col: number) => {
   return row >= 0 && row < 8 && col >= 0 && col < 8
@@ -52,14 +52,12 @@ const flip = (
 }
 
 const handleChipCount = (board: Board) => {
-  const counts = [0, 0]
+  const counts: ChipCounts = {black: 0, white: 0}
 
   for (const row of board) {
     for (const cell of row) {
-      if (cell === 'black') {
-        counts[0] += 1
-      } else if (cell === 'white') {
-        counts[1] += 1
+      if (cell === PLAYER.black || cell === PLAYER.white) {
+        counts[cell] += 1
       }
     }
   }
@@ -156,10 +154,15 @@ const handlePlayerTurn = (
   return nextPlayer
 }
 
+const handleWinningCondition = (chipCounts: ChipCounts): boolean => {
+  return chipCounts.black === 0 || chipCounts.white === 0 || chipCounts.black + chipCounts.white === 64
+}
+
 export {
   handleFlip,
   handleChipCount,
   handleValidMoves,
   handlePossibleMoves,
   handlePlayerTurn,
+  handleWinningCondition
 }

@@ -8,11 +8,14 @@ import {
   handlePossibleMoves,
   handleValidMoves,
   handlePlayerTurn,
+  handleWinningCondition,
 } from './gamelogic'
 
 import { DEFAULTGAMESTATE, PLAYER } from './constants'
 import { OthelloState, Player } from './types'
 import { cloneDeep } from 'lodash'
+import { Box, Button } from '@mui/material'
+import GameModal from './gameModal'
 
 const Othello = () => {
   const [gameState, setGameState] = useState<OthelloState>(
@@ -26,7 +29,7 @@ const Othello = () => {
     ) {
       const newBoard = handleFlip(gameState.board, player, row, col)
 
-      const [newBlackCount, newWhiteCount] = handleChipCount(newBoard)
+      const newChipCount = handleChipCount(newBoard)
 
       const newPossibleMoves = handlePossibleMoves(
         gameState.board,
@@ -42,16 +45,20 @@ const Othello = () => {
         player === PLAYER.black ? PLAYER.white : PLAYER.black
       )
 
+      //TODO: handle win condition and add ui component for win
+
+      const newWinningCondition = handleWinningCondition(newChipCount)
+
       setGameState({
         ...gameState,
         board: newBoard,
         player: nextPlayer,
-        chipCounts: { black: newBlackCount, white: newWhiteCount },
+        chipCounts: newChipCount,
         possibleMoves: newPossibleMoves,
         validMoves: newValidMoves,
+        winningCondition: newWinningCondition
       })
     }
-    //TODO: handle win condition and add ui component for win
   }
 
   const handleReset = () => {
@@ -59,10 +66,11 @@ const Othello = () => {
   }
 
   return (
-    <div>
-      <div className={styles.board}>
+    <Box>
+      <GameModal />
+      <Box className={styles.board}>
         {gameState.board.map((rowArray, row: number) => (
-          <div key={row} className={styles.rowStyle}>
+          <Box key={row} className={styles.rowStyle}>
             {rowArray.map((value, col: number) => (
               <Cell
                 key={`${row}-${col}`}
@@ -74,18 +82,18 @@ const Othello = () => {
                 validMoves={gameState.validMoves}
               />
             ))}
-          </div>
+          </Box>
         ))}
-      </div>
+      </Box>
       {/* TODO: implement ui for game statistics */}
       {/* TODO: implement undo funtion */}
-      <div>
-        <button onClick={handleReset}>Reset</button>
-        Player: {gameState.player}
-        Black: {gameState.chipCounts.black}
-        White: {gameState.chipCounts.white}
-      </div>
-    </div>
+      <Box className={styles.gameUI}>
+        <Button className={styles.reset} onClick={handleReset}>Reset</Button>
+        <Box>Player: {gameState.player}</Box>
+        <Box>Black: {gameState.chipCounts.black}</Box>
+        <Box>White: {gameState.chipCounts.white}</Box>
+      </Box>
+    </Box>
   )
 }
 
