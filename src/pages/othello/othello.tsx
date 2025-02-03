@@ -14,7 +14,7 @@ import {
 import { DEFAULTGAMESTATE, PLAYER } from './constants'
 import { OthelloState, Player } from './types'
 import { cloneDeep } from 'lodash'
-import { Box, Button } from '@mui/material'
+import { Box, Button, Typography } from '@mui/material'
 import GameModal from './gameModal'
 
 const Othello = () => {
@@ -45,8 +45,6 @@ const Othello = () => {
         player === PLAYER.black ? PLAYER.white : PLAYER.black
       )
 
-      //TODO: handle win condition and add ui component for win
-
       const newWinningCondition = handleWinningCondition(newChipCount)
 
       setGameState({
@@ -56,7 +54,7 @@ const Othello = () => {
         chipCounts: newChipCount,
         possibleMoves: newPossibleMoves,
         validMoves: newValidMoves,
-        winningCondition: newWinningCondition
+        openModal: newWinningCondition
       })
     }
   }
@@ -67,7 +65,11 @@ const Othello = () => {
 
   return (
     <Box>
-      <GameModal />
+      <GameModal
+        handleReset={handleReset}
+        setGameState={setGameState}
+        gameState={gameState}
+      />
       <Box className={styles.board}>
         {gameState.board.map((rowArray, row: number) => (
           <Box key={row} className={styles.rowStyle}>
@@ -88,10 +90,10 @@ const Othello = () => {
       {/* TODO: implement ui for game statistics */}
       {/* TODO: implement undo funtion */}
       <Box className={styles.gameUI}>
-        <Button className={styles.reset} onClick={handleReset}>Reset</Button>
-        <Box>Player: {gameState.player}</Box>
-        <Box>Black: {gameState.chipCounts.black}</Box>
-        <Box>White: {gameState.chipCounts.white}</Box>
+        <Button variant='outlined' onClick={handleReset}>Reset</Button>
+        <Typography variant='subtitle2'>Player: {gameState.player}</Typography>
+        <Typography variant='subtitle2'>Black: {gameState.chipCounts.black}</Typography>
+        <Typography variant='subtitle2'>White: {gameState.chipCounts.white}</Typography>
       </Box>
     </Box>
   )

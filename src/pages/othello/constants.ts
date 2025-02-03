@@ -53,7 +53,7 @@ const DEFAULTGAMESTATE: OthelloState = {
     white: { '2,4': [2, 4], '4,2': [4, 2], '5,4': [3, 5], '5,3': [5, 3] },
   },
   possibleMoves: INITIALPOSSIBLEMOVES,
-  winningCondition: false
+  openModal: false
 }
 
 export { DIRECTIONS, DEFAULTGAMESTATE, BOARDSIZE, PLAYER }

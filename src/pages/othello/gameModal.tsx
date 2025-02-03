@@ -4,28 +4,39 @@ import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
 import Modal from '@mui/material/Modal'
 import styles from './gameModal.module.css'
+import { OthelloState } from './types'
+import { PLAYER } from './constants'
+import { upperFirst } from 'lodash'
 
-const GameModal = () => {
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+interface GameModalProps {
+  gameState: OthelloState
+  handleReset: () => void
+  setGameState: (gameState: OthelloState) => void
+}
+
+const GameModal: React.FC<GameModalProps> = ({gameState, handleReset, setGameState}) => {
+
+  const handleClose = () => {
+    const newGameState: OthelloState = {
+      ...gameState,
+      openModal: false
+    }
+    setGameState(newGameState)
+  }
 
   return (
     <Box>
-      <Button onClick={handleOpen}>Open modal</Button>
       <Modal
-        open={open}
+        open={gameState.openModal}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
         <Box className={styles.gameModal}>
           <Typography id="modal-modal-title" variant="h6" component="h2">
-            Text in a modal
+            {upperFirst(gameState.chipCounts.black > gameState.chipCounts.white ? PLAYER.black : PLAYER.white)} Wins!
           </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-          </Typography>
+          <Button onClick={handleReset}>Reset</Button>
         </Box>
       </Modal>
     </Box>

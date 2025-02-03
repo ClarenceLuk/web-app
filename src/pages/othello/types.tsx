@@ -4,7 +4,7 @@ export interface OthelloState {
   chipCounts: ChipCounts
   validMoves: ValidMoves
   possibleMoves: PossibleMoves
-  winningCondition: boolean
+  openModal: boolean
 }
 
 export type ValidMoves = {
