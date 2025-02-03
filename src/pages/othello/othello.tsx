@@ -16,6 +16,7 @@ import { OthelloState, Player } from './types'
 import { cloneDeep } from 'lodash'
 import { Box, Button, Typography } from '@mui/material'
 import GameModal from './gameModal'
+import { upperFirst } from 'lodash'
 
 const Othello = () => {
   const [gameState, setGameState] = useState<OthelloState>(
@@ -91,7 +92,7 @@ const Othello = () => {
       {/* TODO: implement undo funtion */}
       <Box className={styles.gameUI}>
         <Button variant='outlined' onClick={handleReset}>Reset</Button>
-        <Typography variant='subtitle2'>Player: {gameState.player}</Typography>
+        <Typography variant='subtitle2'>Turn: {upperFirst(gameState.player)}</Typography>
         <Typography variant='subtitle2'>Black: {gameState.chipCounts.black}</Typography>
         <Typography variant='subtitle2'>White: {gameState.chipCounts.white}</Typography>
       </Box>
