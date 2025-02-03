@@ -30,11 +30,9 @@ async function getCoordinatesByZip(
 }
 
 const Weather: React.FC = () => {
-  const [zipCode, setZipCode] = useState<string>('90210')
+  const zipCode = '90210'
   const [weatherData, setWeatherData] = useState<WeatherForecast | null>(null)
   const [loading, setLoading] = useState(true)
-
-  setZipCode('90210')
 
   useEffect(() => {
     const fetchWeatherData = async () => {
