@@ -9,14 +9,11 @@ const validCoordinates = (row: number, col: number) => {
 const handleFlip = (board: Board, player: Player, row: number, col: number) => {
   const newBoard: Board = cloneDeep(board)
   newBoard[row][col] = player
-  // also update valid moves and possible moves here
-
   for (const direction of DIRECTIONS) {
     if (validCoordinates(row, col) && newBoard[row][col] !== '') {
       flip(player, newBoard, row + direction[0], col + direction[1], direction)
     }
   }
-
   return newBoard
 }
 
