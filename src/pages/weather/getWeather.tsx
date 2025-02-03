@@ -45,7 +45,6 @@ const getWeather = async ({
 
     // Parse the JSON response
     const weatherData = await forecastResponse.json()
-    console.log(weatherData)
 
     // Return the weather forecast data
     return weatherData
