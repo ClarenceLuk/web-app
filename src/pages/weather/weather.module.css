@@ -1,6 +1,6 @@
 .zipcode {
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
 }
 
@@ -8,6 +8,6 @@
   margin-left: 10px;
 }
 
-.zipcodeSearch {
+.zipcodeButton {
   margin-left: 10px;
 }

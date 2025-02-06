@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import getWeather, { WeatherForecast } from './getWeather'
-import { Box, Button, TextField } from '@mui/material'
+import { Box, Button, TextField, Typography } from '@mui/material'
 import styles from './weather.module.css'
 
 interface Coordinates {
@@ -55,37 +55,38 @@ const Weather: React.FC = () => {
 
   return (
     <Box>
-      <p className={styles.zipcode}>
-        Zip Code:
+      <Box className={styles.zipcode}>
+        <Typography variant="h4">Zip Code:</Typography>
         <TextField
           className={styles.zipcodeField}
           placeholder="Enter Zipcodde"
           onChange={(e) => setZipcode(e.target.value)}
           onKeyDown={(e) => {
             if (e.key === 'Enter') {
-              handleWeatherData();
+              handleWeatherData()
             }
           }}
-          />
+        />
         <Button
-          className={styles.zipcodeSearch}
-          variant='outlined'
-          onClick={handleWeatherData}
-        >
+          className={styles.zipcodeButton}
+          variant="outlined"
+          onClick={handleWeatherData}>
           Search
         </Button>
-      </p>
+      </Box>
 
-      {zipcode && loading && <p>Loading weather data...</p>}
+      {zipcode && loading && (
+        <Typography variant="h6">Loading weather data...</Typography>
+      )}
       {weatherData && (
         <Box>
-          <h3>Weather Forecast</h3>
+          <Typography variant="h3">Weather Forecast</Typography>
           {weatherData.properties.periods.map((period, index) => (
             <Box key={index}>
-              <p>
+              <Typography variant="h6">
                 {period.name}: {period.temperature} {period.temperatureUnit} -{' '}
                 {period.shortForecast}
-              </p>
+              </Typography>
             </Box>
           ))}
         </Box>
