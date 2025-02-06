@@ -36,7 +36,6 @@ const Weather: React.FC = () => {
   const [weatherData, setWeatherData] = useState<WeatherForecast | null>(null)
   const [loading, setLoading] = useState(false)
 
-
   const fetchWeatherData = async () => {
     setLoading(true)
     const coords = await getCoordinatesByZip(zipcode)
@@ -56,9 +55,15 @@ const Weather: React.FC = () => {
 
   return (
     <Box>
-      <Button onClick={handleWeatherData}>Search</Button>
-      <p className={styles.zipcode}>Zip Code:<TextField className={styles.zipcodeField}  placeholder='Enter Zipcodde' onChange={(e) => setZipcode(e.target.value)}></TextField></p>
-      
+      <p className={styles.zipcode}>
+        Zip Code:
+        <TextField
+          className={styles.zipcodeField}
+          placeholder="Enter Zipcodde"
+          onChange={(e) => setZipcode(e.target.value)}></TextField>
+        <Button onClick={handleWeatherData}>Search</Button>
+      </p>
+
       {zipcode && loading && <p>Loading weather data...</p>}
       {weatherData && (
         <Box>
