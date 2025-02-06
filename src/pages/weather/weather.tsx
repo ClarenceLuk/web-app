@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import getWeather, { WeatherForecast } from './getWeather'
 import { Box, Button, TextField } from '@mui/material'
+import styles from './weather.module.css'
 
 interface Coordinates {
   latitude: number
@@ -56,7 +57,8 @@ const Weather: React.FC = () => {
   return (
     <Box>
       <Button onClick={handleWeatherData}>Search</Button>
-      <p>Zip Code: <TextField placeholder='Enter Zipcodde' onChange={(e) => setZipcode(e.target.value)}></TextField></p>
+      <p className={styles.zipcode}>Zip Code:<TextField className={styles.zipcodeField}  placeholder='Enter Zipcodde' onChange={(e) => setZipcode(e.target.value)}></TextField></p>
+      
       {zipcode && loading && <p>Loading weather data...</p>}
       {weatherData && (
         <Box>

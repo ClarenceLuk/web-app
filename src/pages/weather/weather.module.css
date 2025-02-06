@@ -1,0 +1,9 @@
+.zipcode {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.zipcodeField {
+  margin-left: 10px;
+}
