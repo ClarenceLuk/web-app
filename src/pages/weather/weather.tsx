@@ -60,8 +60,20 @@ const Weather: React.FC = () => {
         <TextField
           className={styles.zipcodeField}
           placeholder="Enter Zipcodde"
-          onChange={(e) => setZipcode(e.target.value)}></TextField>
-        <Button onClick={handleWeatherData}>Search</Button>
+          onChange={(e) => setZipcode(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') {
+              handleWeatherData();
+            }
+          }}
+          />
+        <Button
+          className={styles.zipcodeSearch}
+          variant='outlined'
+          onClick={handleWeatherData}
+        >
+          Search
+        </Button>
       </p>
 
       {zipcode && loading && <p>Loading weather data...</p>}
