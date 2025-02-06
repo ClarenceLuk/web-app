@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import getWeather, { WeatherForecast } from './getWeather'
+import { Box, Button, TextField, Typography } from '@mui/material'
 
 interface Coordinates {
   latitude: number
@@ -30,45 +31,47 @@ async function getCoordinatesByZip(
 }
 
 const Weather: React.FC = () => {
-  const zipCode = '90210'
+  const [zipcode, setZipcode] = useState('')
   const [weatherData, setWeatherData] = useState<WeatherForecast | null>(null)
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(false)
 
-  useEffect(() => {
-    const fetchWeatherData = async () => {
-      setLoading(true)
-      const coords = await getCoordinatesByZip(zipCode)
-      if (coords) {
-        const weather = await getWeather({
-          latitude: coords.latitude,
-          longitude: coords.longitude,
-        })
-        setWeatherData(weather)
-      }
-      setLoading(false)
+
+  const fetchWeatherData = async () => {
+    setLoading(true)
+    const coords = await getCoordinatesByZip(zipcode)
+    if (coords) {
+      const weather = await getWeather({
+        latitude: coords.latitude,
+        longitude: coords.longitude,
+      })
+      setWeatherData(weather)
     }
+    setLoading(false)
+  }
 
+  const handleWeatherData = () => {
     fetchWeatherData()
-  }, [zipCode]) // Re-run effect if the zip code changes
+  }
 
   return (
-    <div>
-      <p>Zip Code: {zipCode}</p>
-      {loading && <p>Loading weather data...</p>}
+    <Box>
+      <Button onClick={handleWeatherData}>Search</Button>
+      <p>Zip Code: <TextField placeholder='Enter Zipcodde' onChange={(e) => setZipcode(e.target.value)}></TextField></p>
+      {zipcode && loading && <p>Loading weather data...</p>}
       {weatherData && (
-        <div>
+        <Box>
           <h3>Weather Forecast</h3>
           {weatherData.properties.periods.map((period, index) => (
-            <div key={index}>
+            <Box key={index}>
               <p>
                 {period.name}: {period.temperature} {period.temperatureUnit} -{' '}
                 {period.shortForecast}
               </p>
-            </div>
+            </Box>
           ))}
-        </div>
+        </Box>
       )}
-    </div>
+    </Box>
   )
 }
 
