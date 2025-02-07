@@ -85,6 +85,7 @@ const Weather: React.FC = () => {
           <Typography variant="h3">Weather Forecast</Typography>
           {weatherData.properties.periods.map((period, index) => (
             <Box key={index}>
+              <img src={period.icon} alt={period.detailedForecast}/>
               <Typography variant="h6">
                 {period.name}: {period.temperature} {period.temperatureUnit} -{' '}
                 {period.shortForecast}

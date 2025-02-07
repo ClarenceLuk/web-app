@@ -31,7 +31,7 @@ const NavigationPanel = ({
         className={styles.drawerToggleButton}
       >
         <FontAwesomeIcon
-          icon={(drawerState ? faAnglesLeft : faAnglesRight as IconProp)}
+          icon={faAnglesLeft as IconProp}
         />
       </Button>
       <Drawer
@@ -45,6 +45,14 @@ const NavigationPanel = ({
             flexDirection: 'column',
             gap: 0,
           }}>
+            <Button 
+              onClick={toggleDrawer}
+              className={styles.drawerToggleButton}
+            >
+              <FontAwesomeIcon
+                icon={faAnglesRight as IconProp}
+              />
+            </Button>
           {Object.entries(PageEnum).map(([key, value]) => (
             <Button key={key} onClick={() => handleChangePage(key)}>
               <Typography variant="button">{value}</Typography>
