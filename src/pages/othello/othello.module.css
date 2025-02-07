@@ -8,12 +8,6 @@
   background-color: black;
 }
 
-.gameUI {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
 .reset {
   border: 2px solid gray;
   background-color: black;
