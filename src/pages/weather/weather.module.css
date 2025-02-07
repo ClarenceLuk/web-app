@@ -1,13 +1,14 @@
-.zipcode {
+.zipCode {
   display: flex;
-  justify-content: space-evenly;
+  flex-direction: row;
   align-items: center;
 }
 
-.zipcodeField {
+.zipCodeField {
   margin-left: 10px;
 }
 
-.zipcodeButton {
+.zipCodeButton {
+  height: 55px;
   margin-left: 10px;
 }

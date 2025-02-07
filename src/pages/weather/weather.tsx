@@ -50,16 +50,18 @@ const Weather: React.FC = () => {
   }
 
   const handleWeatherData = () => {
-    fetchWeatherData()
+    if (zipcode) {
+      fetchWeatherData()
+    }
   }
 
   return (
     <Box>
-      <Box className={styles.zipcode}>
-        <Typography variant="h4">Zip Code:</Typography>
+      <Box className={styles.zipCode}>
         <TextField
-          className={styles.zipcodeField}
-          placeholder="Enter Zipcodde"
+          label='Zip Code'
+          className={styles.zipCodeField}
+          placeholder="Enter Zip Code"
           onChange={(e) => setZipcode(e.target.value)}
           onKeyDown={(e) => {
             if (e.key === 'Enter') {
@@ -68,7 +70,7 @@ const Weather: React.FC = () => {
           }}
         />
         <Button
-          className={styles.zipcodeButton}
+          className={styles.zipCodeButton}
           variant="outlined"
           onClick={handleWeatherData}>
           Search
@@ -92,6 +94,8 @@ const Weather: React.FC = () => {
         </Box>
       )}
     </Box>
+
+    // add react component to handle weather cards
   )
 }
 

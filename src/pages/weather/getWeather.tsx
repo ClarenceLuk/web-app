@@ -1,15 +1,31 @@
+interface ProbabilityOfPrecipitation {
+  unitCode: "wmoUnit:percent";
+  value: number;
+}
+
+interface WeatherPeriod {
+  number: number;
+  name: string;
+  startTime: string;
+  endTime: string;
+  isDaytime: boolean;
+  temperature: number;
+  temperatureUnit: "F" | "C"; // Add Celsius if needed
+  temperatureTrend: string;
+  probabilityOfPrecipitation: ProbabilityOfPrecipitation;
+  windSpeed: string;
+  windDirection: string;
+  icon: string;
+  shortForecast: string;
+  detailedForecast: string;
+}
+
 export interface WeatherForecast {
   properties: {
-    periods: Array<{
-      name: string
-      temperature: number
-      temperatureUnit: string
-      windSpeed: string
-      windDirection: string
-      shortForecast: string
-    }>
+      periods: WeatherPeriod[]
   }
 }
+
 
 interface LocationKey {
   latitude: number
@@ -45,6 +61,8 @@ const getWeather = async ({
 
     // Parse the JSON response
     const weatherData = await forecastResponse.json()
+
+    console.log(weatherData)
 
     // Return the weather forecast data
     return weatherData
