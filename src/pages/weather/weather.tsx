@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import getWeather, { WeatherForecast } from './getWeather'
 import { Box, Button, TextField, Typography } from '@mui/material'
 import styles from './weather.module.css'
+import WeatherCard from './weatherCard'
 
 interface Coordinates {
   latitude: number
@@ -94,6 +95,7 @@ const Weather: React.FC = () => {
           ))}
         </Box>
       )}
+      <WeatherCard />
     </Box>
 
     // add react component to handle weather cards
