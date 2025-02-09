@@ -3,7 +3,7 @@ interface ProbabilityOfPrecipitation {
   value: number;
 }
 
-interface WeatherPeriod {
+export interface WeatherPeriod {
   number: number;
   name: string;
   startTime: string;

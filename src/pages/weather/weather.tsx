@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import getWeather, { WeatherForecast } from './getWeather'
+import getWeather, { WeatherForecast, WeatherPeriod } from './getWeather'
 import { Box, Button, TextField, Typography } from '@mui/material'
 import styles from './weather.module.css'
 import WeatherCard from './weatherCard'
@@ -81,24 +81,14 @@ const Weather: React.FC = () => {
       {zipcode && loading && (
         <Typography variant="h6">Loading weather data...</Typography>
       )}
-      {weatherData && (
-        <Box>
-          <Typography variant="h3">Weather Forecast</Typography>
-          {weatherData.properties.periods.map((period, index) => (
-            <Box key={index}>
-              <img src={period.icon} alt={period.detailedForecast}/>
-              <Typography variant="h6">
-                {period.name}: {period.temperature} {period.temperatureUnit} -{' '}
-                {period.shortForecast}
-              </Typography>
-            </Box>
-          ))}
-        </Box>
+      {weatherData && weatherData.properties.periods.map((period: WeatherPeriod, index: number) => 
+        <WeatherCard
+          key={index}
+          {...period}
+        />
       )}
-      <WeatherCard />
+      
     </Box>
-
-    // add react component to handle weather cards
   )
 }
 
