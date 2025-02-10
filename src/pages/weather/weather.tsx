@@ -84,7 +84,7 @@ const Weather: React.FC = () => {
       {weatherData && weatherData.properties.periods.map((period: WeatherPeriod, index: number) => 
         <WeatherCard
           key={index}
-          {...period}
+          props={period}
         />
       )}
       
