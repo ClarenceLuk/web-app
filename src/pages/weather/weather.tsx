@@ -60,7 +60,7 @@ const Weather: React.FC = () => {
     <Box>
       <Box className={styles.zipCode}>
         <TextField
-          label='Zip Code'
+          label="Zip Code"
           className={styles.zipCodeField}
           placeholder="Enter Zip Code"
           onChange={(e) => setZipcode(e.target.value)}
@@ -81,13 +81,12 @@ const Weather: React.FC = () => {
       {zipcode && loading && (
         <Typography variant="h6">Loading weather data...</Typography>
       )}
-      {weatherData && weatherData.properties.periods.map((period: WeatherPeriod, index: number) => 
-        <WeatherCard
-          key={index}
-          props={period}
-        />
-      )}
-      
+      {weatherData &&
+        weatherData.properties.periods.map(
+          (period: WeatherPeriod, index: number) => (
+            <WeatherCard key={index} weatherData={period} />
+          )
+        )}
     </Box>
   )
 }

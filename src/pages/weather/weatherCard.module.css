@@ -1,3 +1,16 @@
 .weatherCard {
   border: 2px solid white;
 }
+
+.detailedForecastButton {
+  width: auto;
+}
+
+.detailedForecast {
+  width: 300px;
+}
+
+.detailedForecastBox {
+  display: flex;
+  align-items: flex-start;
+}
