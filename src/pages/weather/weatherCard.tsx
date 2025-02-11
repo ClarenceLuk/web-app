@@ -37,7 +37,6 @@ const WeatherCard: React.FC<WeatherCardProps> = ({
 
   return (
     <Box className={styles.weatherCard}>
-      {/* <Typography variant="h3">Weather Forecast for {props.momentDayOfWeek} {dayOrNight2}</Typography> */}
       <Box key={number}>
         <img src={icon} alt={detailedForecast} />
         <Typography variant="h6">
