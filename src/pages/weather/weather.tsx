@@ -59,7 +59,7 @@ const Weather: React.FC = () => {
   const [userLocation, setUserLocation] = useState<Coordinates | null>(null)
 
   useEffect(() => {
-    const getLocationData = async () => {
+    const handleLocationWeather = async () => {
       setLoading(true)
       try {
         if (!userLocation) {
@@ -75,11 +75,12 @@ const Weather: React.FC = () => {
         }
       } catch (error) {
         return error
+      } finally {
+        setLoading(false)
       }
-      setLoading(false)
     }
     
-    getLocationData()
+    handleLocationWeather()
   }, [userLocation])
 
   const fetchWeatherData = async () => {
