@@ -58,38 +58,36 @@ const Weather: React.FC = () => {
   const [loading, setLoading] = useState(false)
   const [userLocation, setUserLocation] = useState<Coordinates | null>(null)
 
-  const getLocationData = async () => {
-    setLoading(true)
-    try {
-      const location = await handleLocation()
-      if (location) {
-        setUserLocation(location)
-        const weather = await getWeather({
-          latitude: location.latitude,
-          longitude: location.longitude,
-        })
-        setWeatherData(weather)
-      }
-    } catch (error) {
-      return [error, userLocation]
-    }
-    setLoading(false)
-  }
-
   useEffect(() => {
+    const getLocationData = async () => {
+      setLoading(true)
+      try {
+        if (!userLocation) {
+          const location = await handleLocation()
+          setUserLocation(location)
+        }
+        if (userLocation) {
+          const weather = await getWeather({
+            latitude: userLocation.latitude,
+            longitude: userLocation.longitude,
+          })
+          setWeatherData(weather)
+        }
+      } catch (error) {
+        return error
+      }
+      setLoading(false)
+    }
+    
     getLocationData()
-  }, [])
+  }, [userLocation])
 
   const fetchWeatherData = async () => {
     setLoading(true)
 
-    const coords = await getCoordinatesByZip(zipcode)
-    if (coords) {
-      const weather = await getWeather({
-        latitude: coords.latitude,
-        longitude: coords.longitude,
-      })
-      setWeatherData(weather)
+    const location = await getCoordinatesByZip(zipcode)
+    if (location) {
+      setUserLocation(location)
     }
     setLoading(false)
   }
