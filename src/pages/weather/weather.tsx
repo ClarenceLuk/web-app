@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import getWeather, { WeatherForecast, WeatherPeriod } from './getWeather'
 import { Box, Button, TextField, Typography } from '@mui/material'
 import styles from './weather.module.css'
@@ -9,9 +9,9 @@ interface Coordinates {
   longitude: number
 }
 
-async function getCoordinatesByZip(
+const getCoordinatesByZip = async(
   zipCode: string
-): Promise<Coordinates | null> {
+): Promise<Coordinates | null> => {
   const url = `https://nominatim.openstreetmap.org/search?postalcode=${zipCode}&format=json&countrycodes=US`
 
   try {
@@ -32,13 +32,64 @@ async function getCoordinatesByZip(
   }
 }
 
+const handleLocation = (): Promise<Coordinates | null> => {
+  return new Promise((resolve, reject) => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          resolve({
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude,
+          });
+        },
+        (error) => {
+          return error
+        }
+      );
+    } else {
+      reject(new Error("Geolocation is not supported by this browser."));
+    }
+  });
+};
+
+
 const Weather: React.FC = () => {
   const [zipcode, setZipcode] = useState('')
   const [weatherData, setWeatherData] = useState<WeatherForecast | null>(null)
   const [loading, setLoading] = useState(false)
+  const [userLocation, setUserLocation] = useState<Coordinates | null>(null)
+
+  
+
+  const getLocationData = async () => {
+    setLoading(true)
+    try {
+      const location = await handleLocation();
+      if (location) {
+        setUserLocation(location);
+        const weather = await getWeather({
+          latitude: location.latitude,
+          longitude: location.longitude,
+        });
+        setUserLocation({
+          latitude: location.latitude,
+          longitude: location.longitude
+        })
+        setWeatherData(weather);
+      }
+    } catch (error) {
+      return error
+    }
+    setLoading(false)
+  };
+
+  useEffect(() => {
+    getLocationData()
+  }, [])
 
   const fetchWeatherData = async () => {
     setLoading(true)
+    
     const coords = await getCoordinatesByZip(zipcode)
     if (coords) {
       const weather = await getWeather({
@@ -64,6 +115,7 @@ const Weather: React.FC = () => {
           className={styles.zipCodeField}
           placeholder="Enter Zip Code"
           onChange={(e) => setZipcode(e.target.value)}
+          value={zipcode}
           onKeyDown={(e) => {
             if (e.key === 'Enter') {
               handleWeatherData()
