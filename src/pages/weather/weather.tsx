@@ -9,7 +9,7 @@ interface Coordinates {
   longitude: number
 }
 
-const getCoordinatesByZip = async(
+const getCoordinatesByZip = async (
   zipCode: string
 ): Promise<Coordinates | null> => {
   const url = `https://nominatim.openstreetmap.org/search?postalcode=${zipCode}&format=json&countrycodes=US`
@@ -40,18 +40,17 @@ const handleLocation = (): Promise<Coordinates | null> => {
           resolve({
             latitude: position.coords.latitude,
             longitude: position.coords.longitude,
-          });
+          })
         },
         (error) => {
           return error
         }
-      );
+      )
     } else {
-      reject(new Error("Geolocation is not supported by this browser."));
+      reject(new Error('Geolocation is not supported by this browser.'))
     }
-  });
-};
-
+  })
+}
 
 const Weather: React.FC = () => {
   const [zipcode, setZipcode] = useState('')
@@ -59,29 +58,23 @@ const Weather: React.FC = () => {
   const [loading, setLoading] = useState(false)
   const [userLocation, setUserLocation] = useState<Coordinates | null>(null)
 
-  
-
   const getLocationData = async () => {
     setLoading(true)
     try {
-      const location = await handleLocation();
+      const location = await handleLocation()
       if (location) {
-        setUserLocation(location);
+        setUserLocation(location)
         const weather = await getWeather({
           latitude: location.latitude,
           longitude: location.longitude,
-        });
-        setUserLocation({
-          latitude: location.latitude,
-          longitude: location.longitude
         })
-        setWeatherData(weather);
+        setWeatherData(weather)
       }
     } catch (error) {
-      return error
+      return [error, userLocation]
     }
     setLoading(false)
-  };
+  }
 
   useEffect(() => {
     getLocationData()
@@ -89,7 +82,7 @@ const Weather: React.FC = () => {
 
   const fetchWeatherData = async () => {
     setLoading(true)
-    
+
     const coords = await getCoordinatesByZip(zipcode)
     if (coords) {
       const weather = await getWeather({
