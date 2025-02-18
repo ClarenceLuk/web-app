@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import getWeather, { WeatherForecast, WeatherPeriod } from './getWeather'
-import { Box, Button, TextField, Typography } from '@mui/material'
-import styles from './weather.module.css'
+import { Box, Typography } from '@mui/material'
 import WeatherCard from './weatherCard'
 
 interface Coordinates {
@@ -53,7 +52,6 @@ const handleLocation = (): Promise<Coordinates | null> => {
 }
 
 const Weather: React.FC = () => {
-  const [zipcode, setZipcode] = useState('')
   const [weatherData, setWeatherData] = useState<WeatherForecast | null>(null)
   const [loading, setLoading] = useState(false)
   const [userLocation, setUserLocation] = useState<Coordinates | null>(null)
@@ -83,46 +81,10 @@ const Weather: React.FC = () => {
     handleLocationWeather()
   }, [userLocation])
 
-  const fetchWeatherData = async () => {
-    setLoading(true)
-
-    const location = await getCoordinatesByZip(zipcode)
-    if (location) {
-      setUserLocation(location)
-    }
-    setLoading(false)
-  }
-
-  const handleWeatherData = () => {
-    if (zipcode) {
-      fetchWeatherData()
-    }
-  }
 
   return (
     <Box>
-      {/* <Box className={styles.zipCode}>
-        <TextField
-          label="Zip Code"
-          className={styles.zipCodeField}
-          placeholder="Enter Zip Code"
-          onChange={(e) => setZipcode(e.target.value)}
-          value={zipcode}
-          onKeyDown={(e) => {
-            if (e.key === 'Enter') {
-              handleWeatherData()
-            }
-          }}
-        />
-        <Button
-          className={styles.zipCodeButton}
-          variant="outlined"
-          onClick={handleWeatherData}>
-          Search
-        </Button>
-      </Box> */}
-
-      {zipcode && loading && (
+      {loading && (
         <Typography variant="h6">Loading weather data...</Typography>
       )}
       {weatherData &&
