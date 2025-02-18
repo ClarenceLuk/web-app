@@ -27,6 +27,9 @@ const NavigationPanel = ({
   return (
     <Box className={styles.drawerBox}>
       {!drawerState && <Button 
+        sx={{
+          width: "0px",
+        }}
         onClick={toggleDrawer}
         className={styles.drawerToggleButton}
       >
