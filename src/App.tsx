@@ -45,21 +45,26 @@ const App = () => {
   return (
     <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
       <CssBaseline />
-      <NavigationPanel
-          isDarkMode={isDarkMode}
-          handleThemeChange={handleThemeChange}
-          handleChangePage={handleChangePage}
-        />
-      <Box className={styles.appWrapper}>
-        <Box className={styles.appBox}>
-          {
-            <PageTemplate
-              title={currentPage}
-              children={handlePageLoad(currentPage)}
-            />
-          }
+      <Box
+        className={styles.pageBox}
+      >
+        <NavigationPanel
+            isDarkMode={isDarkMode}
+            handleThemeChange={handleThemeChange}
+            handleChangePage={handleChangePage}
+          />
+        <Box className={styles.appWrapper}>
+          <Box className={styles.appBox}>
+            {
+              <PageTemplate
+                title={currentPage}
+                children={handlePageLoad(currentPage)}
+              />
+            }
+          </Box>
         </Box>
       </Box>
+      
     </ThemeProvider>
   )
 }

@@ -12,3 +12,7 @@
   width: 800;
 }
 
+
+.pageBox {
+  display: flex;
+}

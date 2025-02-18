@@ -26,14 +26,14 @@ const NavigationPanel = ({
 
   return (
     <Box className={styles.drawerBox}>
-      <Button 
+      {!drawerState && <Button 
         onClick={toggleDrawer}
         className={styles.drawerToggleButton}
       >
         <FontAwesomeIcon
-          icon={faAnglesLeft as IconProp}
+          icon={faAnglesRight as IconProp}
         />
-      </Button>
+      </Button>}
       <Drawer
         className={styles.drawer}
         open={drawerState}
@@ -47,10 +47,9 @@ const NavigationPanel = ({
           }}>
             <Button 
               onClick={toggleDrawer}
-              className={styles.drawerToggleButton}
             >
               <FontAwesomeIcon
-                icon={faAnglesRight as IconProp}
+                icon={faAnglesLeft as IconProp}
               />
             </Button>
           {Object.entries(PageEnum).map(([key, value]) => (
