@@ -24,7 +24,7 @@ const PageTemplate = ({ title, children }: PageProps) => {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          width: '100%'
+          minWidth: '450px'
         }}>
         <Typography variant="h4">{title}</Typography>
       </Box>

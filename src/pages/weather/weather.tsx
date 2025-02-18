@@ -101,7 +101,7 @@ const Weather: React.FC = () => {
 
   return (
     <Box>
-      <Box className={styles.zipCode}>
+      {/* <Box className={styles.zipCode}>
         <TextField
           label="Zip Code"
           className={styles.zipCodeField}
@@ -120,7 +120,7 @@ const Weather: React.FC = () => {
           onClick={handleWeatherData}>
           Search
         </Button>
-      </Box>
+      </Box> */}
 
       {zipcode && loading && (
         <Typography variant="h6">Loading weather data...</Typography>

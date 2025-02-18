@@ -65,13 +65,13 @@ const Othello = () => {
   }
 
   return (
-    <Box>
+    <Box className={styles.board}>
       <GameModal
         handleReset={handleReset}
         setGameState={setGameState}
         gameState={gameState}
       />
-      <Box className={styles.board}>
+      <Box>
         {gameState.board.map((rowArray, row: number) => (
           <Box key={row} className={styles.rowStyle}>
             {rowArray.map((value, col: number) => (
