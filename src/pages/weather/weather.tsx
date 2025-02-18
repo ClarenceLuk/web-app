@@ -8,29 +8,6 @@ interface Coordinates {
   longitude: number
 }
 
-const getCoordinatesByZip = async (
-  zipCode: string
-): Promise<Coordinates | null> => {
-  const url = `https://nominatim.openstreetmap.org/search?postalcode=${zipCode}&format=json&countrycodes=US`
-
-  try {
-    const response = await fetch(url)
-    const data = await response.json()
-
-    if (data.length === 0) {
-      throw new Error('No location found for the provided ZIP code.')
-    }
-
-    const location = data[0]
-    const { lat, lon } = location
-
-    return { latitude: parseFloat(lat), longitude: parseFloat(lon) }
-  } catch (error) {
-    console.error('Error fetching geolocation data:', error)
-    return null
-  }
-}
-
 const handleLocation = (): Promise<Coordinates | null> => {
   return new Promise((resolve, reject) => {
     if (navigator.geolocation) {
