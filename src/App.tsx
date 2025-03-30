@@ -27,15 +27,9 @@ const App = () => {
 
   const handlePageLoad = (currentPage: string) => {
     switch (currentPage) {
-      // case PageEnum.EarthQuake: {
-      //   return <Earthquake />
-      // }
       case PageEnum.Weather: {
         return <Weather />
       }
-      // case PageEnum.Othello: {
-      //   return <Othello />
-      // }
       default: {
         return <Othello />
       }
