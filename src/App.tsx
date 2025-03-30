@@ -1,8 +1,6 @@
 import React from 'react'
 import styles from './App.module.css'
 import { Box, CssBaseline, ThemeProvider } from '@mui/material'
-import Fractal from './pages/fractal/fractal'
-import Earthquake from './pages/earthquake/earthquake'
 import Weather from './pages/weather/weather'
 import Othello from './pages/othello/othello'
 import { ChangeEvent, useState } from 'react'
