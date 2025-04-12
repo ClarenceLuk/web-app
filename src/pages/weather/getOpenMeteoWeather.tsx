@@ -17,11 +17,40 @@ const getOpenMeteoWeather = async ({
   tenDaysLater.setDate(today.getDate() + 15);
   const endDate = tenDaysLater.toISOString().split('T')[0];
 
+  const dailyParams = [
+    'temperature_2m_max',
+    'temperature_2m_min',
+    'weathercode',
+    'precipitation_sum',
+    'windspeed_10m_max',
+    'sunrise',
+    'sunset',
+    'shortwave_radiation_sum',
+    'precipitation_probability_max',
+  ].join(',');
+
+  const hourlyParams = [
+    'temperature_2m',
+    'relativehumidity_2m',
+    'dewpoint_2m',
+    'precipitation',
+    'snowfall',
+    'windspeed_10m',
+    'winddirection_10m',
+    'cloudcover',
+    'surface_pressure',
+    'shortwave_radiation',
+    'visibility',
+    'windgusts_10m',
+  ].join(',');
+
   // Build the query parameters using URLSearchParams
   const params = new URLSearchParams({
     latitude: latitude.toString(),
     longitude: longitude.toString(),
-    daily: 'temperature_2m_max,temperature_2m_min,weathercode',
+    daily: dailyParams,
+    hourly: hourlyParams,
+    temperature_unit: 'fahrenheit',
     timezone: 'auto',
     start_date: startDate,
     end_date: endDate,

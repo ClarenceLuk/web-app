@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Box, Typography, Button } from '@mui/material';
 import WeatherCard from './weatherCard';
 import getOpenMeteoWeather from './getOpenMeteoWeather';
-import { WeatherForecast, WeatherPeriod } from './getWeather';
+import { WeatherForecast } from './getWeather';
 
 interface Coordinates {
   latitude: number;
@@ -61,8 +61,6 @@ const Weather: React.FC = () => {
       setLoading(false);
     }
   };
-
-  console.log('Weather Data:', weatherData);
 
   return (
     <Box>
