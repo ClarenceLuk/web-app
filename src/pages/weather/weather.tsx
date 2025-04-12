@@ -1,15 +1,15 @@
+// Weather.tsx
 import React, { useState } from 'react';
 import { Box, Typography, Button } from '@mui/material';
 import WeatherCard from './weatherCard';
 import getOpenMeteoWeather from './getOpenMeteoWeather';
-import { WeatherForecast } from './getWeather';
 
 interface Coordinates {
   latitude: number;
   longitude: number;
 }
 
-const handleLocation = (): Promise<Coordinates | null> => {
+const handleLocation = (): Promise<Coordinates> => {
   return new Promise((resolve, reject) => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
@@ -30,7 +30,7 @@ const handleLocation = (): Promise<Coordinates | null> => {
 };
 
 const Weather: React.FC = () => {
-  const [weatherData, setWeatherData] = useState<WeatherForecast | null>(null);
+  const [weatherData, setWeatherData] = useState<any>(null);
   const [loading, setLoading] = useState(false);
   const [userLocation, setUserLocation] = useState<Coordinates | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -38,17 +38,14 @@ const Weather: React.FC = () => {
   const fetchWeatherData = async () => {
     setLoading(true);
     setError(null);
-
     try {
-      // Get user's location if not already set
       let location = userLocation;
       if (!location) {
         location = await handleLocation();
         setUserLocation(location);
       }
-
-      // Fetch the weather data using the fetched location
       if (location) {
+        // getOpenMeteoWeather returns the raw JSON response from the API
         const weather = await getOpenMeteoWeather({
           latitude: location.latitude,
           longitude: location.longitude,
@@ -62,19 +59,34 @@ const Weather: React.FC = () => {
     }
   };
 
+  // Create an array of forecast objects from the daily response arrays.
+  const dailyForecasts =
+    weatherData && weatherData.daily
+      ? weatherData.daily.time.map((time: string, index: number) => ({
+          index,
+          time,
+          temperature_2m_max: weatherData.daily.temperature_2m_max[index],
+          temperature_2m_min: weatherData.daily.temperature_2m_min[index],
+          weathercode: weatherData.daily.weathercode[index],
+          precipitation_probability_max: weatherData.daily.precipitation_probability_max
+            ? weatherData.daily.precipitation_probability_max[index]
+            : 0,
+          windspeed_10m_max: weatherData.daily.windspeed_10m_max[index],
+          sunrise: weatherData.daily.sunrise[index],
+          sunset: weatherData.daily.sunset[index],
+        }))
+      : [];
+
   return (
     <Box>
       <Button variant="contained" onClick={fetchWeatherData}>
         Get Weather
       </Button>
-      {loading && (
-        <Typography variant="h6">Loading weather data...</Typography>
-      )}
+      {loading && <Typography variant="h6">Loading weather data...</Typography>}
       {error && <Typography variant="h6" color="error">{error}</Typography>}
-      {/* {weatherData &&
-        weatherData.properties.periods.map((period: WeatherPeriod, index: number) => (
-          <WeatherCard key={index} weatherData={period} />
-        ))} */}
+      {dailyForecasts.map((forecast: any) => (
+        <WeatherCard key={forecast.index} forecastData={forecast} />
+      ))}
     </Box>
   );
 };
