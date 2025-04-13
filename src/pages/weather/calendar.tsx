@@ -17,55 +17,70 @@ export const Calendar: React.FC<CalendarProps> = ({
   const currentMonth = firstForecastDate.month();
   const currentYear = firstForecastDate.year();
 
-  // Calculate the start date for the calendar grid:
-  // We want full weeks, so we start from the Sunday on or before the first day of the month.
+  // Calculate the start of the month and its day of week.
   const startOfMonth = moment({ year: currentYear, month: currentMonth, day: 1 });
   const startDayOfWeek = startOfMonth.day(); // 0 (Sunday) - 6 (Saturday)
-  // Subtract startDayOfWeek days to get the calendar's first date.
-  const calendarStartDate = moment(startOfMonth).subtract(startDayOfWeek, 'days');
+  // Calendar grid will start on the Sunday on or before the first day of the month.
+  const calendarStartDate = moment(startOfMonth).subtract(startDayOfWeek, "days");
 
-  // Create an array for a fixed 6-week grid (6 rows × 7 columns = 42 cells).
-  const totalCells = 42;
+  // Calculate the end of the month.
+  const endOfMonth = moment(startOfMonth).endOf("month");
+  // We want the grid to end on the Saturday of the week that contains the month's last day.
+  const endDayOfWeek = endOfMonth.day(); // e.g., if endOfMonth is a Wednesday (3)
+  const daysToAdd = 6 - endDayOfWeek; // Add remaining days to reach Saturday
+  const calendarEndDate = moment(endOfMonth).add(daysToAdd, "days");
+
+  // Total number of days to display in the grid.
+  const totalCells = calendarEndDate.diff(calendarStartDate, "days") + 1;
+
   const calendarDates: Moment[] = Array.from({ length: totalCells }, (_, i) =>
-    moment(calendarStartDate).add(i, 'days')
+    moment(calendarStartDate).add(i, "days")
   );
 
   // Create an array of available forecast dates (formatted as YYYY-MM-DD).
   const availableDates = dailyForecasts.map((f: any) =>
-    moment(f.time).format('YYYY-MM-DD')
+    moment(f.time).format("YYYY-MM-DD")
   );
 
   return (
     <Box>
       {/* Weekday Headers */}
-      <Box sx={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', gap: 1, mb: 1 }}>
-        {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map((dayName) => (
-          <Box key={dayName} sx={{ textAlign: 'center', fontWeight: 'bold' }}>
+      <Box
+        sx={{
+          display: "grid",
+          gridTemplateColumns: "repeat(7, 1fr)",
+          gap: 1,
+          mb: 1,
+        }}
+      >
+        {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((dayName) => (
+          <Box key={dayName} sx={{ textAlign: "center", fontWeight: "bold" }}>
             {dayName}
           </Box>
         ))}
       </Box>
+
       {/* Calendar Grid */}
-      <Box sx={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', gap: 1 }}>
+      <Box sx={{ display: "grid", gridTemplateColumns: "repeat(7, 1fr)", gap: 1 }}>
         {calendarDates.map((cellDate, index) => {
-          const formattedDate = cellDate.format('YYYY-MM-DD');
+          const formattedDate = cellDate.format("YYYY-MM-DD");
           const isAvailable = availableDates.includes(formattedDate);
-          const isToday = cellDate.isSame(moment(), 'day');
+          const isToday = cellDate.isSame(moment(), "day");
           const isSelected =
             selectedForecastIndex !== null &&
-            moment(dailyForecasts[selectedForecastIndex].time).isSame(cellDate, 'day');
-          // Show 'Today' for today's cell; otherwise, display the day number.
-          const displayText = isToday ? 'Today' : cellDate.date().toString();
+            moment(dailyForecasts[selectedForecastIndex].time).isSame(cellDate, "day");
+          // If the date is today, display "Today"; otherwise the numeric day.
+          const displayText = isToday ? "Today" : cellDate.date().toString();
 
           return (
             <Button
               key={index}
-              variant={isSelected ? 'contained' : 'outlined'}
+              variant={isSelected ? "contained" : "outlined"}
               onClick={() => {
                 if (isAvailable) {
                   // Find the forecast index with a matching date.
                   const forecastIdx = dailyForecasts.findIndex((f: any) =>
-                    moment(f.time).isSame(cellDate, 'day')
+                    moment(f.time).isSame(cellDate, "day")
                   );
                   if (forecastIdx >= 0) {
                     setSelectedForecastIndex(forecastIdx);
@@ -77,7 +92,7 @@ export const Calendar: React.FC<CalendarProps> = ({
                 height: 40,
                 minWidth: 40,
                 borderRadius: 1,
-                fontWeight: isToday ? 'bold' : 'normal',
+                fontWeight: isToday ? "bold" : "normal",
               }}
             >
               {displayText}
