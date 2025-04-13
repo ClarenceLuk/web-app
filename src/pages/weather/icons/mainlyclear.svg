@@ -1,0 +1,38 @@
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background gradient -->
+  <defs>
+    <linearGradient id="skyGradient" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#87CEFA" />
+      <stop offset="100%" stop-color="#B0E0E6" />
+    </linearGradient>
+  </defs>
+  <rect width="200" height="200" fill="url(#skyGradient)" />
+
+  <!-- Sun -->
+  <circle cx="140" cy="50" r="25" fill="#FFD700" />
+  <!-- Sun rays -->
+  <g stroke="#FFD700" stroke-width="2">
+    <line x1="140" y1="20" x2="140" y2="0"/>
+    <line x1="140" y1="80" x2="140" y2="100"/>
+    <line x1="110" y1="50" x2="90" y2="50"/>
+    <line x1="170" y1="50" x2="190" y2="50"/>
+    <line x1="120" y1="30" x2="105" y2="15"/>
+    <line x1="160" y1="30" x2="175" y2="15"/>
+    <line x1="120" y1="70" x2="105" y2="85"/>
+    <line x1="160" y1="70" x2="175" y2="85"/>
+  </g>
+
+  <!-- Light cloud near sun -->
+  <g fill="white" opacity="0.8">
+    <ellipse cx="120" cy="80" rx="15" ry="9"/>
+    <ellipse cx="135" cy="80" rx="20" ry="12"/>
+    <ellipse cx="150" cy="80" rx="13" ry="8"/>
+  </g>
+
+  <!-- Distant cloud at bottom -->
+  <g fill="white" opacity="0.6">
+    <ellipse cx="50" cy="160" rx="20" ry="12"/>
+    <ellipse cx="70" cy="160" rx="25" ry="15"/>
+    <ellipse cx="90" cy="160" rx="18" ry="10"/>
+  </g>
+</svg>

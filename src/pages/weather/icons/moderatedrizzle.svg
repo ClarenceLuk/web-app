@@ -1,0 +1,36 @@
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Sky gradient -->
+    <linearGradient id="moderateDrizzleSky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#AFCDEB" />
+      <stop offset="100%" stop-color="#D8EAF5" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="200" height="200" fill="url(#moderateDrizzleSky)" />
+
+  <!-- Cloud -->
+  <g fill="white">
+    <ellipse cx="100" cy="80" rx="40" ry="20"/>
+    <ellipse cx="130" cy="80" rx="35" ry="18"/>
+    <ellipse cx="70" cy="85" rx="30" ry="15"/>
+  </g>
+
+  <!-- Raindrops: 2 triangle groups + 2 scattered drops -->
+  <g stroke="#5CAFE1" stroke-width="2" stroke-linecap="round">
+    <!-- Left triangle -->
+    <line x1="70" y1="115" x2="70" y2="120"/>
+    <line x1="65" y1="125" x2="65" y2="130"/>
+    <line x1="75" y1="125" x2="75" y2="130"/>
+
+    <!-- Right triangle -->
+    <line x1="130" y1="115" x2="130" y2="120"/>
+    <line x1="125" y1="125" x2="125" y2="130"/>
+    <line x1="135" y1="125" x2="135" y2="130"/>
+
+    <!-- Scattered drops -->
+    <line x1="100" y1="120" x2="100" y2="125"/>
+    <line x1="90" y1="135" x2="90" y2="140"/>
+  </g>
+</svg>

@@ -1,0 +1,29 @@
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background: dull grey sky -->
+  <defs>
+    <linearGradient id="overcastSky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#C0C0C0" />
+      <stop offset="100%" stop-color="#A9A9A9" />
+    </linearGradient>
+  </defs>
+  <rect width="200" height="200" fill="url(#overcastSky)" />
+
+  <!-- Layered clouds filling the sky -->
+  <g fill="white" opacity="0.95">
+    <ellipse cx="60" cy="60" rx="40" ry="20"/>
+    <ellipse cx="100" cy="60" rx="50" ry="25"/>
+    <ellipse cx="140" cy="60" rx="40" ry="20"/>
+  </g>
+
+  <g fill="white" opacity="0.9">
+    <ellipse cx="50" cy="100" rx="35" ry="18"/>
+    <ellipse cx="90" cy="100" rx="45" ry="22"/>
+    <ellipse cx="130" cy="100" rx="40" ry="20"/>
+  </g>
+
+  <g fill="white" opacity="0.85">
+    <ellipse cx="70" cy="140" rx="40" ry="20"/>
+    <ellipse cx="110" cy="140" rx="50" ry="25"/>
+    <ellipse cx="150" cy="140" rx="40" ry="20"/>
+  </g>
+</svg>
