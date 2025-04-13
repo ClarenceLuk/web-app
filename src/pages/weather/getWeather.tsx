@@ -66,7 +66,6 @@ const getWeather = async ({
     return weatherData
   } catch (error) {
     // Handle any errors
-    console.error('Error fetching the weather data:', error)
     return null
   }
 }

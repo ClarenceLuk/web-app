@@ -148,10 +148,8 @@ const getOpenMeteoWeather = async ({
       hourly: mergedHourly,
     };
 
-    console.log('Merged Weather Data:', mergedData);
     return mergedData;
   } catch (error) {
-    console.error('Failed to retrieve data:', error);
     throw error;
   }
 };
