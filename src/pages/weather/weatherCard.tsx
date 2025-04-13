@@ -1,6 +1,6 @@
-// weatherCard.tsx
 import React from 'react';
 import { Box, Typography } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 import moment from 'moment';
 import styles from './weatherCard.module.css';
 import { weatherCodeMapping } from './weatherCodeMapping';
@@ -8,7 +8,6 @@ import {
   LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, ResponsiveContainer 
 } from 'recharts';
 
-// Define the expected shape of the raw daily forecast data.
 interface RawDailyForecast {
   index: number;
   time: string;
@@ -24,7 +23,6 @@ interface RawDailyForecast {
 interface HourlyData {
   time: string[];
   temperature_2m: number[];
-  // Include additional hourly fields if needed.
 }
 
 interface WeatherCardProps {
@@ -32,7 +30,30 @@ interface WeatherCardProps {
   hourlyData: HourlyData;
 }
 
-// Helper: returns an icon URL based on the weather code.
+// Custom tooltip component uses the current theme.
+const CustomTooltip: React.FC<any> = ({ active, payload, label }) => {
+  const theme = useTheme();
+
+  if (active && payload && payload.length) {
+    return (
+      <Box
+        sx={{
+          backgroundColor: theme.palette.background.paper,
+          color: theme.palette.text.primary,
+          border: `1px solid ${theme.palette.divider}`,
+          padding: theme.spacing(1),
+        }}
+      >
+        <Typography variant="caption">{`Time: ${label}`}</Typography>
+        <Typography variant="caption" sx={{ display: 'block' }}>
+          {`Temperature: ${payload[0].value}°F`}
+        </Typography>
+      </Box>
+    );
+  }
+  return null;
+};
+
 const getIconForWeatherCode = (code: number): string => {
   return `/icons/${code}.png`;
 };
@@ -50,16 +71,19 @@ const WeatherCard: React.FC<WeatherCardProps> = ({
   },
   hourlyData,
 }) => {
+  // Assume that the API (with timezone=auto) already returns local time strings.
   const dayName = moment(time).format('dddd');
   const fullDate = moment(time).format('LL');
   const iconUrl = getIconForWeatherCode(weathercode);
   const shortForecast = weatherCodeMapping[weathercode] || 'Unknown weather condition';
-  // Use 12-hour time format with AM/PM for sunrise and sunset
+  // Format sunrise and sunset in 12-hour format with AM/PM.
   const detailedForecast = `Max: ${temperature_2m_max}°F, Min: ${temperature_2m_min}°F, 
     Sunrise: ${moment(sunrise).format('h:mm A')}, Sunset: ${moment(sunset).format('h:mm A')}`;
 
-  // Filter the hourly data to only include records for the selected day.
+  // Use the daily forecast's time directly (without .local()) to get the selected date.
   const selectedDate = moment(time).format('YYYY-MM-DD');
+
+  // Filter hourly data for the selected date.
   const hourlyForSelected = hourlyData.time.reduce((acc: any[], hourTime: string, index: number) => {
     if (moment(hourTime).format('YYYY-MM-DD') === selectedDate) {
       acc.push({
@@ -99,7 +123,7 @@ const WeatherCard: React.FC<WeatherCardProps> = ({
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey="time" />
               <YAxis />
-              <Tooltip />
+              <Tooltip content={<CustomTooltip />} />
               <Line type="monotone" dataKey="temperature" stroke="#8884d8" />
             </LineChart>
           </ResponsiveContainer>

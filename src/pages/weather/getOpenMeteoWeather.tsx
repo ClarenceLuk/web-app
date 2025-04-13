@@ -1,7 +1,36 @@
+import moment from 'moment';
+
 interface LocationKey {
   latitude: number;
   longitude: number;
 }
+
+/**
+ * Returns a new Date that is offset (in days) from the base date,
+ * with the time set to the specified hours, minutes, seconds, and milliseconds.
+ *
+ * @param base - The base Date.
+ * @param offset - Number of days to add (or subtract if negative).
+ * @param hours - The desired hour (0–23 or 23 to simulate the end-of-day).
+ * @param minutes - The desired minute.
+ * @param seconds - The desired seconds.
+ * @param ms - The desired milliseconds.
+ * @returns A new Date with the offset and custom time.
+ */
+const getNormalizedDate = (
+  base: Date,
+  offset: number,
+  hours: number,
+  minutes: number = 0,
+  seconds: number = 0,
+  ms: number = 0
+): Date => {
+  const result = new Date(base);
+  result.setUTCDate(result.getDate() + offset);
+  result.setUTCHours(hours, minutes, seconds, ms);
+
+  return result;
+};
 
 const dailyParams = [
   'temperature_2m_max',
@@ -40,15 +69,11 @@ const getOpenMeteoWeather = async ({
   const today = new Date();
 
   // Historical: from 10 days before today to yesterday.
-  const pastStartDate = new Date(today);
-  pastStartDate.setDate(today.getDate() - 10);
-  const pastEndDate = new Date(today);
-  pastEndDate.setDate(today.getDate() - 1);
-
+  const pastStartDate = getNormalizedDate(today, -10, 0);                   // 10 days ago at 00:00
+  const pastEndDate = getNormalizedDate(today, -2, 0);          // Yesterday at 23:59:59.999
   // Forecast: from today to 15 days after today.
-  const futureStartDate = today;
-  const futureEndDate = new Date(today);
-  futureEndDate.setDate(today.getDate() + 15);
+  const futureStartDate = getNormalizedDate(today, -1, 0);                     // Today at 00:00
+  const futureEndDate = getNormalizedDate(today, 15, 0);         // 15 days after today at 23:59:59.999
 
   // Construct URLs for the two endpoints.
   const historicalUrl =
