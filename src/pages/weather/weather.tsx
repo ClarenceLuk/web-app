@@ -1,9 +1,9 @@
 // Weather.tsx
 import React, { useState } from 'react';
-import { Box, Typography, Button } from '@mui/material';
+import { Box, Typography, Button, useTheme } from '@mui/material';
 import WeatherCard from './weatherCard';
 import getOpenMeteoWeather from './getOpenMeteoWeather';
-import { Calendar } from './calendar';
+import Calendar from './calendar';
 
 interface Coordinates {
   latitude: number;
@@ -31,6 +31,7 @@ const handleLocation = (): Promise<Coordinates> => {
 };
 
 const Weather: React.FC = () => {
+  const theme = useTheme();
   const [weatherData, setWeatherData] = useState<any>(null);
   const [loading, setLoading] = useState(false);
   const [userLocation, setUserLocation] = useState<Coordinates | null>(null);
@@ -83,7 +84,17 @@ const Weather: React.FC = () => {
 
   return (
     <Box sx={{ padding: 2 }}>
-      <Button variant="contained" onClick={fetchWeatherData}>
+      <Button
+        variant="contained"
+        onClick={fetchWeatherData}
+        sx={{
+          backgroundColor: theme.palette.primary.main,
+          color: theme.palette.primary.contrastText,
+          '&:hover': {
+            backgroundColor: theme.palette.primary.dark,
+          },
+        }}
+      >
         Get Weather
       </Button>
       {loading && <Typography variant="h6">Loading weather data...</Typography>}

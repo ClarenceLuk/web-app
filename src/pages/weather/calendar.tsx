@@ -1,4 +1,4 @@
-import { Box, Button } from "@mui/material";
+import { Box, Button, useTheme } from "@mui/material";
 import moment, { Moment } from "moment";
 
 interface CalendarProps {
@@ -12,6 +12,8 @@ export const Calendar: React.FC<CalendarProps> = ({
   selectedForecastIndex,
   setSelectedForecastIndex,
 }) => {
+  const theme = useTheme();
+
   // Use the first available forecast date to determine the "current" month.
   const firstForecastDate = moment(dailyForecasts[0].time);
   const currentMonth = firstForecastDate.month();
@@ -26,8 +28,8 @@ export const Calendar: React.FC<CalendarProps> = ({
   // Calculate the end of the month.
   const endOfMonth = moment(startOfMonth).endOf("month");
   // We want the grid to end on the Saturday of the week that contains the month's last day.
-  const endDayOfWeek = endOfMonth.day(); // e.g., if endOfMonth is a Wednesday (3)
-  const daysToAdd = 6 - endDayOfWeek; // Add remaining days to reach Saturday
+  const endDayOfWeek = endOfMonth.day();
+  const daysToAdd = 6 - endDayOfWeek;
   const calendarEndDate = moment(endOfMonth).add(daysToAdd, "days");
 
   // Total number of days to display in the grid.
@@ -69,7 +71,6 @@ export const Calendar: React.FC<CalendarProps> = ({
           const isSelected =
             selectedForecastIndex !== null &&
             moment(dailyForecasts[selectedForecastIndex].time).isSame(cellDate, "day");
-          // If the date is today, display "Today"; otherwise the numeric day.
           const displayText = isToday ? "Today" : cellDate.date().toString();
 
           return (
@@ -78,7 +79,6 @@ export const Calendar: React.FC<CalendarProps> = ({
               variant={isSelected ? "contained" : "outlined"}
               onClick={() => {
                 if (isAvailable) {
-                  // Find the forecast index with a matching date.
                   const forecastIdx = dailyForecasts.findIndex((f: any) =>
                     moment(f.time).isSame(cellDate, "day")
                   );
@@ -91,8 +91,20 @@ export const Calendar: React.FC<CalendarProps> = ({
               sx={{
                 height: 40,
                 minWidth: 40,
-                borderRadius: 1,
+                borderRadius: theme.shape.borderRadius,
                 fontWeight: isToday ? "bold" : "normal",
+                backgroundColor: isSelected ? theme.palette.primary.main : "transparent",
+                color: isSelected
+                  ? theme.palette.primary.contrastText
+                  : isAvailable
+                  ? theme.palette.text.primary
+                  : theme.palette.text.disabled,
+                borderColor: isAvailable ? theme.palette.primary.main : theme.palette.divider,
+                "&:hover": {
+                  backgroundColor: isSelected
+                    ? theme.palette.primary.dark
+                    : theme.palette.action.hover,
+                },
               }}
             >
               {displayText}
@@ -103,3 +115,5 @@ export const Calendar: React.FC<CalendarProps> = ({
     </Box>
   );
 };
+
+export default Calendar;

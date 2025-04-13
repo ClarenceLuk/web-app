@@ -4,8 +4,14 @@ import { useTheme } from '@mui/material/styles';
 import moment from 'moment';
 import styles from './weatherCard.module.css';
 import { weatherCodeMapping } from './weatherCodeMapping';
-import { 
-  LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, ResponsiveContainer 
+import {
+  LineChart,
+  Line,
+  CartesianGrid,
+  XAxis,
+  YAxis,
+  Tooltip,
+  ResponsiveContainer
 } from 'recharts';
 
 interface RawDailyForecast {
@@ -71,23 +77,20 @@ const WeatherCard: React.FC<WeatherCardProps> = ({
   },
   hourlyData,
 }) => {
-  // Assume that the API (with timezone=auto) already returns local time strings.
+  const theme = useTheme();
   const dayName = moment(time).format('dddd');
   const fullDate = moment(time).format('LL');
   const iconUrl = getIconForWeatherCode(weathercode);
   const shortForecast = weatherCodeMapping[weathercode] || 'Unknown weather condition';
-  // Format sunrise and sunset in 12-hour format with AM/PM.
   const detailedForecast = `Max: ${temperature_2m_max}°F, Min: ${temperature_2m_min}°F, 
     Sunrise: ${moment(sunrise).format('h:mm A')}, Sunset: ${moment(sunset).format('h:mm A')}`;
 
-  // Use the daily forecast's time directly (without .local()) to get the selected date.
   const selectedDate = moment(time).format('YYYY-MM-DD');
 
-  // Filter hourly data for the selected date.
   const hourlyForSelected = hourlyData.time.reduce((acc: any[], hourTime: string, index: number) => {
     if (moment(hourTime).format('YYYY-MM-DD') === selectedDate) {
       acc.push({
-        time: moment(hourTime).format('h:mm A'), // 12-hour format with AM/PM
+        time: moment(hourTime).format("h:mm A"),
         temperature: hourlyData.temperature_2m[index],
       });
     }
@@ -124,7 +127,16 @@ const WeatherCard: React.FC<WeatherCardProps> = ({
               <XAxis dataKey="time" />
               <YAxis />
               <Tooltip content={<CustomTooltip />} />
-              <Line type="monotone" dataKey="temperature" stroke="#8884d8" />
+              <Line
+                type="monotone"
+                dataKey="temperature"
+                stroke={theme.palette.primary.main}
+                activeDot={{
+                  r: 5,
+                  stroke: theme.palette.primary.main,
+                  fill: theme.palette.primary.main,
+                }}
+              />
             </LineChart>
           </ResponsiveContainer>
         </Box>
