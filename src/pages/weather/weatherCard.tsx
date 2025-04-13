@@ -54,15 +54,16 @@ const WeatherCard: React.FC<WeatherCardProps> = ({
   const fullDate = moment(time).format('LL');
   const iconUrl = getIconForWeatherCode(weathercode);
   const shortForecast = weatherCodeMapping[weathercode] || 'Unknown weather condition';
+  // Use 12-hour time format with AM/PM for sunrise and sunset
   const detailedForecast = `Max: ${temperature_2m_max}°F, Min: ${temperature_2m_min}°F, 
-    Sunrise: ${moment(sunrise).format('HH:mm')}, Sunset: ${moment(sunset).format('HH:mm')}`;
+    Sunrise: ${moment(sunrise).format('h:mm A')}, Sunset: ${moment(sunset).format('h:mm A')}`;
 
   // Filter the hourly data to only include records for the selected day.
   const selectedDate = moment(time).format('YYYY-MM-DD');
   const hourlyForSelected = hourlyData.time.reduce((acc: any[], hourTime: string, index: number) => {
     if (moment(hourTime).format('YYYY-MM-DD') === selectedDate) {
       acc.push({
-        time: moment(hourTime).format('HH:mm'),
+        time: moment(hourTime).format('h:mm A'), // 12-hour format with AM/PM
         temperature: hourlyData.temperature_2m[index],
       });
     }
