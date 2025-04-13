@@ -89,24 +89,29 @@ const Weather: React.FC = () => {
       {loading && <Typography variant="h6">Loading weather data...</Typography>}
       {error && <Typography variant="h6" color="error">{error}</Typography>}
 
-      {/* Display detailed forecast for the selected date */}
-      {selectedForecastIndex !== null && (
-        <Box sx={{ marginTop: 4 }}>
-          <WeatherCard forecastData={dailyForecasts[selectedForecastIndex]} />
-        </Box>
-      )}
-
-      {/* Render the calendar date selector below the button */}
       {dailyForecasts.length > 0 && (
-        <Box sx={{ marginTop: 2 }}>
-          <Typography variant="h6" sx={{ marginBottom: 1 }}>
-            Select a Date
-          </Typography>
-          <Calendar
-            dailyForecasts={dailyForecasts}
-            selectedForecastIndex={selectedForecastIndex}
-            setSelectedForecastIndex={setSelectedForecastIndex}
-          />
+        <Box>
+          {/* Display detailed forecast for the selected date (with hourly graph) */}
+          {selectedForecastIndex !== null && (
+            <Box sx={{ marginTop: 4 }}>
+              <WeatherCard 
+                forecastData={dailyForecasts[selectedForecastIndex]} 
+                hourlyData={weatherData.hourly} 
+              />
+            </Box>
+          )}
+
+          {/* Date selector header and calendar */}
+          <Box sx={{ marginTop: 2 }}>
+            <Typography variant="h6" sx={{ marginBottom: 1 }}>
+              Select a Date
+            </Typography>
+            <Calendar
+              dailyForecasts={dailyForecasts}
+              selectedForecastIndex={selectedForecastIndex}
+              setSelectedForecastIndex={setSelectedForecastIndex}
+            />
+          </Box>
         </Box>
       )}
     </Box>

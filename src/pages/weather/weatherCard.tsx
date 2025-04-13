@@ -1,9 +1,12 @@
 // weatherCard.tsx
 import React from 'react';
 import { Box, Typography } from '@mui/material';
-import styles from './weatherCard.module.css';
 import moment from 'moment';
+import styles from './weatherCard.module.css';
 import { weatherCodeMapping } from './weatherCodeMapping';
+import { 
+  LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, ResponsiveContainer 
+} from 'recharts';
 
 // Define the expected shape of the raw daily forecast data.
 interface RawDailyForecast {
@@ -18,13 +21,19 @@ interface RawDailyForecast {
   sunset: string;
 }
 
-interface WeatherCardProps {
-  forecastData: RawDailyForecast;
+interface HourlyData {
+  time: string[];
+  temperature_2m: number[];
+  // Include additional hourly fields if needed.
 }
 
-// Helper: returns an icon URL or FontAwesome icon based on the weather code.
+interface WeatherCardProps {
+  forecastData: RawDailyForecast;
+  hourlyData: HourlyData;
+}
+
+// Helper: returns an icon URL based on the weather code.
 const getIconForWeatherCode = (code: number): string => {
-  // Example: return an image path based on the code.
   return `/icons/${code}.png`;
 };
 
@@ -39,13 +48,26 @@ const WeatherCard: React.FC<WeatherCardProps> = ({
     sunrise,
     sunset,
   },
+  hourlyData,
 }) => {
-  const dayName = moment(time).format('dddd'); // e.g. "Monday"
+  const dayName = moment(time).format('dddd');
   const fullDate = moment(time).format('LL');
   const iconUrl = getIconForWeatherCode(weathercode);
   const shortForecast = weatherCodeMapping[weathercode] || 'Unknown weather condition';
-  const detailedForecast = `Max: ${temperature_2m_max}°C, Min: ${temperature_2m_min}°C, 
+  const detailedForecast = `Max: ${temperature_2m_max}°F, Min: ${temperature_2m_min}°F, 
     Sunrise: ${moment(sunrise).format('HH:mm')}, Sunset: ${moment(sunset).format('HH:mm')}`;
+
+  // Filter the hourly data to only include records for the selected day.
+  const selectedDate = moment(time).format('YYYY-MM-DD');
+  const hourlyForSelected = hourlyData.time.reduce((acc: any[], hourTime: string, index: number) => {
+    if (moment(hourTime).format('YYYY-MM-DD') === selectedDate) {
+      acc.push({
+        time: moment(hourTime).format('HH:mm'),
+        temperature: hourlyData.temperature_2m[index],
+      });
+    }
+    return acc;
+  }, []);
 
   return (
     <Box className={styles.weatherCard}>
@@ -54,7 +76,7 @@ const WeatherCard: React.FC<WeatherCardProps> = ({
         {dayName} — {fullDate}
       </Typography>
       <Typography variant="body1">
-        Temperature: {temperature_2m_max}°C (max) / {temperature_2m_min}°C (min)
+        Temperature: {temperature_2m_max}°F (max) / {temperature_2m_min}°F (min)
       </Typography>
       <Typography variant="body1">
         Wind: {windspeed_10m_max} km/h
@@ -65,6 +87,23 @@ const WeatherCard: React.FC<WeatherCardProps> = ({
       <Typography variant="body1" sx={{ marginTop: 1 }}>
         {detailedForecast}
       </Typography>
+
+      {hourlyForSelected.length > 0 && (
+        <Box sx={{ marginTop: 2 }}>
+          <Typography variant="h6" sx={{ marginBottom: 1 }}>
+            Hourly Temperature
+          </Typography>
+          <ResponsiveContainer width="100%" height={300}>
+            <LineChart data={hourlyForSelected}>
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="time" />
+              <YAxis />
+              <Tooltip />
+              <Line type="monotone" dataKey="temperature" stroke="#8884d8" />
+            </LineChart>
+          </ResponsiveContainer>
+        </Box>
+      )}
     </Box>
   );
 };
