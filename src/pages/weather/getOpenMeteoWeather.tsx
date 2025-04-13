@@ -1,5 +1,3 @@
-import moment from 'moment';
-
 interface LocationKey {
   latitude: number;
   longitude: number;
