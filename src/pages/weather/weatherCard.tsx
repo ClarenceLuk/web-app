@@ -4,9 +4,6 @@ import { Box, Typography } from '@mui/material';
 import styles from './weatherCard.module.css';
 import moment from 'moment';
 import { weatherCodeMapping } from './weatherCodeMapping';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSun } from '@fortawesome/free-solid-svg-icons';
-import { IconProp } from '@fortawesome/fontawesome-svg-core';
 
 // Define the expected shape of the raw daily forecast data.
 interface RawDailyForecast {
