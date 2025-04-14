@@ -1,0 +1,34 @@
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Dense drizzle sky gradient -->
+    <linearGradient id="denseDrizzleSky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#8CAFC6" />
+      <stop offset="100%" stop-color="#BFD3E0" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="200" height="200" fill="url(#denseDrizzleSky)" />
+
+  <!-- Cloud -->
+  <g fill="white">
+    <ellipse cx="100" cy="75" rx="42" ry="22"/>
+    <ellipse cx="130" cy="78" rx="38" ry="20"/>
+    <ellipse cx="70" cy="80" rx="34" ry="18"/>
+  </g>
+
+  <!-- Asymmetrical drizzle drops -->
+  <g stroke="#4A9FD3" stroke-width="2" stroke-linecap="round">
+    <!-- Randomized placement to simulate real drizzle -->
+    <line x1="62" y1="112" x2="62" y2="117"/>
+    <line x1="85" y1="116" x2="85" y2="121"/>
+    <line x1="105" y1="110" x2="105" y2="115"/>
+    <line x1="126" y1="119" x2="126" y2="124"/>
+    <line x1="140" y1="112" x2="140" y2="117"/>
+    <line x1="70" y1="128" x2="70" y2="133"/>
+    <line x1="95" y1="130" x2="95" y2="135"/>
+    <line x1="120" y1="126" x2="120" y2="131"/>
+    <line x1="135" y1="132" x2="135" y2="137"/>
+    <line x1="110" y1="138" x2="110" y2="143"/>
+  </g>
+</svg>

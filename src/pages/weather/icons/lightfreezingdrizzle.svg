@@ -1,0 +1,36 @@
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Cold sky gradient -->
+    <linearGradient id="freezingDrizzleSky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#D4E3F2" />
+      <stop offset="100%" stop-color="#F0F4FA" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="200" height="200" fill="url(#freezingDrizzleSky)" />
+
+  <!-- Cloud -->
+  <g fill="white">
+    <ellipse cx="100" cy="80" rx="40" ry="20"/>
+    <ellipse cx="130" cy="80" rx="35" ry="18"/>
+    <ellipse cx="70" cy="85" rx="30" ry="15"/>
+  </g>
+
+  <!-- Light drizzle drops -->
+  <g stroke="#76BFE7" stroke-width="2" stroke-linecap="round">
+    <line x1="85" y1="115" x2="85" y2="120"/>
+    <line x1="100" y1="120" x2="100" y2="125"/>
+    <line x1="115" y1="115" x2="115" y2="120"/>
+  </g>
+
+  <!-- Freezing sparkle accents -->
+  <g stroke="#B2EBF2" stroke-width="1">
+    <!-- Sparkle 1 -->
+    <line x1="75" y1="130" x2="79" y2="134"/>
+    <line x1="79" y1="130" x2="75" y2="134"/>
+    <!-- Sparkle 2 -->
+    <line x1="125" y1="130" x2="129" y2="134"/>
+    <line x1="129" y1="130" x2="125" y2="134"/>
+  </g>
+</svg>

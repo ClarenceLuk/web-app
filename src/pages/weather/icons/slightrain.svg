@@ -1,0 +1,28 @@
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Sky gradient -->
+    <linearGradient id="slightRainSky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#B0CDE0" />
+      <stop offset="100%" stop-color="#D6E7F2" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="200" height="200" fill="url(#slightRainSky)" />
+
+  <!-- Cloud -->
+  <g fill="white">
+    <ellipse cx="100" cy="80" rx="40" ry="20"/>
+    <ellipse cx="130" cy="80" rx="35" ry="18"/>
+    <ellipse cx="70" cy="85" rx="30" ry="15"/>
+  </g>
+
+  <!-- Diagonal raindrops -->
+  <g stroke="#4A9FD3" stroke-width="2" stroke-linecap="round">
+    <!-- slanted rain lines -->
+    <line x1="75" y1="110" x2="85" y2="125"/>
+    <line x1="95" y1="115" x2="105" y2="132"/>
+    <line x1="115" y1="112" x2="125" y2="128"/>
+    <line x1="125" y1="120" x2="135" y2="136"/>
+  </g>
+</svg>
