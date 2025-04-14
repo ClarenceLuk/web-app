@@ -1,9 +1,8 @@
 import React from 'react';
 import { Box, Typography } from '@mui/material';
-import { useTheme } from '@mui/material/styles';
 import moment from 'moment';
 import styles from './weatherCard.module.css';
-import { weatherCodeMapping } from './weatherCodeMapping';
+import { weatherCodeMapping, weatherCodeIcons } from './weatherCodeMapping';
 import {
   LineChart,
   Line,
@@ -13,6 +12,7 @@ import {
   Tooltip,
   ResponsiveContainer
 } from 'recharts';
+import { useTheme } from '@mui/material/styles';
 
 interface RawDailyForecast {
   index: number;
@@ -36,32 +36,28 @@ interface WeatherCardProps {
   hourlyData: HourlyData;
 }
 
-// Custom tooltip component uses the current theme.
 const CustomTooltip: React.FC<any> = ({ active, payload, label }) => {
-  const theme = useTheme();
+  const theme = useTheme(); // Use the theme
 
-  if (active && payload && payload.length) {
+  if (active && payload && payload.length > 0) {
     return (
       <Box
         sx={{
           backgroundColor: theme.palette.background.paper,
-          color: theme.palette.text.primary,
           border: `1px solid ${theme.palette.divider}`,
           padding: theme.spacing(1),
         }}
       >
-        <Typography variant="caption">{`Time: ${label}`}</Typography>
-        <Typography variant="caption" sx={{ display: 'block' }}>
+        <Typography variant="caption" sx={{ color: theme.palette.text.primary }}>
+          {`Time: ${label}`}
+        </Typography>
+        <Typography variant="caption" sx={{ color: theme.palette.text.secondary, display: 'block' }}>
           {`Temperature: ${payload[0].value}°F`}
         </Typography>
       </Box>
     );
   }
   return null;
-};
-
-const getIconForWeatherCode = (code: number): string => {
-  return `/icons/${code}.png`;
 };
 
 const WeatherCard: React.FC<WeatherCardProps> = ({
@@ -77,20 +73,16 @@ const WeatherCard: React.FC<WeatherCardProps> = ({
   },
   hourlyData,
 }) => {
-  const theme = useTheme();
   const dayName = moment(time).format('dddd');
   const fullDate = moment(time).format('LL');
-  const iconUrl = getIconForWeatherCode(weathercode);
-  const shortForecast = weatherCodeMapping[weathercode] || 'Unknown weather condition';
-  const detailedForecast = `Max: ${temperature_2m_max}°F, Min: ${temperature_2m_min}°F, 
-    Sunrise: ${moment(sunrise).format('h:mm A')}, Sunset: ${moment(sunset).format('h:mm A')}`;
-
+  const iconClass = weatherCodeIcons[weathercode] || 'wi-na';
+  const detailedForecast = `Max: ${temperature_2m_max}°F, Min: ${temperature_2m_min}°F, Sunrise: ${moment(sunrise).format('h:mm A')}, Sunset: ${moment(sunset).format('h:mm A')}`;
   const selectedDate = moment(time).format('YYYY-MM-DD');
 
   const hourlyForSelected = hourlyData.time.reduce((acc: any[], hourTime: string, index: number) => {
     if (moment(hourTime).format('YYYY-MM-DD') === selectedDate) {
       acc.push({
-        time: moment(hourTime).format("h:mm A"),
+        time: moment(hourTime).format('h:mm A'),
         temperature: hourlyData.temperature_2m[index],
       });
     }
@@ -99,44 +91,25 @@ const WeatherCard: React.FC<WeatherCardProps> = ({
 
   return (
     <Box className={styles.weatherCard}>
-      <img src={iconUrl} alt={shortForecast} className={styles.icon} />
-      <Typography variant="h6">
-        {dayName} — {fullDate}
-      </Typography>
+      {/* Use an <i> element with Weather Icons classes */}
+      <i className={`wi ${iconClass}`} style={{ fontSize: '64px', marginBottom: '10px' }}></i>
+      <Typography variant="h6">{dayName} — {fullDate}</Typography>
       <Typography variant="body1">
         Temperature: {temperature_2m_max}°F (max) / {temperature_2m_min}°F (min)
       </Typography>
-      <Typography variant="body1">
-        Wind: {windspeed_10m_max} km/h
-      </Typography>
-      <Typography variant="body1">
-        Chance to rain: {precipitation_probability_max || 0}%
-      </Typography>
-      <Typography variant="body1" sx={{ marginTop: 1 }}>
-        {detailedForecast}
-      </Typography>
-
+      <Typography variant="body1">Wind: {windspeed_10m_max} km/h</Typography>
+      <Typography variant="body1">Chance to rain: {precipitation_probability_max || 0}%</Typography>
+      <Typography variant="body1" sx={{ marginTop: 1 }}>{detailedForecast}</Typography>
       {hourlyForSelected.length > 0 && (
         <Box sx={{ marginTop: 2 }}>
-          <Typography variant="h6" sx={{ marginBottom: 1 }}>
-            Hourly Temperature
-          </Typography>
+          <Typography variant="h6" sx={{ marginBottom: 1 }}>Hourly Temperature</Typography>
           <ResponsiveContainer width="100%" height={300}>
             <LineChart data={hourlyForSelected}>
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey="time" />
               <YAxis />
               <Tooltip content={<CustomTooltip />} />
-              <Line
-                type="monotone"
-                dataKey="temperature"
-                stroke={theme.palette.primary.main}
-                activeDot={{
-                  r: 5,
-                  stroke: theme.palette.primary.main,
-                  fill: theme.palette.primary.main,
-                }}
-              />
+              <Line type="monotone" dataKey="temperature" stroke="#8884d8" />
             </LineChart>
           </ResponsiveContainer>
         </Box>

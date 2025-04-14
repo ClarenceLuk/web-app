@@ -1,25 +1,3 @@
-// getWeather.ts (or types.ts)
-export interface WeatherPeriod {
-  number: number;
-  name: string; // e.g. day name, “Monday”
-  startTime: string;
-  endTime: string;
-  temperature: number;
-  temperatureUnit: string;
-  probabilityOfPrecipitation: { value: number };
-  windSpeed: number;
-  windDirection: string;
-  icon: string;
-  shortForecast: string;
-  detailedForecast: string;
-}
-
-export interface WeatherForecast {
-  properties: {
-    periods: WeatherPeriod[];
-  };
-}
-
 export const weatherCodeMapping: Record<number, string> = {
   0: 'Clear sky',
   1: 'Mainly clear',
@@ -52,32 +30,32 @@ export const weatherCodeMapping: Record<number, string> = {
 };
 
 export const weatherCodeIcons: Record<number, string> = {
-  0: '/icons/clear.svg',
-  1: '/icons/mainlyclear.svg',
-  2: '/icons/partlycloudy.svg',
-  3: '/icons/overcast.svg',
-  45: '/icons/fog.svg',
-  48: '/icons/depositingrimefog.svg',
-  51: '/icons/lightdrizzle.svg',
-  53: '/icons/moderatedrizzle.svg',
-  55: '/icons/densedrizzle.svg',
-  56: '/icons/lightfreezingdrizzle.svg',
-  57: '/icons/densefreezingdrizzle.svg',
-  61: '/icons/slightrain.svg',
-  63: '/icons/moderaterain.svg',
-  65: '/icons/heavyrain.svg',
-  66: '/icons/lightfreezingrain.svg',
-  67: '/icons/heavyfreezingrain.svg',
-  71: '/icons/slightsnowfall.svg',
-  73: '/icons/moderatesnowfall.svg',
-  75: '/icons/heavysnowfall.svg',
-  77: '/icons/snowgrains.svg',
-  80: '/icons/slightrainshowers.svg',
-  81: '/icons/moderaterainshowers.svg',
-  82: '/icons/violentrainshowers.svg',
-  85: '/icons/slightsnowshowers.svg',
-  86: '/icons/heavysnowshowers.svg',
-  95: '/icons/thunderstorm.svg',
-  96: '/icons/thunderstormwithslighthail.svg',
-  99: '/icons/thunderstormwithheavyhail.svg'
+  0: 'wi-day-sunny',          // Clear sky
+  1: 'wi-day-sunny',          // Mainly clear
+  2: 'wi-day-cloudy',         // Partly cloudy
+  3: 'wi-cloudy',             // Overcast
+  45: 'wi-fog',               // Fog
+  48: 'wi-fog',               // Depositing rime fog
+  51: 'wi-sprinkle',          // Light drizzle
+  53: 'wi-sprinkle',          // Moderate drizzle
+  55: 'wi-showers',           // Dense drizzle
+  56: 'wi-sleet',             // Light freezing drizzle
+  57: 'wi-sleet',             // Dense freezing drizzle
+  61: 'wi-rain',              // Slight rain
+  63: 'wi-rain',              // Moderate rain
+  65: 'wi-rain',              // Heavy rain
+  66: 'wi-sleet',             // Light freezing rain
+  67: 'wi-sleet',             // Heavy freezing rain
+  71: 'wi-snow',              // Slight snowfall
+  73: 'wi-snow',              // Moderate snowfall
+  75: 'wi-snow',              // Heavy snowfall
+  77: 'wi-snowflake-cold',    // Snow grains
+  80: 'wi-showers',           // Slight rain showers
+  81: 'wi-showers',           // Moderate rain showers
+  82: 'wi-storm-showers',     // Violent rain showers
+  85: 'wi-snow',              // Slight snow showers
+  86: 'wi-snow',              // Heavy snow showers
+  95: 'wi-thunderstorm',      // Thunderstorm (slight or moderate)
+  96: 'wi-thunderstorm-with-slight-hail', // Thunderstorm with slight hail
+  99: 'wi-thunderstorm-with-heavy-hail'   // Thunderstorm with heavy hail
 };
