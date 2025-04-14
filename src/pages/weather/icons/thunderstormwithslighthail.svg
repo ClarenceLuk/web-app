@@ -1,0 +1,38 @@
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <defs>
+    <!-- Thunderstorm sky gradient -->
+    <linearGradient id="thunderHailSky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#4B5D75" />
+      <stop offset="100%" stop-color="#A0B4C4" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="200" height="200" fill="url(#thunderHailSky)" />
+
+  <!-- Storm cloud -->
+  <g fill="white">
+    <ellipse cx="100" cy="70" rx="45" ry="24" />
+    <ellipse cx="130" cy="74" rx="42" ry="22" />
+    <ellipse cx="70" cy="76" rx="40" ry="20" />
+  </g>
+
+  <!-- Lightning bolt -->
+  <g fill="#FDD835" stroke="#FBC02D" stroke-width="1">
+    <polygon points="100,95 110,95 100,120 115,120 105,145" />
+  </g>
+
+  <!-- Rain drops -->
+  <g stroke="#4A9FD3" stroke-width="2" stroke-linecap="round">
+    <line x1="75" y1="115" x2="80" y2="125" />
+    <line x1="90" y1="118" x2="95" y2="128" />
+    <line x1="120" y1="115" x2="125" y2="125" />
+  </g>
+
+  <!-- Hailstones (small circles) -->
+  <g fill="#BFD7EA">
+    <circle cx="105" cy="132" r="2.5" />
+    <circle cx="135" cy="130" r="2.5" />
+    <circle cx="120" cy="138" r="2.5" />
+  </g>
+</svg>
