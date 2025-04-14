@@ -50,3 +50,34 @@ export const weatherCodeMapping: Record<number, string> = {
   96: 'Thunderstorm with slight hail',
   99: 'Thunderstorm with heavy hail'
 };
+
+export const weatherCodeIcons: Record<number, string> = {
+  0: '/icons/clear.svg',
+  1: '/icons/mainlyclear.svg',
+  2: '/icons/partlycloudy.svg',
+  3: '/icons/overcast.svg',
+  45: '/icons/fog.svg',
+  48: '/icons/depositingrimefog.svg',
+  51: '/icons/lightdrizzle.svg',
+  53: '/icons/moderatedrizzle.svg',
+  55: '/icons/densedrizzle.svg',
+  56: '/icons/lightfreezingdrizzle.svg',
+  57: '/icons/densefreezingdrizzle.svg',
+  61: '/icons/slightrain.svg',
+  63: '/icons/moderaterain.svg',
+  65: '/icons/heavyrain.svg',
+  66: '/icons/lightfreezingrain.svg',
+  67: '/icons/heavyfreezingrain.svg',
+  71: '/icons/slightsnowfall.svg',
+  73: '/icons/moderatesnowfall.svg',
+  75: '/icons/heavysnowfall.svg',
+  77: '/icons/snowgrains.svg',
+  80: '/icons/slightrainshowers.svg',
+  81: '/icons/moderaterainshowers.svg',
+  82: '/icons/violentrainshowers.svg',
+  85: '/icons/slightsnowshowers.svg',
+  86: '/icons/heavysnowshowers.svg',
+  95: '/icons/thunderstorm.svg',
+  96: '/icons/thunderstormwithslighthail.svg',
+  99: '/icons/thunderstormwithheavyhail.svg'
+};
