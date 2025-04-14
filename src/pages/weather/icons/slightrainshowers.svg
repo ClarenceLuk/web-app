@@ -1,0 +1,42 @@
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Sky gradient -->
+    <linearGradient id="rainShowerSky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#C8DAEA" />
+      <stop offset="100%" stop-color="#E8F0F8" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="200" height="200" fill="url(#rainShowerSky)" />
+
+  <!-- Sun (behind cloud) -->
+  <g fill="#FFD36D" stroke="#FBC02D" stroke-width="1">
+    <!-- Sun circle -->
+    <circle cx="60" cy="60" r="12"/>
+    <!-- Sun rays -->
+    <line x1="60" y1="42" x2="60" y2="30"/>
+    <line x1="60" y1="78" x2="60" y2="90"/>
+    <line x1="45" y1="60" x2="32" y2="60"/>
+    <line x1="75" y1="60" x2="88" y2="60"/>
+    <line x1="50" y1="50" x2="40" y2="40"/>
+    <line x1="70" y1="50" x2="80" y2="40"/>
+    <line x1="50" y1="70" x2="40" y2="80"/>
+    <line x1="70" y1="70" x2="80" y2="80"/>
+  </g>
+
+  <!-- Cloud -->
+  <g fill="white">
+    <ellipse cx="100" cy="80" rx="40" ry="20"/>
+    <ellipse cx="130" cy="82" rx="35" ry="18"/>
+    <ellipse cx="70" cy="85" rx="30" ry="15"/>
+  </g>
+
+  <!-- Slight rain shower drops (short diagonals) -->
+  <g stroke="#5CAFE1" stroke-width="2" stroke-linecap="round">
+    <line x1="75" y1="110" x2="80" y2="118"/>
+    <line x1="95" y1="112" x2="100" y2="120"/>
+    <line x1="115" y1="110" x2="120" y2="118"/>
+    <line x1="135" y1="114" x2="140" y2="122"/>
+  </g>
+</svg>

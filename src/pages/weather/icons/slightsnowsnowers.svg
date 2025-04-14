@@ -1,0 +1,54 @@
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <defs>
+    <!-- Mixed sky -->
+    <linearGradient id="mixedSky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#D9E8F5" />
+      <stop offset="100%" stop-color="#F2F8FC" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="200" height="200" fill="url(#mixedSky)" />
+
+  <!-- Sun (behind cloud) -->
+  <g fill="#FFD36D" stroke="#FBC02D" stroke-width="1">
+    <circle cx="60" cy="60" r="12"/>
+    <line x1="60" y1="42" x2="60" y2="30"/>
+    <line x1="60" y1="78" x2="60" y2="90"/>
+    <line x1="45" y1="60" x2="32" y2="60"/>
+    <line x1="75" y1="60" x2="88" y2="60"/>
+    <line x1="50" y1="50" x2="40" y2="40"/>
+    <line x1="70" y1="50" x2="80" y2="40"/>
+    <line x1="50" y1="70" x2="40" y2="80"/>
+    <line x1="70" y1="70" x2="80" y2="80"/>
+  </g>
+
+  <!-- Cloud -->
+  <g fill="white">
+    <ellipse cx="100" cy="80" rx="40" ry="20"/>
+    <ellipse cx="130" cy="82" rx="35" ry="18"/>
+    <ellipse cx="70" cy="85" rx="30" ry="15"/>
+  </g>
+
+  <!-- Snowflakes -->
+  <g stroke="#9FCBEA" stroke-width="1.4" stroke-linecap="round">
+    <!-- Flake 1 -->
+    <line x1="85" y1="115" x2="85" y2="125"/>
+    <line x1="80" y1="120" x2="90" y2="120"/>
+    <line x1="82" y1="117" x2="88" y2="123"/>
+    <line x1="88" y1="117" x2="82" y2="123"/>
+
+    <!-- Flake 2 -->
+    <line x1="115" y1="115" x2="115" y2="125"/>
+    <line x1="110" y1="120" x2="120" y2="120"/>
+    <line x1="112" y1="117" x2="118" y2="123"/>
+    <line x1="118" y1="117" x2="112" y2="123"/>
+  </g>
+
+  <!-- Light rain drops (dots) -->
+  <g fill="#5CAFE1">
+    <circle cx="95" cy="135" r="2"/>
+    <circle cx="105" cy="140" r="2"/>
+    <circle cx="115" cy="135" r="2"/>
+  </g>
+</svg>

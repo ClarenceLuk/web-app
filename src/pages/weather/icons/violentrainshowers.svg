@@ -1,0 +1,50 @@
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <defs>
+    <!-- Stormy sky gradient -->
+    <linearGradient id="stormSky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#4A6580" />
+      <stop offset="100%" stop-color="#8AA3B4" />
+    </linearGradient>
+
+    <!-- Rain animation -->
+    <style>
+      .rain line {
+        animation: fall 0.8s linear infinite;
+      }
+
+      @keyframes fall {
+        0% {
+          transform: translateY(0);
+          opacity: 1;
+        }
+        100% {
+          transform: translateY(20px);
+          opacity: 0;
+        }
+      }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="200" height="200" fill="url(#stormSky)" />
+
+  <!-- Heavy cloud -->
+  <g fill="white">
+    <ellipse cx="100" cy="65" rx="50" ry="26" />
+    <ellipse cx="135" cy="70" rx="45" ry="24" />
+    <ellipse cx="65" cy="72" rx="40" ry="22" />
+  </g>
+
+  <!-- Animated rain -->
+  <g stroke="#2C79A8" stroke-width="2.5" stroke-linecap="round" class="rain">
+    <line x1="40" y1="110" x2="55" y2="140" />
+    <line x1="55" y1="108" x2="70" y2="138" />
+    <line x1="70" y1="112" x2="85" y2="142" />
+    <line x1="85" y1="110" x2="100" y2="140" />
+    <line x1="100" y1="112" x2="115" y2="142" />
+    <line x1="115" y1="108" x2="130" y2="138" />
+    <line x1="130" y1="110" x2="145" y2="140" />
+    <line x1="145" y1="112" x2="160" y2="142" />
+    <line x1="160" y1="108" x2="175" y2="138" />
+  </g>
+</svg>

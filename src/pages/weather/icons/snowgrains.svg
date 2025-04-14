@@ -1,0 +1,31 @@
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Snow grains sky gradient -->
+    <linearGradient id="snowGrainsSky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#D2E3ED" />
+      <stop offset="100%" stop-color="#EEF4F8" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="200" height="200" fill="url(#snowGrainsSky)" />
+
+  <!-- Cloud -->
+  <g fill="white">
+    <ellipse cx="100" cy="80" rx="40" ry="20" />
+    <ellipse cx="130" cy="80" rx="35" ry="18" />
+    <ellipse cx="70" cy="85" rx="30" ry="15" />
+  </g>
+
+  <!-- Snow grains (small solid dots) -->
+  <g fill="#B2D6E6">
+    <circle cx="70" cy="115" r="2" />
+    <circle cx="90" cy="120" r="2" />
+    <circle cx="110" cy="115" r="2" />
+    <circle cx="130" cy="120" r="2" />
+    <circle cx="80" cy="135" r="2" />
+    <circle cx="100" cy="140" r="2" />
+    <circle cx="120" cy="135" r="2" />
+    <circle cx="140" cy="140" r="2" />
+  </g>
+</svg>
