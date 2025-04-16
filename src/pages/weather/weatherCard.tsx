@@ -77,8 +77,9 @@ const WeatherCard: React.FC<WeatherCardProps> = ({
     const dayName = moment(time).format('dddd');
     const fullDate = moment(time).format('LL');
     const iconClass = weatherCodeIcons[weathercode] || 'wi-na';
-    const detailedForecast = `Max: ${temperature_2m_max}°F, Min: ${temperature_2m_min}°F, Sunrise: ${moment(sunrise).format('h:mm A')}, Sunset: ${moment(sunset).format('h:mm A')}`;
     const selectedDate = moment(time).format('YYYY-MM-DD');
+    const today = moment().format('YYYY-MM-DD');
+    const isTodaySelected = selectedDate === today;
 
     // Filter hourly data for the selected date.
     const hourlyForSelected = hourlyData.time.reduce((acc: any[], hourTime: string, index: number) => {
@@ -91,17 +92,29 @@ const WeatherCard: React.FC<WeatherCardProps> = ({
         return acc;
     }, []);
 
+    // If today is selected, try to find current hourly temperature.
+    const nowFormatted = moment().format('h:mm A');
+    const currentData = hourlyForSelected.find((data: { time: string; temperature: number }) => data.time === nowFormatted);
+    const currentTemperature = currentData ? currentData.temperature : temperature_2m_max;
+
     return (
         <Box className={styles.weatherCard}>
             {/* Use an <i> element with Weather Icons classes */}
             <i className={`wi ${iconClass}`} style={{ fontSize: '64px', marginBottom: '10px' }}></i>
             <Typography variant="h6">{dayName} — {fullDate}</Typography>
-            <Typography variant="body1">
-                Temperature: {temperature_2m_max}°F (max) / {temperature_2m_min}°F (min)
-            </Typography>
+            {isTodaySelected && (
+                <Typography variant="body1">
+                    Current Temperature: {currentTemperature}°F
+                </Typography>
+            )}
             <Typography variant="body1">Wind: {windspeed_10m_max} km/h</Typography>
             <Typography variant="body1">Chance to rain: {precipitation_probability_max || 0}%</Typography>
-            <Typography variant="body1" sx={{ marginTop: 1 }}>{detailedForecast}</Typography>
+            <Typography variant="body1" sx={{ marginTop: 1, whiteSpace: 'pre-line' }}>
+                {`Max: ${temperature_2m_max}°F
+Min: ${temperature_2m_min}°F
+Sunrise: ${moment(sunrise).format('h:mm A')}
+Sunset: ${moment(sunset).format('h:mm A')}`}
+            </Typography>
             {hourlyForSelected.length > 0 && (
                 <Box sx={{ marginTop: 2 }}>
                     <Typography variant="h6" sx={{ marginBottom: 1 }}>Hourly Temperature</Typography>
@@ -112,7 +125,6 @@ const WeatherCard: React.FC<WeatherCardProps> = ({
                             <YAxis domain={[0, 120]} />
                             <Tooltip content={<CustomTooltip />} />
                             <Line type="monotone" dataKey="temperature" stroke={theme.palette.primary.main} />
-                            {/* Brush added for scrolling; tickFormatter converts each tick to a date format */}
                             <Brush 
                                 dataKey="time" 
                                 height={30} 
