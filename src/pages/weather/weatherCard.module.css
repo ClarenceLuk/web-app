@@ -2,6 +2,14 @@
   border: 2px solid white;
 }
 
+.weatherCard i {
+  max-width: 100%;
+  display: block;
+  overflow: hidden;
+  text-align: center; /* optional */
+  margin-top: 20px;
+}
+
 .detailedForecastButton {
   width: auto;
 }
@@ -14,4 +22,3 @@
   display: flex;
   align-items: flex-start;
 }
-     
