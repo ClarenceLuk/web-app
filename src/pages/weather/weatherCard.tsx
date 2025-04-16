@@ -132,7 +132,7 @@ const WeatherCard: React.FC<WeatherCardProps> = ({
                                 height={30} 
                                 stroke={theme.palette.primary.main}
                                 tickFormatter={(value) => moment(value, 'h:mm A').format('hh:mm A')}
-                                travellerWidth={10}
+                                travellerWidth={20}
                                 fill={theme.palette.background.paper}
                             />
                         </LineChart>
