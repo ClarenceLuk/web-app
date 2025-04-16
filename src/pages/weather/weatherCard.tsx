@@ -107,7 +107,7 @@ const WeatherCard: React.FC<WeatherCardProps> = ({
             <LineChart data={hourlyForSelected}>
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey="time" />
-              <YAxis />
+              <YAxis domain={[0, 120]} />
               <Tooltip content={<CustomTooltip />} />
               <Line type="monotone" dataKey="temperature" stroke="#8884d8" />
             </LineChart>
