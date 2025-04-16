@@ -30,6 +30,7 @@ const getNormalizedDate = (
   return result;
 };
 
+
 const dailyParams = [
   'temperature_2m_max',
   'temperature_2m_min',
@@ -68,7 +69,7 @@ const getOpenMeteoWeather = async ({
 
   // Historical: from 10 days before today to yesterday.
   const pastStartDate = getNormalizedDate(today, -10, 0);                   // 10 days ago at 00:00
-  const pastEndDate = getNormalizedDate(today, -2, 0);          // Yesterday at 23:59:59.999
+  const pastEndDate = getNormalizedDate(today, -1, 0);          // Yesterday at 23:59:59.999
   // Forecast: from today to 15 days after today.
   const futureStartDate = getNormalizedDate(today, -1, 0);                     // Today at 00:00
   const futureEndDate = getNormalizedDate(today, 15, 0);         // 15 days after today at 23:59:59.999
@@ -132,22 +133,47 @@ const getOpenMeteoWeather = async ({
       }
     }
 
-    // Merge hourly data similarly, if available.
+    // Merge hourly data with overlap handling.
     const mergedHourly: Record<string, any> = {};
     if (historicalData.hourly && forecastData.hourly) {
+      // Define how many overlapping points (hours) to check.
+      const overlapCount = 24;
+      
+      // For each key in hourly data...
+      for (const key in historicalData.hourly) {
+        const histArr = historicalData.hourly[key];
+        const foreArr = forecastData.hourly[key];
+    
+        // Fill nulls in the overlapping region in historical data.
+        // The overlapping indices in historical data are from histArr.length - overlapCount to histArr.length - 1.
+        for (let i = histArr.length - overlapCount, j = 0; i < histArr.length; i++, j++) {
+          if (histArr[i] === null) {
+            // Replace a null historical value with the corresponding forecast value.
+            histArr[i] = foreArr[j];
+          }
+        }
+      }
+    
+      // Remove the first overlapCount points from each forecast hourly array.
+      const updatedForecastHourly: Record<string, any> = {};
+      for (const key in forecastData.hourly) {
+        updatedForecastHourly[key] = forecastData.hourly[key].slice(overlapCount);
+      }
+    
+      // Now merge the hourly datasets.
       for (const key in historicalData.hourly) {
         mergedHourly[key] = [
           ...historicalData.hourly[key],
-          ...forecastData.hourly[key],
+          ...updatedForecastHourly[key],
         ];
       }
     }
-
+    
     const mergedData = {
       daily: mergedDaily,
       hourly: mergedHourly,
     };
-
+    
     return mergedData;
   } catch (error) {
     throw error;

@@ -2,7 +2,7 @@ import React from 'react';
 import { Box, Typography } from '@mui/material';
 import moment from 'moment';
 import styles from './weatherCard.module.css';
-import { weatherCodeMapping, weatherCodeIcons } from './weatherCodeMapping';
+import { weatherCodeIcons } from './weatherCodeMapping';
 import {
   LineChart,
   Line,
