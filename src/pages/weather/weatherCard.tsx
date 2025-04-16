@@ -110,10 +110,12 @@ const WeatherCard: React.FC<WeatherCardProps> = ({
             <Typography variant="body1">Wind: {windspeed_10m_max} km/h</Typography>
             <Typography variant="body1">Chance to rain: {precipitation_probability_max || 0}%</Typography>
             <Typography variant="body1" sx={{ marginTop: 1, whiteSpace: 'pre-line' }}>
-                {`Max: ${temperature_2m_max}°F
-Min: ${temperature_2m_min}°F
-Sunrise: ${moment(sunrise).format('h:mm A')}
-Sunset: ${moment(sunset).format('h:mm A')}`}
+                {
+                  `Max: ${temperature_2m_max}°F
+                  Min: ${temperature_2m_min}°F
+                  Sunrise: ${moment(sunrise).format('h:mm A')}
+                  Sunset: ${moment(sunset).format('h:mm A')}`
+                }
             </Typography>
             {hourlyForSelected.length > 0 && (
                 <Box sx={{ marginTop: 2 }}>
