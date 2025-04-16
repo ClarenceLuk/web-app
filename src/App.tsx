@@ -25,11 +25,11 @@ const App = () => {
 
   const handlePageLoad = (currentPage: string) => {
     switch (currentPage) {
-      case PageEnum.Weather: {
-        return <Weather />
+      case PageEnum.Othello: {
+        return <Othello />
       }
       default: {
-        return <Othello />
+        return <Weather />
       }
     }
   }
