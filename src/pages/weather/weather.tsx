@@ -1,6 +1,6 @@
 // Weather.tsx
 import React, { useState } from 'react';
-import { Box, Typography, Button, useTheme } from '@mui/material';
+import { Box, Typography, Button, useTheme, TextField } from '@mui/material';
 import WeatherCard from './weatherCard';
 import getOpenMeteoWeather from './getOpenMeteoWeather';
 import Calendar from './calendar';
@@ -30,6 +30,23 @@ const handleLocation = (): Promise<Coordinates> => {
   });
 };
 
+// Fetch coordinates from a US zip code using OpenWeatherMap Geocoding API
+const getCoordinatesFromZip = async (zip: string): Promise<Coordinates> => {
+  // You can use your own API key or a different geocoding service if you prefer
+  const apiKey = 'demo'; // Replace with your OpenWeatherMap API key
+  const response = await fetch(
+    `https://api.openweathermap.org/geo/1.0/zip?zip=${zip},US&appid=${apiKey}`
+  );
+  if (!response.ok) {
+    throw new Error('Invalid zip code or failed to fetch location.');
+  }
+  const data = await response.json();
+  return {
+    latitude: data.lat,
+    longitude: data.lon,
+  };
+};
+
 const Weather: React.FC = () => {
   const theme = useTheme();
   const [weatherData, setWeatherData] = useState<any>(null);
@@ -37,26 +54,41 @@ const Weather: React.FC = () => {
   const [userLocation, setUserLocation] = useState<Coordinates | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [selectedForecastIndex, setSelectedForecastIndex] = useState<number | null>(null);
+  const [zipCode, setZipCode] = useState<string>('');
 
-  const fetchWeatherData = async () => {
+  const fetchWeatherData = async (coords?: Coordinates) => {
     setLoading(true);
     setError(null);
     try {
-      let location = userLocation;
+      let location = coords || userLocation;
       if (!location) {
         location = await handleLocation();
         setUserLocation(location);
       }
       if (location) {
-        // getOpenMeteoWeather returns the merged weather data.
         const weather = await getOpenMeteoWeather({
           latitude: location.latitude,
           longitude: location.longitude,
         });
         setWeatherData(weather);
-        // Reset selection when new data arrives.
         setSelectedForecastIndex(null);
       }
+    } catch (err: any) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Handle zip code submit
+  const handleZipSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError(null);
+    setLoading(true);
+    try {
+      const coords = await getCoordinatesFromZip(zipCode);
+      setUserLocation(coords);
+      await fetchWeatherData(coords);
     } catch (err: any) {
       setError(err.message);
     } finally {
@@ -84,19 +116,42 @@ const Weather: React.FC = () => {
 
   return (
     <Box sx={{ padding: 2 }}>
-      <Button
-        variant="contained"
-        onClick={fetchWeatherData}
-        sx={{
-          backgroundColor: theme.palette.primary.main,
-          color: theme.palette.primary.contrastText,
-          '&:hover': {
-            backgroundColor: theme.palette.primary.dark,
-          },
-        }}
-      >
-        Get Weather
-      </Button>
+      <form onSubmit={handleZipSubmit} style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 16 }}>
+        <TextField
+          label="Zip Code"
+          variant="outlined"
+          size="small"
+          value={zipCode}
+          onChange={(e) => setZipCode(e.target.value)}
+          sx={{ width: 120 }}
+        />
+        <Button
+          type="submit"
+          variant="contained"
+          sx={{
+            backgroundColor: theme.palette.primary.main,
+            color: theme.palette.primary.contrastText,
+            '&:hover': {
+              backgroundColor: theme.palette.primary.dark,
+            },
+          }}
+        >
+          Use Zip
+        </Button>
+        <Button
+          variant="contained"
+          onClick={() => fetchWeatherData()}
+          sx={{
+            backgroundColor: theme.palette.primary.main,
+            color: theme.palette.primary.contrastText,
+            '&:hover': {
+              backgroundColor: theme.palette.primary.dark,
+            },
+          }}
+        >
+          Use My Location
+        </Button>
+      </form>
       {loading && <Typography variant="h6">Loading weather data...</Typography>}
       {error && <Typography variant="h6" color="error">{error}</Typography>}
 
