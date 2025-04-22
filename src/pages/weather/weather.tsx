@@ -53,7 +53,6 @@ const getCoordinatesFromZip = async (zip: string): Promise<Coordinates> => {
     throw new Error('Invalid zip code or failed to fetch location.');
   }
   const data: ZippopotamResponse = await response.json();
-  console.log(data);
   return {
     latitude: Number(data.places[0].latitude),
     longitude: Number(data.places[0].longitude),
