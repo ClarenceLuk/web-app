@@ -10,6 +10,19 @@ interface Coordinates {
   longitude: number;
 }
 
+export interface ZippopotamResponse {
+  'post code': string;
+  country: string;
+  'country abbreviation': string;
+  places: Array<{
+    'place name': string;
+    longitude: string;
+    state: string;
+    'state abbreviation': string;
+    latitude: string;
+  }>;
+}
+
 const handleLocation = (): Promise<Coordinates> => {
   return new Promise((resolve, reject) => {
     if (navigator.geolocation) {
@@ -33,17 +46,17 @@ const handleLocation = (): Promise<Coordinates> => {
 // Fetch coordinates from a US zip code using OpenWeatherMap Geocoding API
 const getCoordinatesFromZip = async (zip: string): Promise<Coordinates> => {
   // You can use your own API key or a different geocoding service if you prefer
-  const apiKey = 'demo'; // Replace with your OpenWeatherMap API key
   const response = await fetch(
-    `https://api.openweathermap.org/geo/1.0/zip?zip=${zip},US&appid=${apiKey}`
+    `http://api.zippopotam.us/us/${zip}`
   );
   if (!response.ok) {
     throw new Error('Invalid zip code or failed to fetch location.');
   }
-  const data = await response.json();
+  const data: ZippopotamResponse = await response.json();
+  console.log(data);
   return {
-    latitude: data.lat,
-    longitude: data.lon,
+    latitude: Number(data.places[0].latitude),
+    longitude: Number(data.places[0].longitude),
   };
 };
 
