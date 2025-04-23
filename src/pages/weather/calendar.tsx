@@ -13,7 +13,7 @@ export const Calendar: React.FC<CalendarProps> = ({
   setSelectedForecastIndex,
 }) => {
   const theme = useTheme();
-
+  console.log(dailyForecasts)
   // Use the first and last forecast dates to determine the calendar range
   const firstForecastDate = moment(dailyForecasts[0].time);
   const lastForecastDate = moment(dailyForecasts[dailyForecasts.length - 1].time);
@@ -104,7 +104,7 @@ export const Calendar: React.FC<CalendarProps> = ({
                   }}
                   disabled={!isAvailable}
                   sx={{
-                    height: 64,
+                    height: 80, // Increased height for more space
                     minWidth: 64,
                     borderRadius: theme.shape.borderRadius,
                     fontWeight: isToday ? "bold" : "normal",
@@ -127,27 +127,56 @@ export const Calendar: React.FC<CalendarProps> = ({
                   <Box
                     sx={{
                       position: "absolute",
-                      top: 10,
+                      top: 6,
                       left: 0,
                       width: "100%",
+                      height: 48,
                       textAlign: "center",
                       zIndex: 1,
                       pointerEvents: "none",
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                      justifyContent: "flex-start",
                     }}
                   >
-                    {displayText}
+                    <span style={{ fontWeight: isToday ? "bold" : "normal" }}>{displayText}</span>
+                    
                   </Box>
-                  {rainPercent !== null && (
+                  {forecastIdx >= 0 && (
                     <Box
                       sx={{
                         position: "absolute",
-                        bottom: 6,
+                        bottom: 21,
                         right: 6,
-                        fontSize: 13,
+                        fontSize: 8,
                         color: theme.palette.text.secondary,
                         display: "flex",
                         alignItems: "center",
                         gap: 0.5,
+                        borderRadius: 1,
+                        px: 0.5,
+                      }}
+                    >
+                      <span style={{ fontSize: 8, display: "flex", alignItems: "center" }}>
+                        <span role="img" aria-label="thermometer" style={{ fontSize: 14, marginRight: 3 }}>🌡️</span>
+                        {Math.round(dailyForecasts[forecastIdx].temperature_2m_max)}°F
+                      </span>
+                    </Box>
+                  )}
+                  {rainPercent !== null && (
+                    <Box
+                      sx={{
+                        position: "absolute",
+                        bottom: 3,
+                        right: 6,
+                        fontSize: 8,
+                        color: theme.palette.text.secondary,
+                        display: "flex",
+                        alignItems: "center",
+                        gap: 0.5,
+                        borderRadius: 1,
+                        px: 0.5,
                       }}
                     >
                       <span role="img" aria-label="rain" style={{ fontSize: 13, marginRight: 2 }}>🌧️</span>
