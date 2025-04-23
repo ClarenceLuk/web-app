@@ -1,5 +1,6 @@
 import { Box, Button, useTheme } from "@mui/material";
 import moment, { Moment } from "moment";
+import styles from './calendar.module.css';
 
 interface CalendarProps {
   dailyForecasts: any[];
@@ -124,39 +125,12 @@ export const Calendar: React.FC<CalendarProps> = ({
                     padding: 0,
                   }}
                 >
-                  <Box
-                    sx={{
-                      position: "absolute",
-                      top: 6,
-                      left: 0,
-                      width: "100%",
-                      height: 48,
-                      textAlign: "center",
-                      zIndex: 1,
-                      pointerEvents: "none",
-                      display: "flex",
-                      flexDirection: "column",
-                      alignItems: "center",
-                      justifyContent: "flex-start",
-                    }}
-                  >
+                  <Box className={styles.dateBox}>
                     <span style={{ fontWeight: isToday ? "bold" : "normal" }}>{displayText}</span>
-                    
                   </Box>
                   {forecastIdx >= 0 && (
                     <Box
-                      sx={{
-                        position: "absolute",
-                        bottom: 21,
-                        right: 6,
-                        fontSize: 8,
-                        color: theme.palette.text.secondary,
-                        display: "flex",
-                        alignItems: "center",
-                        gap: 0.5,
-                        borderRadius: 1,
-                        px: 0.5,
-                      }}
+                      className={styles.tempBox}
                     >
                       <span style={{ fontSize: 8, display: "flex", alignItems: "center" }}>
                         <span role="img" aria-label="thermometer" style={{ fontSize: 14, marginRight: 3 }}>🌡️</span>
@@ -166,18 +140,7 @@ export const Calendar: React.FC<CalendarProps> = ({
                   )}
                   {rainPercent !== null && (
                     <Box
-                      sx={{
-                        position: "absolute",
-                        bottom: 3,
-                        right: 6,
-                        fontSize: 8,
-                        color: theme.palette.text.secondary,
-                        display: "flex",
-                        alignItems: "center",
-                        gap: 0.5,
-                        borderRadius: 1,
-                        px: 0.5,
-                      }}
+                      className={styles.rainBox}
                     >
                       <span role="img" aria-label="rain" style={{ fontSize: 13, marginRight: 2 }}>🌧️</span>
                       {rainPercent}%
