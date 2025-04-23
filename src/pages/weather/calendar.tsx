@@ -13,7 +13,7 @@ export const Calendar: React.FC<CalendarProps> = ({
   setSelectedForecastIndex,
 }) => {
   const theme = useTheme();
-  console.log(dailyForecasts)
+
   // Use the first and last forecast dates to determine the calendar range
   const firstForecastDate = moment(dailyForecasts[0].time);
   const lastForecastDate = moment(dailyForecasts[dailyForecasts.length - 1].time);
