@@ -47,7 +47,7 @@ const handleLocation = (): Promise<Coordinates> => {
 const getCoordinatesFromZip = async (zip: string): Promise<Coordinates> => {
   // You can use your own API key or a different geocoding service if you prefer
   const response = await fetch(
-    `http://api.zippopotam.us/us/${zip}`
+    `https://api.zippopotam.us/us/${zip}`
   );
   if (!response.ok) {
     throw new Error('Invalid zip code or failed to fetch location.');
