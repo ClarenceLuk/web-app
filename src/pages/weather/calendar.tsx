@@ -13,25 +13,15 @@ export const Calendar: React.FC<CalendarProps> = ({
   setSelectedForecastIndex,
 }) => {
   const theme = useTheme();
-  console.log(dailyForecasts)
 
-  // Use the first available forecast date to determine the "current" month.
+  // Use the first and last forecast dates to determine the calendar range
   const firstForecastDate = moment(dailyForecasts[0].time);
-  const currentMonth = firstForecastDate.month();
-  const currentYear = firstForecastDate.year();
+  const lastForecastDate = moment(dailyForecasts[dailyForecasts.length - 1].time);
 
-  // Calculate the start of the month and its day of week.
-  const startOfMonth = moment({ year: currentYear, month: currentMonth, day: 1 });
-  const startDayOfWeek = startOfMonth.day(); // 0 (Sunday) - 6 (Saturday)
-  // Calendar grid will start on the Sunday on or before the first day of the month.
-  const calendarStartDate = moment(startOfMonth).subtract(startDayOfWeek, "days");
-
-  // Calculate the end of the month.
-  const endOfMonth = moment(startOfMonth).endOf("month");
-  // We want the grid to end on the Saturday of the week that contains the month's last day.
-  const endDayOfWeek = endOfMonth.day();
-  const daysToAdd = 6 - endDayOfWeek;
-  const calendarEndDate = moment(endOfMonth).add(daysToAdd, "days");
+  // Find the Sunday before (or on) the first forecast date
+  const calendarStartDate = moment(firstForecastDate).startOf("week");
+  // Find the Saturday after (or on) the last forecast date
+  const calendarEndDate = moment(lastForecastDate).endOf("week");
 
   // Total number of days to display in the grid.
   const totalCells = calendarEndDate.diff(calendarStartDate, "days") + 1;
