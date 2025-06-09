@@ -23,6 +23,7 @@
   gap: 0.5em;
   border-radius: 4px;
   padding: 0 4px;
+  /* background: none; <-- not needed */
 }
 
 .rainBox {
@@ -35,4 +36,5 @@
   gap: 0.5em;
   border-radius: 4px;
   padding: 0 4px;
+  /* background: none; <-- not needed */
 }
