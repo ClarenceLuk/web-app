@@ -1,14 +1,13 @@
+import React from 'react';
+import EarthquakeQuery from './earthquakeQuery';
 
-
-
-const Earthquake = () => {
-  
+const Earthquake: React.FC = () => {
   return (
     <div>
-      Earthquake
-      Work In Progress
+      <h1>Earthquake Data</h1>
+      <EarthquakeQuery />
     </div>
-  )
-}
+  );
+};
 
 export default Earthquake;

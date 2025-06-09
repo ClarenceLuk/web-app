@@ -10,6 +10,7 @@ import { darkTheme } from './themes/darkTheme'
 import { lightTheme } from './themes/lightTheme'
 import { PageEnum } from './constants/mapped-enums'
 import PageTemplate from './pages/pageTemplate/pageTemplate'
+import Earthquake from './pages/earthquake/earthquake'
 
 const App = () => {
   const [isDarkMode, setIsDarkMode] = useState(true)
@@ -27,6 +28,9 @@ const App = () => {
     switch (currentPage) {
       case PageEnum.Othello: {
         return <Othello />
+      }
+      case PageEnum.Earthquake: {
+        return <Earthquake />
       }
       default: {
         return <Weather />
