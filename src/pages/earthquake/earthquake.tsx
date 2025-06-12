@@ -238,8 +238,8 @@ const Earthquake = () => {
             </ButtonGroup>
           </Box>
 
-          <Grid container spacing={2}>
-            <Grid item xs={6}>
+          <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap' }}>
+            <Box sx={{ flex: '1 1 200px' }}>
               <TextField
                 label="Start Date"
                 type="date"
@@ -249,8 +249,8 @@ const Earthquake = () => {
                 InputLabelProps={{ shrink: true }}
                 size="small"
               />
-            </Grid>
-            <Grid item xs={6}>
+            </Box>
+            <Box sx={{ flex: '1 1 200px' }}>
               <TextField
                 label="End Date"
                 type="date"
@@ -260,11 +260,11 @@ const Earthquake = () => {
                 InputLabelProps={{ shrink: true }}
                 size="small"
               />
-            </Grid>
-          </Grid>
+            </Box>
+          </Box>
 
-          <Grid container spacing={2}>
-            <Grid item xs={8}>
+          <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap' }}>
+            <Box sx={{ flex: '2 1 200px' }}>
               <TextField
                 label="Zipcode"
                 type="text"
@@ -277,8 +277,8 @@ const Earthquake = () => {
                 fullWidth
                 size="small"
               />
-            </Grid>
-            <Grid item xs={4}>
+            </Box>
+            <Box sx={{ flex: '1 1 100px' }}>
               <TextField
                 label="Radius (km)"
                 type="number"
@@ -288,11 +288,11 @@ const Earthquake = () => {
                 fullWidth
                 size="small"
               />
-            </Grid>
-          </Grid>
+            </Box>
+          </Box>
 
-          <Grid container spacing={2}>
-            <Grid item xs={6}>
+          <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap' }}>
+            <Box sx={{ flex: '1 1 200px' }}>
               <TextField
                 label="Min Magnitude"
                 type="number"
@@ -302,8 +302,8 @@ const Earthquake = () => {
                 fullWidth
                 size="small"
               />
-            </Grid>
-            <Grid item xs={6}>
+            </Box>
+            <Box sx={{ flex: '1 1 200px' }}>
               <TextField
                 label="Max Magnitude"
                 type="number"
@@ -313,8 +313,8 @@ const Earthquake = () => {
                 fullWidth
                 size="small"
               />
-            </Grid>
-          </Grid>
+            </Box>
+          </Box>
 
           <Box display="flex" gap={2} justifyContent="center">
             <Button
