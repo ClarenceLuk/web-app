@@ -1,0 +1,16 @@
+HTTP/2 200 
+server: awselb/2.0
+date: Wed, 08 Oct 2025 22:17:04 GMT
+content-type: application/json
+content-length: 138
+x-flagsmith-document-updated-at: 1759961746.512027
+cache-control: max-age=0
+aws-resource-region: us-west-1
+aws-lambda-region: us-west-1
+access-control-expose-headers: x-flagsmith-document-updated-at
+access-control-allow-methods: GET, POST, PUT
+access-control-allow-credentials: true
+access-control-allow-headers: *
+access-control-allow-origin: *
+
+[{"feature": {"id": 165778, "name": "new_navigation_bar_layout", "type": "STANDARD"}, "enabled": false, "feature_state_value": "Enabled"}]
