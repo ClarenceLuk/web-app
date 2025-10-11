@@ -1,6 +1,13 @@
 import React, { createContext, useContext, ReactNode } from 'react';
 import { getFeatureFlags } from '../api/featureFlags';
 
+interface FeatureFlag {
+  feature: {
+    name: string;
+  };
+  enabled: boolean;
+}
+
 interface FeatureFlagObjectContextType {
   featureFlagObject: Record<string, boolean>;
 }
@@ -15,14 +22,14 @@ export const FeatureFlagProvider: React.FC<FeatureFlagObjectProviderProps> = ({ 
   // Fetch feature flags and create object
   const fetchFlags = async () => {
     const flags = await getFeatureFlags();
-    const featureFlagObject = flags.reduce((acc: any, flag: any) => {
+    const featureFlagObject = flags.reduce((acc: Record<string, boolean>, flag: FeatureFlag) => {
       const flagName = flag.feature?.name;
       if (flagName) {
         acc[flagName] = flag.enabled;
       }
       return acc;
-    }, {});
-    
+    }, {} as Record<string, boolean>);
+
     return featureFlagObject;
   };
 
