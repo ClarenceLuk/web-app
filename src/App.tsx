@@ -10,7 +10,7 @@ import { darkTheme } from './themes/darkTheme'
 import { lightTheme } from './themes/lightTheme'
 import { PageEnum } from './constants/mapped-enums'
 import PageTemplate from './pages/pageTemplate/pageTemplate'
-import './callFeatureFlags'
+import { FeatureFlagProvider } from './contexts/FeatureFlagProvider'
 
 const App = () => {
   const [isDarkMode, setIsDarkMode] = useState(true)
@@ -36,29 +36,31 @@ const App = () => {
   }
 
   return (
-    <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
-      <CssBaseline />
-      <Box
-        className={styles.pageBox}
-      >
-        <NavigationPanel
-            isDarkMode={isDarkMode}
-            handleThemeChange={handleThemeChange}
-            handleChangePage={handleChangePage}
-          />
-        <Box className={styles.appWrapper}>
-          <Box className={styles.appBox}>
-            {
-              <PageTemplate
-                title={currentPage}
-                children={handlePageLoad(currentPage)}
-              />
-            }
+    <FeatureFlagProvider>
+      <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
+        <CssBaseline />
+        <Box
+          className={styles.pageBox}
+        >
+          <NavigationPanel
+              isDarkMode={isDarkMode}
+              handleThemeChange={handleThemeChange}
+              handleChangePage={handleChangePage}
+            />
+          <Box className={styles.appWrapper}>
+            <Box className={styles.appBox}>
+              {
+                <PageTemplate
+                  title={currentPage}
+                  children={handlePageLoad(currentPage)}
+                />
+              }
+            </Box>
           </Box>
         </Box>
-      </Box>
-      
-    </ThemeProvider>
+        
+      </ThemeProvider>
+    </FeatureFlagProvider>
   )
 }
 

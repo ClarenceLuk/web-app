@@ -4,6 +4,5 @@ export const getFeatureFlags = async () => {
       'X-Environment-Key': 'QwfQ7eQTFQKKzB9wpH3Nzh',
     },
   });
-  
   return response.json();
 };
