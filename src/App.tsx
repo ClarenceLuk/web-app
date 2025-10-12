@@ -10,7 +10,7 @@ import { darkTheme } from './themes/darkTheme'
 import { lightTheme } from './themes/lightTheme'
 import { PageEnum } from './constants/mapped-enums'
 import PageTemplate from './pages/pageTemplate/pageTemplate'
-import { FeatureFlagProvider } from './contexts/FeatureFlagProvider'
+import { AppProviders } from './contexts/AppProviders'
 
 const App = () => {
   const [isDarkMode, setIsDarkMode] = useState(true)
@@ -36,7 +36,7 @@ const App = () => {
   }
 
   return (
-    <FeatureFlagProvider>
+    <AppProviders>
       <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
         <CssBaseline />
         <Box
@@ -60,7 +60,7 @@ const App = () => {
         </Box>
         
       </ThemeProvider>
-    </FeatureFlagProvider>
+    </AppProviders>
   )
 }
 
