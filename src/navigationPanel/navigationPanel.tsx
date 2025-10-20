@@ -50,7 +50,7 @@ const NavigationPanel = () => {
               />
             </Button>
           {Object.entries(PageEnum).map(([key, value]) => (
-            <Button key={key} onClick={() => handleChangePage(key)}>
+            <Button key={key} onClick={() => handleChangePage(value)}>
               <Typography variant="button">{value}</Typography>
             </Button>
           ))}
