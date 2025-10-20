@@ -1,22 +1,16 @@
 import { Box, Button, Drawer, Switch, Typography } from '@mui/material'
-import { ChangeEvent, useState } from 'react'
+import { useState } from 'react'
 import { PageEnum } from '../constants/mapped-enums'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAnglesLeft, faAnglesRight } from '@fortawesome/free-solid-svg-icons'
 import { IconProp } from '@fortawesome/fontawesome-svg-core'
 import styles from './navigationPanel.module.css'
+import { useTheme } from '../contexts/ThemeProvider'
+import { useNavigation } from '../contexts/NavigationProvider'
 
-interface NavigationProps {
-  isDarkMode: boolean
-  handleThemeChange: (event: ChangeEvent<HTMLInputElement>) => void
-  handleChangePage: (page: string) => void
-}
-
-const NavigationPanel = ({
-  isDarkMode,
-  handleThemeChange,
-  handleChangePage,
-}: NavigationProps) => {
+const NavigationPanel = () => {
+  const { isDarkMode, handleThemeChange } = useTheme();
+  const { handleChangePage } = useNavigation();
   const [drawerState, setDrawerState] = useState(true)
 
   const toggleDrawer = () => {
