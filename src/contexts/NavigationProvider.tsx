@@ -1,8 +1,9 @@
 import React, { createContext, useContext, ReactNode, useState } from 'react';
+import { PageEnum } from '../constants/mapped-enums';
 
 interface NavigationContextType {
-  currentPage: string;
-  handleChangePage: (page: string) => void;
+  currentPage: PageEnum;
+  handleChangePage: (page: PageEnum) => void;
 }
 
 const NavigationContext = createContext<NavigationContextType | undefined>(undefined);
@@ -12,9 +13,9 @@ interface NavigationProviderProps {
 }
 
 export const NavigationProvider: React.FC<NavigationProviderProps> = ({ children }) => {
-  const [currentPage, setCurrentPage] = useState('home');
+  const [currentPage, setCurrentPage] = useState<PageEnum>(PageEnum.Weather);
 
-  const handleChangePage = (page: string) => {
+  const handleChangePage = (page: PageEnum) => {
     setCurrentPage(page);
   };
 
