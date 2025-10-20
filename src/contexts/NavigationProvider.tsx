@@ -6,6 +6,8 @@ interface NavigationContextType {
   handleChangePage: (page: PageEnum) => void;
 }
 
+const DEFAULT_PAGE = PageEnum.Weather;
+
 const NavigationContext = createContext<NavigationContextType | undefined>(undefined);
 
 interface NavigationProviderProps {
@@ -13,7 +15,7 @@ interface NavigationProviderProps {
 }
 
 export const NavigationProvider: React.FC<NavigationProviderProps> = ({ children }) => {
-  const [currentPage, setCurrentPage] = useState<PageEnum>(PageEnum.Weather);
+  const [currentPage, setCurrentPage] = useState<PageEnum>(DEFAULT_PAGE);
 
   const handleChangePage = (page: PageEnum) => {
     setCurrentPage(page);
